@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layer"
+    android:padding="20dp"
+    tools:context="com.example.ahmed.eyecare.activity.SignIn">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:id="@+id/tv_signin"
+        android:textColor="@color/white"
+        android:gravity="center_horizontal"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:adjustViewBounds="true"
+        android:layout_marginRight="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/iv_logo"
+        android:contentDescription=""
+        android:layout_below="@+id/tv_signin" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/iv_logo"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/emailicon"
+        android:hint="@string/email_address"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:id="@+id/et_email"
+        android:nextFocusForward="@+id/et_code"
+        android:lines="1"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:drawablePadding="5dp"
+        android:backgroundTint="@color/white"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/et_email"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/iconpassword"
+        android:hint="@string/code"
+        android:id="@+id/et_code"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:drawableEnd="@drawable/icontooltip"
+        android:drawablePadding="5dp"
+        android:backgroundTint="@color/white"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="@string/sign_in"
+        android:textSize="20sp"
+        android:paddingBottom="10dp"
+        android:id="@+id/btn_signin"
+        android:layout_below="@+id/et_code"
+        android:textColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button"/>
+</RelativeLayout>
