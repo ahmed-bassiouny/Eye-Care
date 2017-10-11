@@ -48,6 +48,7 @@ public class SignIn extends AppCompatActivity {
                     RetrofitRequest.login(etEmail.getText().toString(), etCode.getText().toString(),token, new RetrofitResponse<User>() {
                         @Override
                         public void onSuccess(User user) {
+                            // TODO : save userid in sharedpref
                             // TODO: open main activity
                         }
 
