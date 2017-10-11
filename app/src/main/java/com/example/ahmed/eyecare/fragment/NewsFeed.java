@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.adapter.NewsFeedAdapter;
 import com.example.ahmed.eyecare.adapter.PhotoAdapter;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.utils.Constant;
+import com.example.ahmed.eyecare.utils.DummyData;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class NewsFeed extends Fragment {
     TabLayout tabLayout;
     ImageView ivWritePost,ivChecIn;
     RecyclerView recycleview;
+    NewsFeedAdapter newsFeedAdapter;
 
     public NewsFeed() {
         // Required empty public constructor
@@ -52,10 +56,12 @@ public class NewsFeed extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        RetrofitRequest.getPosts(12028, Constant.PAGE_NUMBER, new RetrofitResponse<List<Post>>() {
+        RetrofitRequest.getPosts(DummyData.userID, Constant.PAGE_NUMBER, new RetrofitResponse<List<Post>>() {
             @Override
             public void onSuccess(List<Post> posts) {
-                Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+                newsFeedAdapter = new NewsFeedAdapter(posts);
+                recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                recycleview.setAdapter(newsFeedAdapter);
             }
 
             @Override
@@ -77,7 +83,7 @@ public class NewsFeed extends Fragment {
 
     }
     private void setviewpager(){
-
+        recycleview.setNestedScrollingEnabled(true);
         adapter = new PhotoAdapter(getActivity());
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager, true);

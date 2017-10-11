@@ -1,7 +1,9 @@
 package com.example.ahmed.eyecare.model;
 
+import com.example.ahmed.eyecare.utils.Utils;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -54,14 +56,18 @@ public class Post {
         return post;
     }
 
-    public String getPostDate() {
-        return postDate;
-    }
+
 
     public boolean getIsMakeLike() {
         if (makeLike == 1)
             return true;
         return false;
+    }
+    public String getDayDate(){
+        return String.valueOf(Utils.getCalender(postDate).get(Calendar.DAY_OF_MONTH));
+    }
+    public String getTime(){
+        return String.valueOf(Utils.getCalender(postDate).get(Calendar.HOUR)+":"+Utils.getCalender(postDate).get(Calendar.MINUTE));
     }
 
     public List<Comment> getComments() {
@@ -71,4 +77,9 @@ public class Post {
     public String getNumberOfLike() {
         return numberOfLike;
     }
+
+    public String getCommentsSize(){
+        return String.valueOf(comments.size());
+    }
+
 }

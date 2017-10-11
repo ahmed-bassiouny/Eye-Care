@@ -11,6 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.ahmed.eyecare.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by ahmed on 11/10/17.
  */
@@ -27,5 +33,17 @@ public class Utils {
         if (tag != null)
             fragmentTransaction.addToBackStack(tag);
         fragmentTransaction.commit();
+    }
+
+    public static Calendar getCalender(String dateTime){
+        Date date = null;
+        try {
+            date = new SimpleDateFormat(Constant.DATE_FORMATE).parse(dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
     }
 }

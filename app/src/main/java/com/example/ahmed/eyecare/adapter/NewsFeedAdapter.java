@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.model.Post;
+
+import java.util.List;
 
 /**
  * Created by ahmed on 11/10/17.
@@ -16,8 +19,9 @@ import com.example.ahmed.eyecare.R;
 public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomViewHolder> {
 
 
-    public NewsFeedAdapter() {
-
+    List<Post> posts;
+    public NewsFeedAdapter(List<Post> posts) {
+        this.posts=posts;
     }
 
     @Override
@@ -31,11 +35,26 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
     public void onBindViewHolder(NewsFeedAdapter.CutomViewHolder holder, int position) {
 
         // TODO : SET DATA
+        Post post = posts.get(position);
+        holder.tvDay.setText(post.getDayDate());
+        holder.tvMonth.setText("");
+
+        holder.tvUserName.setText(post.getUserName());
+        holder.tvUserPost.setText(post.getPost());
+        holder.ivTime.setText(post.getTime());
+        holder.ivComment.setText(post.getCommentsSize());
+        holder.ivLike.setText(post.getNumberOfLike());
+        if(post.getIsMakeLike()){
+            // TODO red color
+        }else {
+            // TODO null color
+        }
+        // TODO Image
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return posts.size();
     }
 
     class CutomViewHolder extends RecyclerView.ViewHolder {
