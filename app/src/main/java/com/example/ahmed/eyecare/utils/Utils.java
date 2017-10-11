@@ -8,7 +8,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.ahmed.eyecare.R;
 
 import java.text.DateFormat;
@@ -16,6 +22,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ahmed on 11/10/17.
@@ -45,5 +53,12 @@ public class Utils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return cal;
+    }
+    public static void setImage(final Context context , String imgUrl , CircleImageView circleImageView){
+        Glide.with(context)
+                .load(imgUrl)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.placeholder)
+                .into(circleImageView);
     }
 }

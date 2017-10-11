@@ -21,7 +21,7 @@ public class Post {
     @SerializedName("username")
     private String userName;
 
-    @SerializedName("userImage")
+    @SerializedName("user_image")
     private String avatar;
     @SerializedName("post")
     private String post;

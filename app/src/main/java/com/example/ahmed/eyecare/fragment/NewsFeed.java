@@ -59,7 +59,7 @@ public class NewsFeed extends Fragment {
         RetrofitRequest.getPosts(DummyData.userID, Constant.PAGE_NUMBER, new RetrofitResponse<List<Post>>() {
             @Override
             public void onSuccess(List<Post> posts) {
-                newsFeedAdapter = new NewsFeedAdapter(posts);
+                newsFeedAdapter = new NewsFeedAdapter(posts,getContext());
                 recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                 recycleview.setAdapter(newsFeedAdapter);
             }

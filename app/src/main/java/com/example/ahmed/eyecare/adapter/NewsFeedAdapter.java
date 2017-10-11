@@ -1,6 +1,12 @@
 package com.example.ahmed.eyecare.adapter;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +15,11 @@ import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.model.Post;
+import com.example.ahmed.eyecare.utils.Utils;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ahmed on 11/10/17.
@@ -20,8 +29,10 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
 
 
     List<Post> posts;
-    public NewsFeedAdapter(List<Post> posts) {
+    Context context;
+    public NewsFeedAdapter(List<Post> posts ,Context context) {
         this.posts=posts;
+        this.context=context;
     }
 
     @Override
@@ -45,11 +56,13 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
         holder.ivComment.setText(post.getCommentsSize());
         holder.ivLike.setText(post.getNumberOfLike());
         if(post.getIsMakeLike()){
-            // TODO red color
+            // TODO red image
+            holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmart),null,null,null);
         }else {
-            // TODO null color
+            holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmart),null,null,null);
         }
-        // TODO Image
+        if(!post.getAvatar().isEmpty())
+            Utils.setImage(context,post.getAvatar(),holder.ivAvatar);
     }
 
     @Override
@@ -60,7 +73,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
     class CutomViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvDay, tvMonth ,tvUserName ,tvUserPost , ivTime , ivComment ,ivLike;
-        ImageView ivAvatar;
+        CircleImageView ivAvatar;
 
         public CutomViewHolder(View view) {
             super(view);
