@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "747073134588",
+    "firebase_url": "https://eye-care-excellence.firebaseio.com",
+    "project_id": "eye-care-excellence",
+    "storage_bucket": "eye-care-excellence.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747073134588:android:eb8455cdd19a2273",
+        "android_client_info": {
+          "package_name": "com.example.ahmed.eyecare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747073134588-be1l8rj6tf4qoh6srn50adsv7hj0u0uj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ahmed.eyecare",
+            "certificate_hash": "f845d2e0be2fe50cf4649b16f788e3897c0c4e9e"
+          }
+        },
+        {
+          "client_id": "747073134588-9i64brnja63env55k6plpfr7ahlanatf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG2Gi89BAjnnFrJZ_u5V2fnZdoAki3uxU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747073134588-9i64brnja63env55k6plpfr7ahlanatf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

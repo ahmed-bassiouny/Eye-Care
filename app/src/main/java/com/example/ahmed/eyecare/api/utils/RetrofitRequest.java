@@ -18,10 +18,11 @@ public class RetrofitRequest {
 
     private static RetrofitService service = RetrofitConfi.getRetrofit().create(RetrofitService.class);
     private static final String errorMessageForDevelopment = "Error Message For Development";
+    private static final String TAG = "TAG";
 
-   public static void login(String email , String code , final RetrofitResponse<User> userRetrofitResponse){
-       LoginRequest loginRequest = new LoginRequest.Builder().email(email).code(code).build();
-       Call<LoginResponse> response = service.login(loginRequest);
+   public static void login(String email , String code ,String token, final RetrofitResponse<User> userRetrofitResponse){
+       LoginRequest loginRequest = new LoginRequest();
+       Call<LoginResponse> response = service.login(email,code,token,loginRequest.getEventId());
        response.enqueue(new Callback<LoginResponse>() {
            @Override
            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -30,6 +31,7 @@ public class RetrofitRequest {
                        userRetrofitResponse.onSuccess(response.body().getUser());
                    }else {
                        userRetrofitResponse.onFailed(response.body().getMassage());
+                       Log.i(TAG , response.body().getMassage());
                    }
                }else {
                    Log.e("onResponse: ",errorMessageForDevelopment );
@@ -40,6 +42,7 @@ public class RetrofitRequest {
            @Override
            public void onFailure(Call<LoginResponse> call, Throwable t) {
                userRetrofitResponse.onFailed(t.getLocalizedMessage());
+               Log.i(TAG , t.getLocalizedMessage());
            }
        });
    }

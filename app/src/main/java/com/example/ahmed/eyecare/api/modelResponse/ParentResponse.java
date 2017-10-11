@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public abstract class ParentResponse {
 
-    public static final String trueResult= "True";
+    public static final String trueResult= "true";
 
     @SerializedName("status")
     private String status;

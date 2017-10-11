@@ -4,4 +4,6 @@
     <string name="sign_in">تسجيل الدخول</string>
     <string name="email_address">البريد الالكترونى</string>
     <string name="code">الرمز</string>
+    <string name="reinstall_app">حدث خطا ما برجاء اعادة تثبيت البرنامج</string>
+
 </resources>
