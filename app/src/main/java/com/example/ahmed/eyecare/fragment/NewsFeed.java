@@ -83,7 +83,6 @@ public class NewsFeed extends Fragment {
 
     }
     private void setviewpager(){
-        recycleview.setNestedScrollingEnabled(true);
         adapter = new PhotoAdapter(getActivity());
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager, true);
