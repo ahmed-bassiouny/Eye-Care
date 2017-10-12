@@ -8,4 +8,5 @@
     <string name="reinstall_app">Error Happened Please reinstall Application</string>
     <string name="write_post">Write Post</string>
     <string name="check_in">Check in</string>
+    <string name="cant_load_data">Sorry we can\'t load data</string>
 </resources>

@@ -22,6 +22,7 @@ import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.DummyData;
+import com.example.ahmed.eyecare.utils.Utils;
 
 import java.util.List;
 
@@ -80,7 +81,30 @@ public class NewsFeed extends Fragment {
 
     }
     private void onClick(){
+        ivWritePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO open fragment dialog to send post
+            }
+        });
 
+        ivChecIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RetrofitRequest.checkIn(DummyData.userID, new RetrofitResponse<Post>() {
+                    @Override
+                    public void onSuccess(Post post) {
+                        newsFeedAdapter.addPost(post);
+                        Toast.makeText(getActivity(), R.string.check_in, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailed(String errorMessage) {
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
     private void setviewpager(){
         adapter = new PhotoAdapter(getActivity());

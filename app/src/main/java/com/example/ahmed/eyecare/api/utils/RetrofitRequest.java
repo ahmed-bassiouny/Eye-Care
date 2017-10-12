@@ -2,10 +2,10 @@ package com.example.ahmed.eyecare.api.utils;
 
 import android.util.Log;
 
-import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
-import com.example.ahmed.eyecare.api.modelResponse.PostsResponse;
+import com.example.ahmed.eyecare.api.modelResponse.AllPostsResponse;
+import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.model.User;
 
@@ -51,10 +51,10 @@ public class RetrofitRequest {
        });
    }
    public static void getPosts(int userId,int pageNumber,final RetrofitResponse<List<Post>> listRetrofitResponse){
-       Call<PostsResponse> response = service.getAllPost(userId,pageNumber,ParentRequest.getEventId());
-       response.enqueue(new Callback<PostsResponse>() {
+       Call<AllPostsResponse> response = service.getAllPost(userId,pageNumber,ParentRequest.getEventId());
+       response.enqueue(new Callback<AllPostsResponse>() {
            @Override
-           public void onResponse(Call<PostsResponse> call, Response<PostsResponse> response) {
+           public void onResponse(Call<AllPostsResponse> call, Response<AllPostsResponse> response) {
                if(response.code()==200){
                    if(response.body().getStatus()){
                        listRetrofitResponse.onSuccess(response.body().getPosts());
@@ -69,10 +69,46 @@ public class RetrofitRequest {
            }
 
            @Override
-           public void onFailure(Call<PostsResponse> call, Throwable t) {
+           public void onFailure(Call<AllPostsResponse> call, Throwable t) {
                listRetrofitResponse.onFailed(t.getLocalizedMessage());
                Log.e(TAG , t.getLocalizedMessage());
            }
        });
    }
+   private static void addPostOrCheckIn(int userId,String post,boolean checkIn,final RetrofitResponse<Post> retrofitResponse){
+       Call<PostResponse> response ;
+
+       if(checkIn) // this case make check in so i send 1 as true and empty post
+           response =service.addPostOrCheckIn(userId,"",1,ParentRequest.getEventId());
+       else // this case make post in so i send 0 as false
+           response =service.addPostOrCheckIn(userId,post,0,ParentRequest.getEventId());
+       response.enqueue(new Callback<PostResponse>() {
+           @Override
+           public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+               if(response.code()==200){
+                   if(response.body().getStatus()){
+                       retrofitResponse.onSuccess(response.body().getPost());
+                   }else {
+                       retrofitResponse.onFailed(response.body().getMassage());
+                       Log.e(TAG , response.body().getMassage());
+                   }
+               }else {
+                   Log.e("onResponse: ",errorMessageForDevelopment );
+                   retrofitResponse.onFailed(errorMessageForDevelopment);
+               }
+           }
+
+           @Override
+           public void onFailure(Call<PostResponse> call, Throwable t) {
+               retrofitResponse.onFailed(t.getLocalizedMessage());
+               Log.e(TAG , t.getLocalizedMessage());
+           }
+       });
+   }
+   public static void addPost(int userId,String post,final RetrofitResponse<Post> retrofitResponse){
+       addPostOrCheckIn(userId,post,false,retrofitResponse);
+   }
+    public static void checkIn(int userId,final RetrofitResponse<Post> retrofitResponse){
+        addPostOrCheckIn(userId,"",true,retrofitResponse);
+    }
 }

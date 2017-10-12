@@ -87,4 +87,8 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
             ivAvatar = view.findViewById(R.id.iv_avatar);
         }
     }
+    public void addPost(Post post){
+        this.posts.add(post);
+        notifyDataSetChanged();
+    }
 }

@@ -12,8 +12,8 @@ public abstract class ParentResponse {
 
     @SerializedName("status")
     private String status;
-    @SerializedName("massage")
-    private String massage;
+    @SerializedName("message")
+    private String message;
 
     public boolean getStatus() {
         if (status.equals(trueResult))
@@ -22,6 +22,8 @@ public abstract class ParentResponse {
     }
 
     public String getMassage() {
-        return massage;
+        if(message==null)
+            message="";
+        return message;
     }
 }

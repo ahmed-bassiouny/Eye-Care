@@ -95,7 +95,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:drawablePadding="5dp"
-            android:background="@color/red_like"
             android:drawableStart="@drawable/vectorsmart"
             android:layout_toStartOf="@+id/tv_comment"
             android:layout_below="@+id/tv_user_post" />
