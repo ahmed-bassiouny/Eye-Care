@@ -3,6 +3,7 @@ package com.example.ahmed.eyecare.model;
 import com.example.ahmed.eyecare.utils.Utils;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by ahmed on 11/10/17.
  */
 
-public class Post {
+public class Post implements Serializable{
 
 
     @SerializedName("id")
@@ -68,6 +69,9 @@ public class Post {
     }
     public String getTime(){
         return String.valueOf(Utils.getCalender(postDate).get(Calendar.HOUR)+":"+Utils.getCalender(postDate).get(Calendar.MINUTE));
+    }
+    public String getMonth(){
+        return String.valueOf(Utils.getMothStringByNumber(Utils.getCalender(postDate).get(Calendar.MONTH)));
     }
 
     public List<Comment> getComments() {

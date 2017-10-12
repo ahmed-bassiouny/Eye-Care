@@ -31,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Utils {
 
-    public static void goToFragment(AppCompatActivity appCompatActivity, Fragment fragment, String tag,Bundle bundle) {
+    public static void goToFragment(AppCompatActivity appCompatActivity, Fragment fragment, String tag, Bundle bundle) {
         FragmentManager fragmentManager = appCompatActivity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_container, fragment);
@@ -43,7 +43,7 @@ public class Utils {
         fragmentTransaction.commit();
     }
 
-    public static Calendar getCalender(String dateTime){
+    public static Calendar getCalender(String dateTime) {
         Date date = null;
         try {
             date = new SimpleDateFormat(Constant.DATE_FORMATE).parse(dateTime);
@@ -54,11 +54,56 @@ public class Utils {
         cal.setTime(date);
         return cal;
     }
-    public static void setImage(final Context context , String imgUrl , CircleImageView circleImageView){
+
+    public static void setImage(final Context context, String imgUrl, CircleImageView circleImageView) {
         Glide.with(context)
                 .load(imgUrl)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .into(circleImageView);
+    }
+
+    public static String getMothStringByNumber(int number) {
+        String result = "";
+        // TODO check if language arabic or english to return value
+        switch (number) {
+            case 0:
+                result = "January";
+                break;
+            case 1:
+                result = "February";
+                break;
+            case 2:
+                result = "March";
+                break;
+            case 3:
+                result = "April";
+                break;
+            case 4:
+                result = "May";
+                break;
+            case 5:
+                result = "June";
+                break;
+            case 6:
+                result = "July";
+                break;
+            case 7:
+                result = "August";
+                break;
+            case 8:
+                result = "September ";
+                break;
+            case 9:
+                result = "October";
+                break;
+            case 10:
+                result = "November";
+                break;
+            case 11:
+                result = "December";
+                break;
+        }
+        return result;
     }
 }

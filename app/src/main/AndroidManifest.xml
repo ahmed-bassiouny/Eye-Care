@@ -14,8 +14,7 @@
         <!-- Activity -->
         <activity
             android:name=".activity.Splash"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.SignIn"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -27,7 +26,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activity.MainContainer"
+        <activity
+            android:name=".activity.MainContainer"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".dialog.AddPostDialog"
+            android:theme="@style/AppThemeDialog"></activity>
     </application>
 
 </manifest>

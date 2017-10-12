@@ -9,4 +9,8 @@
     <string name="write_post">Write Post</string>
     <string name="check_in">Check in</string>
     <string name="cant_load_data">Sorry we can\'t load data</string>
+    <string name="cancel">Cancel</string>
+    <string name="post">Post</string>
+    <string name="thanks">Thanks</string>
+
 </resources>

@@ -23,6 +23,7 @@ public class RetrofitRequest {
 
     private static RetrofitService service = RetrofitConfi.getRetrofit().create(RetrofitService.class);
     private static final String errorMessageForDevelopment = "Error Message For Development";
+    private static final String INTERNET_CONNECTION = "Error No Internet Connection";
     private static final String TAG = "TAG";
 
    public static void login(String email , String code ,String token, final RetrofitResponse<User> userRetrofitResponse){
@@ -45,8 +46,8 @@ public class RetrofitRequest {
 
            @Override
            public void onFailure(Call<LoginResponse> call, Throwable t) {
-               userRetrofitResponse.onFailed(t.getLocalizedMessage());
-               Log.i(TAG , t.getLocalizedMessage());
+               userRetrofitResponse.onFailed(INTERNET_CONNECTION);
+               Log.i(TAG , t.getLocalizedMessage()+"");
            }
        });
    }
@@ -70,8 +71,8 @@ public class RetrofitRequest {
 
            @Override
            public void onFailure(Call<AllPostsResponse> call, Throwable t) {
-               listRetrofitResponse.onFailed(t.getLocalizedMessage());
-               Log.e(TAG , t.getLocalizedMessage());
+               listRetrofitResponse.onFailed(INTERNET_CONNECTION);
+               Log.e(TAG , t.getLocalizedMessage()+"");
            }
        });
    }
@@ -100,8 +101,8 @@ public class RetrofitRequest {
 
            @Override
            public void onFailure(Call<PostResponse> call, Throwable t) {
-               retrofitResponse.onFailed(t.getLocalizedMessage());
-               Log.e(TAG , t.getLocalizedMessage());
+               retrofitResponse.onFailed(INTERNET_CONNECTION);
+               Log.e(TAG , t.getLocalizedMessage()+"");
            }
        });
    }

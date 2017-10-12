@@ -48,7 +48,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
         // TODO : SET DATA
         Post post = posts.get(position);
         holder.tvDay.setText(post.getDayDate());
-        holder.tvMonth.setText("");
+        holder.tvMonth.setText(post.getMonth());
 
         holder.tvUserName.setText(post.getUserName());
         holder.tvUserPost.setText(post.getPost());
@@ -57,7 +57,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
         holder.ivLike.setText(post.getNumberOfLike());
         if(post.getIsMakeLike()){
             // TODO red image
-            holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmart),null,null,null);
+            holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmartred),null,null,null);
         }else {
             holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmart),null,null,null);
         }
@@ -88,7 +88,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
         }
     }
     public void addPost(Post post){
-        this.posts.add(post);
+        this.posts.add(0,post);
         notifyDataSetChanged();
     }
 }
