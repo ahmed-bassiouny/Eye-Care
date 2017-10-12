@@ -58,8 +58,8 @@ public class Utils {
     public static void setImage(final Context context, String imgUrl, CircleImageView circleImageView) {
         Glide.with(context)
                 .load(imgUrl)
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.placeholderperson)
+                .error(R.drawable.placeholderperson)
                 .into(circleImageView);
     }
 

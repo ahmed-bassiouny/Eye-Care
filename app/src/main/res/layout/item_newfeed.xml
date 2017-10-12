@@ -31,7 +31,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_below="@+id/tv_month"
-        android:src="@drawable/placeholder"
+        android:src="@drawable/placeholderperson"
         android:padding="5dp"
         android:id="@+id/iv_avatar"/>
     </LinearLayout>
