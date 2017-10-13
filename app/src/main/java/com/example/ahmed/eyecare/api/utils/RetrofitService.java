@@ -7,6 +7,10 @@ import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AllPostsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
+import com.example.ahmed.eyecare.api.modelResponse.SpeakerResponse;
+import com.example.ahmed.eyecare.model.Speaker;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -21,6 +25,7 @@ public interface RetrofitService {
     String LOGIN = "login.php";
     String ALL_POST = "all_posts.php";
     String ADD_POST_CHECKIN = "add_post.php";
+    String ALL_SPEAKER = "all_speaker.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -31,16 +36,20 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST(ALL_POST)
-    Call<AllPostsResponse> getAllPost(@Field(AllPostRequest.USER_ID_KEY) int userId,
+    Call<AllPostsResponse> getAllPost(@Field(ParentRequest.USER_ID_KEY) int userId,
                                       @Field(AllPostRequest.PAGE_NUMBER_KEY) int pageNumber,
                                       @Field(ParentRequest.EVENT_KEY) int event_id);
 
     @FormUrlEncoded
     @POST(ADD_POST_CHECKIN)
-    Call<PostResponse> addPostOrCheckIn(@Field(PostRequest.USER_ID_KEY) int userId,
-                                  @Field(PostRequest.POST_KEY) String post,
-                                  @Field(PostRequest.CHECK_IN_KEY) int checkIn,
-                                  @Field(ParentRequest.EVENT_KEY) int event_id);
+    Call<PostResponse> addPostOrCheckIn(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                        @Field(PostRequest.POST_KEY) String post,
+                                        @Field(PostRequest.CHECK_IN_KEY) int checkIn,
+                                        @Field(ParentRequest.EVENT_KEY) int event_id);
 
+    @FormUrlEncoded
+    @POST(ALL_SPEAKER)
+    Call<SpeakerResponse> getAllSpeaker(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                        @Field(ParentRequest.EVENT_KEY) int event_id);
 
 }

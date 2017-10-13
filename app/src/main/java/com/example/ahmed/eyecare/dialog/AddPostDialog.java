@@ -4,18 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
-import com.example.ahmed.eyecare.fragment.NewsFeed;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.utils.DummyData;
-
-import java.io.Serializable;
 
 public class AddPostDialog extends AppCompatActivity {
 

@@ -7,6 +7,7 @@ package com.example.ahmed.eyecare.api.modelRequest;
 public  class ParentRequest {
 
     public static final String EVENT_KEY = "event_id";
+    public static final String USER_ID_KEY = "user_id";
 
     static private int eventId = 1; // fixed
 

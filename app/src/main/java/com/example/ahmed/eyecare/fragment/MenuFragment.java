@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.ahmed.eyecare.R;
 
-public class Menu extends Fragment implements View.OnClickListener {
+public class MenuFragment extends Fragment implements View.OnClickListener {
 
 
     @Override

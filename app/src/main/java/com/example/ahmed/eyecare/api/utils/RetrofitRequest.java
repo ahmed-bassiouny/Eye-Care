@@ -6,7 +6,9 @@ import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AllPostsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
+import com.example.ahmed.eyecare.api.modelResponse.SpeakerResponse;
 import com.example.ahmed.eyecare.model.Post;
+import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.model.User;
 
 import java.util.List;
@@ -111,5 +113,30 @@ public class RetrofitRequest {
    }
     public static void checkIn(int userId,final RetrofitResponse<Post> retrofitResponse){
         addPostOrCheckIn(userId,"",true,retrofitResponse);
+    }
+    public static void getAllSpeaker(int userId , final RetrofitResponse<List<Speaker>> retrofitResponse){
+        Call<SpeakerResponse> response = service.getAllSpeaker(userId,ParentRequest.getEventId());
+        response.enqueue(new Callback<SpeakerResponse>() {
+            @Override
+            public void onResponse(Call<SpeakerResponse> call, Response<SpeakerResponse> response) {
+                if(response.code()==200){
+                    if(response.body().getStatus()){
+                        retrofitResponse.onSuccess(response.body().getSpeakers());
+                    }else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG , response.body().getMassage());
+                    }
+                }else {
+                    Log.e("onResponse: ",errorMessageForDevelopment );
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpeakerResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG , t.getLocalizedMessage()+"");
+            }
+        });
     }
 }

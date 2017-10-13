@@ -5,7 +5,5 @@ package com.example.ahmed.eyecare.api.modelRequest;
  */
 
 public class AllPostRequest {
-
-    public static final String USER_ID_KEY = "user_id";
     public static final String PAGE_NUMBER_KEY = "page_number";
 }

@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFeed extends Fragment {
+public class NewsFeedFragment extends Fragment {
 
     // constant
     public static final int NEW_POST =123;
@@ -43,7 +43,7 @@ public class NewsFeed extends Fragment {
     RecyclerView recycleview;
     NewsFeedAdapter newsFeedAdapter;
 
-    public NewsFeed() {
+    public NewsFeedFragment() {
         // Required empty public constructor
     }
 

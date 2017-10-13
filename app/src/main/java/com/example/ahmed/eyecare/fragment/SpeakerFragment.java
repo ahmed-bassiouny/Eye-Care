@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,22 +17,38 @@ import android.view.Menu;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.adapter.SpeakerAdapter;
+import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
+import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
+import com.example.ahmed.eyecare.model.Speaker;
+import com.example.ahmed.eyecare.utils.DummyData;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Speaker extends Fragment {
+public class SpeakerFragment extends Fragment {
 
 
     private Toolbar mToolbar;
     private MenuItem mSearchAction;
     private boolean isSearchOpened = false;
     private EditText edtSeach;
-    public Speaker() {
+
+    RecyclerView recycleview;
+    SpeakerAdapter speakerAdapter;
+    ProgressBar progress;
+    List<Speaker> speakerList;
+    List<Speaker> speakerListFilter;
+
+
+    public SpeakerFragment() {
         // Required empty public constructor
     }
 
@@ -49,10 +67,19 @@ public class Speaker extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        loadData();
+    }
+
     private void findViewById(View view) {
         mToolbar = view.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        recycleview = view.findViewById(R.id.recycleview);
+        progress = view.findViewById(R.id.progress);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
     }
+
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         mSearchAction = menu.findItem(R.id.action_search);
@@ -77,10 +104,11 @@ public class Speaker extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-    protected void handleMenuSearch(){
-        ActionBar action = ((AppCompatActivity)getActivity()).getSupportActionBar(); //get the actionbar
 
-        if(isSearchOpened){ //test if the search is open
+    protected void handleMenuSearch() {
+        ActionBar action = ((AppCompatActivity) getActivity()).getSupportActionBar(); //get the actionbar
+
+        if (isSearchOpened) { //test if the search is open
 
             action.setDisplayShowCustomEnabled(false); //disable a custom view inside the actionbar
             action.setDisplayShowTitleEnabled(true); //show the title in the action bar
@@ -100,15 +128,14 @@ public class Speaker extends Fragment {
             action.setCustomView(R.layout.search_bar);//add the custom view
             action.setDisplayShowTitleEnabled(false); //hide the title
 
-            edtSeach = (EditText)action.getCustomView().findViewById(R.id.edtSearch); //the text editor
+            edtSeach = (EditText) action.getCustomView().findViewById(R.id.edtSearch); //the text editor
 
             //this is a listener to do a search when the user clicks on search button
             edtSeach.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                        doSearch();
-                        Toast.makeText(getActivity(), "ss", Toast.LENGTH_SHORT).show();
+                        //doSearch();
                         return true;
                     }
                     return false;
@@ -122,12 +149,20 @@ public class Speaker extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    Toast.makeText(getActivity(), edtSeach.getText().toString(), Toast.LENGTH_SHORT).show();
+                    if (speakerList == null || speakerListFilter == null)
+                        return;
+                    Toast.makeText(getActivity(), "search in all", Toast.LENGTH_SHORT).show();
+
+//                    if (s.toString().trim().isEmpty())
+//                        Toast.makeText(getActivity(), "set data", Toast.LENGTH_SHORT).show();
+//                    else if (s.toString().trim().length() == 1 || before == 1)
+//                        Toast.makeText(getActivity(), "search in all", Toast.LENGTH_SHORT).show();
+//                    else
+//                        Toast.makeText(getActivity(), "search in all filter", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
                 }
             });
 
@@ -145,6 +180,36 @@ public class Speaker extends Fragment {
             isSearchOpened = true;
         }
     }
-    private void doSearch() {
+
+    /*void filter(String text){
+        List<DataHolder> temp = new ArrayList();
+        for(DataHolder d: displayedList){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(d.getEnglish().contains(text)){
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        //disp_adapter.updateList(temp);
+    }*/
+    private void loadData() {
+        RetrofitRequest.getAllSpeaker(DummyData.userID, new RetrofitResponse<List<com.example.ahmed.eyecare.model.Speaker>>() {
+            @Override
+            public void onSuccess(List<com.example.ahmed.eyecare.model.Speaker> speakers) {
+                speakerList = speakers;
+                speakerListFilter = speakers;
+                speakerAdapter = new SpeakerAdapter(speakers, getContext());
+                recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                recycleview.setAdapter(speakerAdapter);
+                progress.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailed(String errorMessage) {
+                Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                progress.setVisibility(View.GONE);
+            }
+        });
     }
 }
