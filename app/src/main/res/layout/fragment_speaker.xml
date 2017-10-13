@@ -1,13 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layer"
     tools:context="com.example.ahmed.eyecare.fragment.Speaker">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar">
+    </include>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:layout_below="@+id/toolbar"
         android:id="@+id/recycleview"/>
-</FrameLayout>
+</RelativeLayout>
