@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,7 +49,13 @@ public class SignIn extends AppCompatActivity {
                     RetrofitRequest.login(etEmail.getText().toString(), etCode.getText().toString(),token, new RetrofitResponse<User>() {
                         @Override
                         public void onSuccess(User user) {
-                            // TODO : save userid in sharedpref
+                            if(user !=null){
+                                SharedPref.setFullData(SignIn.this,user.getId());
+                                startActivity(new Intent(SignIn.this,MainContainer.class));
+                                finish();
+                            }else {
+                                onFailed(getString(R.string.cant_load_data));
+                            }
                             // TODO: open main activity
                         }
 

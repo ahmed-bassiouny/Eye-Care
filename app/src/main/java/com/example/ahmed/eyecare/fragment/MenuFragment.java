@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.utils.Utils;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
-    private ImageView back;
     private TextView tvSpeeker;
     private TextView tvAttendee;
     private TextView tvAgenda;
@@ -42,6 +44,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     private ImageView ivAbout;
     private TextView tvAdmin;
     private ImageView ivAdmin;
+    private Toolbar mToolbar;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,10 +59,24 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
         onClick();
+        setToolbar();
+    }
+
+    private void setToolbar() {
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mToolbar.setNavigationIcon(R.drawable.ic_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
     }
 
     private void onClick() {
-        back.setOnClickListener(this);
         tvSpeeker.setOnClickListener(this);
         tvAttendee.setOnClickListener(this);
         tvAgenda.setOnClickListener(this);
@@ -88,8 +106,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     }
 
     private void findViewById(View view) {
-
-        back = view.findViewById(R.id.back);
         tvSpeeker = view.findViewById(R.id.tv_speeker);
         tvAttendee = view.findViewById(R.id.tv_attendee);
         tvAgenda = view.findViewById(R.id.tv_agenda);
@@ -116,6 +132,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         ivAbout = view.findViewById(R.id.iv_about);
         tvAdmin = view.findViewById(R.id.tv_admin);
         ivAdmin = view.findViewById(R.id.iv_admin);
+        mToolbar = view.findViewById(R.id.toolbar);
     }
 
     @Override
@@ -123,6 +140,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tv_speeker:
             case R.id.iv_speeker:
+                Utils.goToFragment(getActivity(),new SpeakerListFragment(),"Back",null);
                 break;
 
             case R.id.tv_attendee:
@@ -169,7 +187,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_admin:
             case R.id.iv_admin:
                 break;
-
         }
     }
 }

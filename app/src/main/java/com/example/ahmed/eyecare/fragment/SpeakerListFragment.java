@@ -79,6 +79,16 @@ public class SpeakerListFragment extends Fragment {
         recycleview = view.findViewById(R.id.recycleview);
         progress = view.findViewById(R.id.progress);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mToolbar.setNavigationIcon(R.drawable.ic_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -152,15 +162,12 @@ public class SpeakerListFragment extends Fragment {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                     if (s.toString().trim().isEmpty()) {
-                        Toast.makeText(getActivity(), "set data", Toast.LENGTH_SHORT).show();
                         speakerAdapter.updateList(speakerList);
                     }
                     else if (speakerList != null &&s.toString().trim().length() == 1 || before == 1) {
                         searchInSpeaker(s.toString());
-                        Toast.makeText(getActivity(), "search in all", Toast.LENGTH_SHORT).show();
                     }
                     else if(speakerListFilter != null) {
-                        Toast.makeText(getActivity(), "search in all filter", Toast.LENGTH_SHORT).show();
                         searchInFilter(s.toString());
                     }
                 }

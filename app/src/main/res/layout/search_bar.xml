@@ -6,10 +6,10 @@
 
     <EditText
         android:id="@+id/edtSearch"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/seach_speaker"
-        android:gravity="center"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:inputType="text"
         android:imeOptions="actionSearch" />

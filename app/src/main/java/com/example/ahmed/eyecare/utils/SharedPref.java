@@ -21,8 +21,15 @@ public class SharedPref {
     public static MyAccount getMyAccount(Context context){
         getSharedPref(context);
         String token = sharedPref.getString(MyAccount.TOKEN_KEY,"");
-        MyAccount account = new MyAccount.Builder().token(token).build();
+        int userId = sharedPref.getInt(MyAccount.USER_ID_KEY,0);
+        MyAccount account = new MyAccount.Builder().token(token).userId(userId).build();
         return account;
+    }
+    public static void setFullData(Context context,int userId){
+        getSharedPref(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(MyAccount.USER_ID_KEY,userId);
+        editor.commit();
     }
     public static void setToken(Context context,String token){
         getSharedPref(context);

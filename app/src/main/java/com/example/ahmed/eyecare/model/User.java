@@ -41,6 +41,7 @@ public class User {
     @SerializedName("is_speaker")
     private int isSpeaker;
 
-
-
+    public int getId() {
+        return id;
+    }
 }

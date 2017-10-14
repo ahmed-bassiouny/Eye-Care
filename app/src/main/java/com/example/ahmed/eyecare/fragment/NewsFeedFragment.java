@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.activity.MainContainer;
+import com.example.ahmed.eyecare.activity.MenuContainer;
 import com.example.ahmed.eyecare.adapter.NewsFeedAdapter;
 import com.example.ahmed.eyecare.adapter.PhotoAdapter;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
@@ -39,7 +41,7 @@ public class NewsFeedFragment extends Fragment {
     ViewPager pager;
     PagerAdapter adapter;
     TabLayout tabLayout;
-    ImageView ivWritePost,ivChecIn;
+    ImageView ivWritePost,ivChecIn,ivMenu;
     RecyclerView recycleview;
     NewsFeedAdapter newsFeedAdapter;
 
@@ -75,6 +77,7 @@ public class NewsFeedFragment extends Fragment {
         ivWritePost =view.findViewById(R.id.iv_write_post);
         ivChecIn = view.findViewById(R.id.iv_checkin);
         recycleview = view.findViewById(R.id.recycleview);
+        ivMenu = view.findViewById(R.id.iv_menu);
         recycleview.setNestedScrollingEnabled(false);
         recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
@@ -103,6 +106,13 @@ public class NewsFeedFragment extends Fragment {
                         Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+        ivMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),MenuContainer.class));
+
             }
         });
     }

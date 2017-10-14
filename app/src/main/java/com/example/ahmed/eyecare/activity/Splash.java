@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.utils.SharedPref;
 
 public class Splash extends AppCompatActivity {
 
@@ -17,9 +18,14 @@ public class Splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent = new Intent(Splash.this,SignIn.class);
-                Splash.this.startActivity(mainIntent);
-                Splash.this.finish();
+                if(SharedPref.getMyAccount(Splash.this).getUserId() >0){
+                    // TODO check if have another info or not
+                    startActivity(new Intent(Splash.this,MainContainer.class));
+                }else {
+                    Intent mainIntent = new Intent(Splash.this, SignIn.class);
+                    startActivity(mainIntent);
+                }
+                finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

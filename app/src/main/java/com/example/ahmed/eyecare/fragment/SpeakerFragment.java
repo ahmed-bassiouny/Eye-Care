@@ -47,7 +47,7 @@ public class SpeakerFragment extends Fragment {
         speaker = (Speaker) getArguments().getSerializable(Constant.INTENT_OPEN_SPEAKER_KEY);
         if(speaker == null){
             Toast.makeText(getActivity(), R.string.cant_load_data, Toast.LENGTH_SHORT).show();
-            getFragmentManager().popBackStackImmediate();
+            getActivity().onBackPressed();
         }
     }
 
