@@ -76,7 +76,7 @@ public class NewsFeedFragment extends Fragment {
         ivChecIn = view.findViewById(R.id.iv_checkin);
         recycleview = view.findViewById(R.id.recycleview);
         recycleview.setNestedScrollingEnabled(false);
-
+        recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
     }
     private void onClick(){
@@ -129,7 +129,6 @@ public class NewsFeedFragment extends Fragment {
             @Override
             public void onSuccess(List<Post> posts) {
                 newsFeedAdapter = new NewsFeedAdapter(posts,getContext());
-                recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                 recycleview.setAdapter(newsFeedAdapter);
             }
 

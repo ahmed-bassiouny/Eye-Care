@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.model;
 
+import com.example.ahmed.eyecare.utils.Utils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -31,14 +32,14 @@ public class Session {
     @SerializedName("venue")
     private String venue;
     @SerializedName("physical_address")
-    private String address;
+    private String location;
     @SerializedName("list_of_speaker")
     private List<Speaker> speaker;
 
     public int getId() {
-        try{
-        return Integer.parseInt(id);
-        }catch (Exception e){
+        try {
+            return Integer.parseInt(id);
+        } catch (Exception e) {
             return 0;
         }
     }
@@ -51,39 +52,47 @@ public class Session {
         return sessionDate;
     }
 
-    public String getStartTime() {
+    private String getStartTime() {
         return startTime;
     }
 
-    public String getEndTime() {
+    private String getEndTime() {
         return endTime;
     }
 
-    public String getSessionTag() {
+    private String getSessionTag() {
         return sessionTag;
     }
 
-    public String getDesc() {
+    private String getDesc() {
         return desc;
     }
 
-    public boolean getHasRate() {
-        if(hasRate.equals("1"))
+    private boolean getHasRate() {
+        if (hasRate.equals("1"))
             return true;
         return false;
     }
 
-    public String getVenue() {
+    private String getVenue() {
         return venue;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLocation() {
+        if (location == null || location.isEmpty())
+            location = "No Location";
+        return location;
     }
 
-    public List<Speaker> getSpeaker() {
-        if(speaker ==null)
+    private List<Speaker> getSpeaker() {
+        if (speaker == null)
             speaker = new ArrayList<>();
         return speaker;
+    }
+    public String getspeakerCount(){
+        return String.valueOf(speaker.size());
+    }
+    public String getFullTimeSession(){
+        return Utils.convert24FormatTo12Format(startTime) + " - " +Utils.convert24FormatTo12Format(endTime);
     }
 }

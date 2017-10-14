@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/seach_speaker"
         android:gravity="center"
+        android:textColorHint="@color/white"
         android:inputType="text"
         android:imeOptions="actionSearch" />
 

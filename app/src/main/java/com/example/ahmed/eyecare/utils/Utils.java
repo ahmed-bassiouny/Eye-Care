@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,7 +47,7 @@ public class Utils {
     public static Calendar getCalender(String dateTime) {
         Date date = null;
         try {
-            date = new SimpleDateFormat(Constant.DATE_FORMATE).parse(dateTime);
+            date = new SimpleDateFormat(Constant.DATE_FORMAT).parse(dateTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -105,5 +106,18 @@ public class Utils {
                 break;
         }
         return result;
+    }
+
+    public static String convert24FormatTo12Format(String originalTime){
+        DateFormat originalFormat = new SimpleDateFormat(Constant.DATE_FULL_TIME_FORMAT, Locale.ENGLISH);
+        DateFormat targetFormat = new SimpleDateFormat(Constant.DATE_TIME_FORMAT);
+        Date date = null;
+        try {
+            date = originalFormat.parse(originalTime);
+            return targetFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

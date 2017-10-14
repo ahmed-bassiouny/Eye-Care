@@ -7,7 +7,9 @@ package com.example.ahmed.eyecare.utils;
 public class Constant {
 
     public static final int PAGE_NUMBER = 1;
-    public static final String DATE_FORMATE = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FULL_TIME_FORMAT = "HH:mm:ss";
+    public static final String DATE_TIME_FORMAT = "hh:mm a";
 
 
     // INTENT KEY

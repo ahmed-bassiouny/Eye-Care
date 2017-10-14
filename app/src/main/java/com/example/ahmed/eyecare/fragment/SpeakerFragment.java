@@ -4,6 +4,7 @@ package com.example.ahmed.eyecare.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.adapter.SessionAdapter;
 import com.example.ahmed.eyecare.model.Session;
 import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.utils.Constant;
@@ -33,7 +35,7 @@ public class SpeakerFragment extends Fragment {
     private RecyclerView recycleview;
 
     Speaker speaker;
-
+    SessionAdapter sessionAdapter;
     public SpeakerFragment() {
         // Required empty public constructor
     }
@@ -70,6 +72,8 @@ public class SpeakerFragment extends Fragment {
         tvBio.setText(speaker.getBio());
         if(!speaker.getImage().isEmpty())
             Utils.setImage(getContext(), speaker.getImage(), ivAvatar);
+        sessionAdapter = new SessionAdapter(speaker.getSession(),getContext());
+        recycleview.setAdapter(sessionAdapter);
 
     }
 
@@ -80,5 +84,7 @@ public class SpeakerFragment extends Fragment {
         tvCompany = view.findViewById(R.id.tv_company);
         tvBio = view.findViewById(R.id.tv_bio);
         recycleview = view.findViewById(R.id.recycleview);
+        recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recycleview.setNestedScrollingEnabled(false);
     }
 }

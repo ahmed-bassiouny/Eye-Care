@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -28,9 +29,10 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.CutomVie
 
 
     List<Session> sessions;
-
-    public SessionAdapter(List<Session> sessions) {
+    Context context;
+    public SessionAdapter(List<Session> sessions ,Context context) {
         this.sessions = sessions;
+        this.context=context;
     }
 
     @Override
@@ -43,6 +45,10 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.CutomVie
     @Override
     public void onBindViewHolder(SessionAdapter.CutomViewHolder holder, int position) {
         Session session = sessions.get(position);
+        holder.tvSessionName.setText(session.getSessionName());
+        holder.tvSessionLocation.setText(session.getLocation());
+        holder.tvSessionSpeaker.setText(session.getspeakerCount()+" "+context.getString(R.string.people_interested));
+        holder.tvSessionTime.setText(session.getFullTimeSession());
     }
 
     @Override
@@ -58,10 +64,10 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.CutomVie
 
         public CutomViewHolder(View view) {
             super(view);
-            tvSessionName = (TextView) view.findViewById(R.id.tv_session_name);
-            tvSessionTime = (TextView) view.findViewById(R.id.tv_session_time);
-            tvSessionLocation = (TextView) view.findViewById(R.id.tv_session_location);
-            tvSessionSpeaker = (TextView) view.findViewById(R.id.tv_session_speaker);
+            tvSessionName = view.findViewById(R.id.tv_session_name);
+            tvSessionTime = view.findViewById(R.id.tv_session_time);
+            tvSessionLocation = view.findViewById(R.id.tv_session_location);
+            tvSessionSpeaker = view.findViewById(R.id.tv_session_speaker);
         }
     }
 }
