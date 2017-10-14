@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
@@ -48,6 +49,12 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.CutomVie
 
         if (!speaker.getImage().isEmpty())
             Utils.setImage(context, speaker.getImage(), holder.ivAvatar);
+        holder.relativeLayoutContianer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
     @Override
@@ -59,12 +66,17 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.CutomVie
 
         TextView tvName, tvPosition, tvCompany;
         CircleImageView ivAvatar;
-
+        RelativeLayout relativeLayoutContianer;
         public CutomViewHolder(View view) {
             super(view);
             tvName = view.findViewById(R.id.tv_name);
             tvPosition = view.findViewById(R.id.tv_position);
             tvCompany = view.findViewById(R.id.tv_company);
+            relativeLayoutContianer = view.findViewById(R.id.relative_container);
         }
+    }
+    public void updateList(List<Speaker> speakers){
+        this.speakers=speakers;
+        notifyDataSetChanged();
     }
 }

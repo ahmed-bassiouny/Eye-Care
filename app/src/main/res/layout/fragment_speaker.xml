@@ -1,24 +1,87 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layer"
+    android:background="@color/white"
     tools:context="com.example.ahmed.eyecare.fragment.SpeakerFragment">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar">
-    </include>
-
-    <android.support.v7.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/toolbar"
-        android:id="@+id/recycleview"/>
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/progress"/>
-</RelativeLayout>
+        android:padding="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/placeholderperson"
+            android:padding="5dp"
+            android:id="@+id/iv_avatar"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            tools:text="Name"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:id="@+id/tv_name"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/iv_avatar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            tools:text="Position"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:id="@+id/tv_position"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/iv_avatar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            tools:text="Company"
+            android:textSize="17sp"
+            android:id="@+id/tv_company"
+            android:layout_below="@+id/tv_position"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/iv_avatar"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/tv_company"
+            android:layout_marginTop="20dp"
+            android:id="@+id/view"
+            android:background="@color/gray"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            tools:text="Company"
+            android:textSize="15sp"
+            android:id="@+id/tv_bio"
+            android:layout_below="@+id/view"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/session"
+            android:textSize="17sp"
+            android:id="@+id/tv_session"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tv_bio"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_session"
+            android:background="@color/gray"
+            android:layout_marginTop="10dp"/>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

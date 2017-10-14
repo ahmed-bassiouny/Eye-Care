@@ -7,4 +7,8 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
     <color name="red_like">#fd0730</color>
+    <color name="blue">#3f5e9b</color>
+    <color name="gray">#d1d2d4</color>
+
+
 </resources>

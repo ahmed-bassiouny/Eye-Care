@@ -8,6 +8,8 @@
         android:id="@+id/edtSearch"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:hint="@string/seach_speaker"
+        android:gravity="center"
         android:inputType="text"
         android:imeOptions="actionSearch" />
 
