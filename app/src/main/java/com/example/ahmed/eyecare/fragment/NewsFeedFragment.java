@@ -52,11 +52,15 @@ public class NewsFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_news_feed, container, false);
+        return inflater.inflate(R.layout.fragment_news_feed, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         findViewById(view);
         onClick();
         setviewpager();
-        return view;
     }
 
     @Override
@@ -107,7 +111,7 @@ public class NewsFeedFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == getActivity().RESULT_OK && requestCode == NEW_POST){
-            Post post = (Post) data.getSerializableExtra(AddPostDialog.POST);
+            Post post = (Post) data.getSerializableExtra(Constant.INTENT_POST_KEY);
             if(post==null)
                 loadData();
             else

@@ -1,7 +1,11 @@
 package com.example.ahmed.eyecare.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.fragment.SpeakerFragment;
 import com.example.ahmed.eyecare.model.Speaker;
+import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.Utils;
 
 import java.util.List;
@@ -25,11 +31,11 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.CutomVie
 
 
     List<Speaker> speakers;
-    Context context;
+    FragmentActivity activity;
 
-    public SpeakerAdapter(List<Speaker> speakers, Context context) {
+    public SpeakerAdapter(List<Speaker> speakers, FragmentActivity activity) {
         this.speakers = speakers;
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -42,17 +48,19 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.CutomVie
     @Override
     public void onBindViewHolder(SpeakerAdapter.CutomViewHolder holder, int position) {
 
-        Speaker speaker = speakers.get(position);
+        final Speaker speaker = speakers.get(position);
         holder.tvName.setText(speaker.getName());
         holder.tvPosition.setText(speaker.getPosition());
         holder.tvCompany.setText(speaker.getCompany());
 
         if (!speaker.getImage().isEmpty())
-            Utils.setImage(context, speaker.getImage(), holder.ivAvatar);
+            Utils.setImage(activity, speaker.getImage(), holder.ivAvatar);
         holder.relativeLayoutContianer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.INTENT_OPEN_SPEAKER_KEY,speaker);
+                Utils.goToFragment(activity,new SpeakerFragment(),"Back",bundle);
             }
         });
     }

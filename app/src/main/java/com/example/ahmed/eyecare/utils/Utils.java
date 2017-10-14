@@ -31,8 +31,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Utils {
 
-    public static void goToFragment(AppCompatActivity appCompatActivity, Fragment fragment, String tag, Bundle bundle) {
-        FragmentManager fragmentManager = appCompatActivity.getSupportFragmentManager();
+    public static void goToFragment(FragmentActivity fragmentActivity, Fragment fragment, String tag, Bundle bundle) {
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_container, fragment);
         if (bundle != null) {

@@ -3,31 +3,119 @@ package com.example.ahmed.eyecare.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
+    private ImageView back;
+    private TextView tvSpeeker;
+    private TextView tvAttendee;
+    private TextView tvAgenda;
+    private ImageView ivSpeeker;
+    private ImageView ivAttendee;
+    private ImageView ivAgenda;
+    private TextView tvLogistics;
+    private TextView tvNewfeed;
+    private TextView tvAnnouncement;
+    private ImageView ivLogistics;
+    private ImageView ivNewfeed;
+    private ImageView ivAnnouncement;
+    private TextView tvLiveVote;
+    private TextView tvPhoto;
+    private TextView tvTwitter;
+    private ImageView ivLiveVote;
+    private ImageView ivPhoto;
+    private ImageView ivTwitter;
+    private TextView tvMessage;
+    private TextView tvSetting;
+    private TextView tvAbout;
+    private ImageView ivMessage;
+    private ImageView ivSetting;
+    private ImageView ivAbout;
+    private TextView tvAdmin;
+    private ImageView ivAdmin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_menu, container, false);
     }
 
-    private void onCilick(View view) {
-        view.findViewById(R.id.tv_speeker).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        findViewById(view);
+        onClick();
+    }
 
-            }
-        });
+    private void onClick() {
+        back.setOnClickListener(this);
+        tvSpeeker.setOnClickListener(this);
+        tvAttendee.setOnClickListener(this);
+        tvAgenda.setOnClickListener(this);
+        ivSpeeker.setOnClickListener(this);
+        ivAttendee.setOnClickListener(this);
+        ivAgenda.setOnClickListener(this);
+        tvLogistics.setOnClickListener(this);
+        tvNewfeed.setOnClickListener(this);
+        tvAnnouncement.setOnClickListener(this);
+        ivLogistics.setOnClickListener(this);
+        ivNewfeed.setOnClickListener(this);
+        ivAnnouncement.setOnClickListener(this);
+        tvLiveVote.setOnClickListener(this);
+        tvPhoto.setOnClickListener(this);
+        tvTwitter.setOnClickListener(this);
+        ivLiveVote.setOnClickListener(this);
+        ivPhoto.setOnClickListener(this);
+        ivTwitter.setOnClickListener(this);
+        tvMessage.setOnClickListener(this);
+        tvSetting.setOnClickListener(this);
+        tvAbout.setOnClickListener(this);
+        ivMessage.setOnClickListener(this);
+        ivSetting.setOnClickListener(this);
+        ivAbout.setOnClickListener(this);
+        tvAdmin.setOnClickListener(this);
+        ivAdmin.setOnClickListener(this);
+    }
+
+    private void findViewById(View view) {
+
+        back = view.findViewById(R.id.back);
+        tvSpeeker = view.findViewById(R.id.tv_speeker);
+        tvAttendee = view.findViewById(R.id.tv_attendee);
+        tvAgenda = view.findViewById(R.id.tv_agenda);
+        ivSpeeker = view.findViewById(R.id.iv_speeker);
+        ivAttendee = view.findViewById(R.id.iv_attendee);
+        ivAgenda = view.findViewById(R.id.iv_agenda);
+        tvLogistics = view.findViewById(R.id.tv_logistics);
+        tvNewfeed = view.findViewById(R.id.tv_newfeed);
+        tvAnnouncement = view.findViewById(R.id.tv_announcement);
+        ivLogistics = view.findViewById(R.id.iv_logistics);
+        ivNewfeed = view.findViewById(R.id.iv_newfeed);
+        ivAnnouncement = view.findViewById(R.id.iv_announcement);
+        tvLiveVote = view.findViewById(R.id.tv_live_vote);
+        tvPhoto = view.findViewById(R.id.tv_photo);
+        tvTwitter = view.findViewById(R.id.tv_twitter);
+        ivLiveVote = view.findViewById(R.id.iv_live_vote);
+        ivPhoto = view.findViewById(R.id.iv_photo);
+        ivTwitter = view.findViewById(R.id.iv_twitter);
+        tvMessage = view.findViewById(R.id.tv_message);
+        tvSetting = view.findViewById(R.id.tv_setting);
+        tvAbout = view.findViewById(R.id.tv_about);
+        ivMessage = view.findViewById(R.id.iv_message);
+        ivSetting = view.findViewById(R.id.iv_setting);
+        ivAbout = view.findViewById(R.id.iv_about);
+        tvAdmin = view.findViewById(R.id.tv_admin);
+        ivAdmin = view.findViewById(R.id.iv_admin);
     }
 
     @Override

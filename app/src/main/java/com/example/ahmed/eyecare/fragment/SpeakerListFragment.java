@@ -64,14 +64,13 @@ public class SpeakerListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_speaker_list, container, false);
-        findViewById(view);
-        return view;
+        return  inflater.inflate(R.layout.fragment_speaker_list, container, false);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        findViewById(view);
         loadData();
     }
 
@@ -232,7 +231,7 @@ public class SpeakerListFragment extends Fragment {
             public void onSuccess(List<com.example.ahmed.eyecare.model.Speaker> speakers) {
                 speakerList = speakers;
                 speakerListFilter = speakers;
-                speakerAdapter = new SpeakerAdapter(speakers, getContext());
+                speakerAdapter = new SpeakerAdapter(speakers, getActivity());
                 recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                 recycleview.setAdapter(speakerAdapter);
                 progress.setVisibility(View.GONE);

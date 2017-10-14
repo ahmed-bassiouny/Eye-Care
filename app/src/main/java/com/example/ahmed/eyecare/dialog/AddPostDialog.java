@@ -11,11 +11,11 @@ import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.Post;
+import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.DummyData;
 
 public class AddPostDialog extends AppCompatActivity {
 
-    public static final String POST ="post";
 
     EditText edPost;
     @Override
@@ -41,7 +41,7 @@ public class AddPostDialog extends AppCompatActivity {
                     public void onSuccess(Post post) {
                         Toast.makeText(AddPostDialog.this, R.string.thanks, Toast.LENGTH_SHORT).show();
                         Intent resultIntent = new Intent();
-                        resultIntent.putExtra(POST,post);
+                        resultIntent.putExtra(Constant.INTENT_POST_KEY,post);
                         setResult(AddPostDialog.this.RESULT_OK, resultIntent);
                         finish();
                     }
