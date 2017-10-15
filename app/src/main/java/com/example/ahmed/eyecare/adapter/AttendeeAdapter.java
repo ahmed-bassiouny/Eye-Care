@@ -13,6 +13,7 @@ import com.example.ahmed.eyecare.model.Attendee;
 import com.example.ahmed.eyecare.model.Session;
 import com.example.ahmed.eyecare.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -85,5 +86,9 @@ public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.CutomV
             tvCompany = view.findViewById(R.id.tv_company);
             ivChat = view.findViewById(R.id.iv_chat);
         }
+    }
+    public void updateAttendee(List<Attendee> item){
+        this.attendees.addAll(item);
+        notifyDataSetChanged();
     }
 }

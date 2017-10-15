@@ -20,6 +20,7 @@ import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Attendee;
+import com.example.ahmed.eyecare.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,9 @@ public class AttendeeListFragment extends Fragment {
     private Toolbar mToolbar;
     private ProgressBar progress;
     private AttendeeAdapter attendeeAdapter;
-    private List<Attendee> attendeeList = new ArrayList<>();;
+    private List<Attendee> attendeeList;
+    LinearLayoutManager linearLayoutManager;
+    int pageNumber = 1;
 
 
     public AttendeeListFragment() {
@@ -52,12 +55,17 @@ public class AttendeeListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
-        loadData(1);
+        loadData();
     }
 
-    private void loadData(int pageNumber) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        pageNumber = 1;
+    }
+
+    private void loadData() {
         progress.setVisibility(View.VISIBLE);
-        recycleview.setVisibility(View.GONE);
         RetrofitRequest.getAllAttendee(pageNumber, new RetrofitResponse<List<AttendeLisWithLetter>>() {
             @Override
             public void onSuccess(final List<AttendeLisWithLetter> attendeLisWithLetters) {
@@ -68,20 +76,23 @@ public class AttendeeListFragment extends Fragment {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            for (AttendeLisWithLetter item : attendeLisWithLetters) {
+                            attendeeList = new ArrayList<>();
+                            for (AttendeLisWithLetter item : attendeLisWithLetters)
                                 for (Attendee attendee : item.getAttendees())
                                     attendeeList.add(attendee);
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(pageNumber==Constant.PAGE_NUMBER) {
                                         attendeeAdapter = new AttendeeAdapter(attendeeList, getContext());
                                         recycleview.setAdapter(attendeeAdapter);
-                                        progress.setVisibility(View.GONE);
-                                        recycleview.setVisibility(View.VISIBLE);
+                                    }else {
+                                        attendeeAdapter.updateAttendee(attendeeList);
                                     }
-                                });
-                            }
-
+                                    progress.setVisibility(View.GONE);
+                                    recycleview.setVisibility(View.VISIBLE);
+                                }
+                            });
                         }
                     }).start();
                 }
@@ -100,7 +111,8 @@ public class AttendeeListFragment extends Fragment {
         recycleview = view.findViewById(R.id.recycleview);
         mToolbar = view.findViewById(R.id.toolbar);
         progress = view.findViewById(R.id.progress);
-        recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recycleview.setLayoutManager(linearLayoutManager);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -110,6 +122,25 @@ public class AttendeeListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().onBackPressed();
+            }
+        });
+        recycleview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int itemno = linearLayoutManager.findLastVisibleItemPosition();
+                if (Constant.COUNT_ITEMS_PER_REQUEST-1 == itemno) {
+                    if ((attendeeList.size() / Constant.COUNT_ITEMS_PER_REQUEST) == pageNumber) {
+                        pageNumber++;
+                        loadData();
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
             }
         });
     }
