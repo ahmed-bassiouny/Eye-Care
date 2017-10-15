@@ -9,7 +9,7 @@ import java.util.List;
  * Created by ahmed on 11/10/17.
  */
 
-public class AllPostsResponse extends ParentResponse {
+public class PostListResponse extends ParentResponse {
     @SerializedName("all_posts")
     private List<Post> posts;
 

@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
+import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
+import com.example.ahmed.eyecare.model.Attendee;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +45,20 @@ public class AttendeeListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
+        loadData(1);
+    }
+
+    private void loadData(int pageNumber) {
+        RetrofitRequest.getAllAttendee(pageNumber, new RetrofitResponse<List<Attendee>>() {
+            @Override
+            public void onSuccess(List<Attendee> attendees) {
+            }
+
+            @Override
+            public void onFailed(String errorMessage) {
+
+            }
+        });
     }
 
     private void findViewById(View view) {

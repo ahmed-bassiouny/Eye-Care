@@ -3,10 +3,12 @@ package com.example.ahmed.eyecare.api.utils;
 import android.util.Log;
 
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
+import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
-import com.example.ahmed.eyecare.api.modelResponse.AllPostsResponse;
+import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
-import com.example.ahmed.eyecare.api.modelResponse.SpeakerResponse;
+import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
+import com.example.ahmed.eyecare.model.Attendee;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.model.User;
@@ -54,10 +56,10 @@ public class RetrofitRequest {
        });
    }
    public static void getPosts(int userId,int pageNumber,final RetrofitResponse<List<Post>> listRetrofitResponse){
-       Call<AllPostsResponse> response = service.getAllPost(userId,pageNumber,ParentRequest.getEventId());
-       response.enqueue(new Callback<AllPostsResponse>() {
+       Call<PostListResponse> response = service.getAllPost(userId,pageNumber,ParentRequest.getEventId());
+       response.enqueue(new Callback<PostListResponse>() {
            @Override
-           public void onResponse(Call<AllPostsResponse> call, Response<AllPostsResponse> response) {
+           public void onResponse(Call<PostListResponse> call, Response<PostListResponse> response) {
                if(response.code()==200){
                    if(response.body().getStatus()){
                        listRetrofitResponse.onSuccess(response.body().getPosts());
@@ -72,7 +74,7 @@ public class RetrofitRequest {
            }
 
            @Override
-           public void onFailure(Call<AllPostsResponse> call, Throwable t) {
+           public void onFailure(Call<PostListResponse> call, Throwable t) {
                listRetrofitResponse.onFailed(INTERNET_CONNECTION);
                Log.e(TAG , t.getLocalizedMessage()+"");
            }
@@ -115,10 +117,10 @@ public class RetrofitRequest {
         addPostOrCheckIn(userId,"",true,retrofitResponse);
     }
     public static void getAllSpeaker(int userId , final RetrofitResponse<List<Speaker>> retrofitResponse){
-        Call<SpeakerResponse> response = service.getAllSpeaker(userId,ParentRequest.getEventId());
-        response.enqueue(new Callback<SpeakerResponse>() {
+        Call<SpeakerListResponse> response = service.getAllSpeaker(userId,ParentRequest.getEventId());
+        response.enqueue(new Callback<SpeakerListResponse>() {
             @Override
-            public void onResponse(Call<SpeakerResponse> call, Response<SpeakerResponse> response) {
+            public void onResponse(Call<SpeakerListResponse> call, Response<SpeakerListResponse> response) {
                 if(response.code()==200){
                     if(response.body().getStatus()){
                         retrofitResponse.onSuccess(response.body().getSpeakers());
@@ -133,10 +135,37 @@ public class RetrofitRequest {
             }
 
             @Override
-            public void onFailure(Call<SpeakerResponse> call, Throwable t) {
+            public void onFailure(Call<SpeakerListResponse> call, Throwable t) {
                 retrofitResponse.onFailed(INTERNET_CONNECTION);
                 Log.e(TAG , t.getLocalizedMessage()+"");
             }
         });
+    }
+
+    public static void getAllAttendee(int pageNumber, final RetrofitResponse<List<Attendee>> retrofitResponse){
+        Call<AttendeeListResponse> response = service.getAllAttendee(pageNumber,ParentRequest.getEventId());
+        response.enqueue(new Callback<AttendeeListResponse>() {
+            @Override
+            public void onResponse(Call<AttendeeListResponse> call, Response<AttendeeListResponse> response) {
+                if(response.code()==200){
+                    if(response.body().getStatus()){
+                        retrofitResponse.onSuccess(response.body().getAttendees());
+                    }else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG , response.body().getMassage());
+                    }
+                }else {
+                    Log.e("onResponse: ",errorMessageForDevelopment );
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AttendeeListResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG , t.getLocalizedMessage()+"");
+            }
+        });
+
     }
 }

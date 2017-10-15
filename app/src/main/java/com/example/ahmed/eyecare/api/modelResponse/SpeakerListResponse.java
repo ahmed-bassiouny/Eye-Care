@@ -10,7 +10,7 @@ import java.util.List;
  * Created by ahmed on 14/10/17.
  */
 
-public class SpeakerResponse extends  ParentResponse  {
+public class SpeakerListResponse extends  ParentResponse  {
     @SerializedName("all_speaker")
     private List<Speaker> speakers;
 
