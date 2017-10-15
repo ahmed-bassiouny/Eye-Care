@@ -165,6 +165,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_live_vote:
             case R.id.iv_live_vote:
+                Utils.goToFragment(getActivity(), new LiveVoteFragment(), "Back", null);
                 break;
 
             case R.id.tv_photo:

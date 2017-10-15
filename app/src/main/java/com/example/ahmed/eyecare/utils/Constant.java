@@ -17,4 +17,7 @@ public class Constant {
     public static final String INTENT_POST_KEY ="post";
     public static final String INTENT_OPEN_SPEAKER_KEY ="post";
 
+    //FireBase
+    public static final String QUESTION ="questions";
+
 }
