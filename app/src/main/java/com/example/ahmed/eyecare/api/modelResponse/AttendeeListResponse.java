@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.api.modelResponse;
 
+import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Attendee;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,9 +13,9 @@ import java.util.List;
 
 public class AttendeeListResponse extends ParentResponse {
     @SerializedName("all_attends")
-    private List<Attendee> attendees;
+    private List<AttendeLisWithLetter> attendees;
 
-    public List<Attendee> getAttendees() {
+    public List<AttendeLisWithLetter> getAttendeesWithLetter() {
         if (attendees == null)
             attendees = new ArrayList<>();
         return attendees;

@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.model.Attendee;
 import com.example.ahmed.eyecare.model.Session;
+import com.example.ahmed.eyecare.utils.Utils;
 
 import java.util.List;
 
@@ -19,11 +21,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by ahmed on 11/10/17.
  */
 
-public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.CutomViewHolder> {
+public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.CutomViewHolder>  {
 
 
-    public AttendeeAdapter() {
+    private List<Attendee> attendees;
+    private Context context;
 
+    public AttendeeAdapter(List<Attendee> attendees, Context context) {
+        this.attendees = attendees;
+        this.context = context;
     }
 
     @Override
@@ -35,12 +41,31 @@ public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.CutomV
 
     @Override
     public void onBindViewHolder(AttendeeAdapter.CutomViewHolder holder, int position) {
+        Attendee currentAttendee = attendees.get(position);
+        holder.tvName.setText(currentAttendee.getName());
+        holder.tvCompany.setText(currentAttendee.getCompany());
+        holder.tvPosition.setText(currentAttendee.getPosition());
 
+        if (!currentAttendee.getImage().isEmpty())
+            Utils.setImage(context, currentAttendee.getImage(), holder.ivAvatar);
+        if(position == 0){
+            holder.tvLetter.setVisibility(View.VISIBLE);
+            holder.tvLetter.setText(currentAttendee.getName().charAt(0)+"");
+        }else {
+            Attendee prevAttende = attendees.get(position-1);
+            if(prevAttende.getName().toLowerCase().charAt(0) == currentAttendee.getName().toLowerCase().charAt(0)){
+                holder.tvLetter.setVisibility(View.GONE);
+            }else {
+                holder.tvLetter.setVisibility(View.VISIBLE);
+                holder.tvLetter.setText(currentAttendee.getName().charAt(0)+"");
+            }
+        }
     }
+
 
     @Override
     public int getItemCount() {
-        return 0;
+        return attendees.size();
     }
 
     class CutomViewHolder extends RecyclerView.ViewHolder {

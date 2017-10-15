@@ -140,11 +140,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tv_speeker:
             case R.id.iv_speeker:
-                Utils.goToFragment(getActivity(),new SpeakerListFragment(),"Back",null);
+                Utils.goToFragment(getActivity(), new SpeakerListFragment(), "Back", null);
                 break;
-
             case R.id.tv_attendee:
             case R.id.iv_attendee:
+                Utils.goToFragment(getActivity(), new AttendeeListFragment(), "Back", null);
                 break;
 
             case R.id.tv_agenda:

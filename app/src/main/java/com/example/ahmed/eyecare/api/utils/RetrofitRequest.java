@@ -8,6 +8,7 @@ import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
+import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Attendee;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.model.Speaker;
@@ -142,14 +143,14 @@ public class RetrofitRequest {
         });
     }
 
-    public static void getAllAttendee(int pageNumber, final RetrofitResponse<List<Attendee>> retrofitResponse){
+    public static void getAllAttendee(int pageNumber, final RetrofitResponse<List<AttendeLisWithLetter>> retrofitResponse){
         Call<AttendeeListResponse> response = service.getAllAttendee(pageNumber,ParentRequest.getEventId());
         response.enqueue(new Callback<AttendeeListResponse>() {
             @Override
             public void onResponse(Call<AttendeeListResponse> call, Response<AttendeeListResponse> response) {
                 if(response.code()==200){
                     if(response.body().getStatus()){
-                        retrofitResponse.onSuccess(response.body().getAttendees());
+                        retrofitResponse.onSuccess(response.body().getAttendeesWithLetter());
                     }else {
                         retrofitResponse.onFailed(response.body().getMassage());
                         Log.e(TAG , response.body().getMassage());
@@ -166,6 +167,5 @@ public class RetrofitRequest {
                 Log.e(TAG , t.getLocalizedMessage()+"");
             }
         });
-
     }
 }

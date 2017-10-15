@@ -9,6 +9,7 @@ import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
+import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
