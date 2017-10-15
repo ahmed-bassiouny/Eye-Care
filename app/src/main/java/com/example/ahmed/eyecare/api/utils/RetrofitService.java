@@ -2,14 +2,14 @@ package com.example.ahmed.eyecare.api.utils;
 
 import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
-import com.example.ahmed.eyecare.api.modelRequest.AllPostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
+import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
+import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
-import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -26,6 +26,7 @@ public interface RetrofitService {
     String ADD_POST_CHECKIN = "add_post.php";
     String ALL_SPEAKER = "all_speaker.php";
     String ALL_ATTENDEE = "all_attends.php";
+    String SEARCH_ATTENDEE = "search_attendees.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -37,7 +38,7 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(ALL_POST)
     Call<PostListResponse> getAllPost(@Field(ParentRequest.USER_ID_KEY) int userId,
-                                      @Field(AllPostRequest.PAGE_NUMBER_KEY) int pageNumber,
+                                      @Field(ParentRequest.PAGE_NUMBER_KEY) int pageNumber,
                                       @Field(ParentRequest.EVENT_KEY) int event_id);
 
     @FormUrlEncoded
@@ -55,7 +56,14 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST(ALL_ATTENDEE)
-    Call<AttendeeListResponse> getAllAttendee(@Field(AllPostRequest.PAGE_NUMBER_KEY) int pageNumber,
+    Call<AttendeeListResponse> getAllAttendee(@Field(ParentRequest.PAGE_NUMBER_KEY) int pageNumber,
                                               @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(SEARCH_ATTENDEE)
+    Call<AttendeeListResponse> searchAttendee(@Field(ParentRequest.PAGE_NUMBER_KEY) int pageNumber,
+                                              @Field(ParentRequest.EVENT_KEY) int event_id,
+                                              @Field(SearchAttendeeRequest.SEARCH_STRING) String searchWord);
 
 }

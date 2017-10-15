@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class LoginRequest{
 
     public static final String TOKEN_KEY = "register_id";
-    public static final String EMAIL_KEY = "email";
+    public static final String EMAIL_KEY = "name";
     public static final String CODE_KEY = "code";
 
 }

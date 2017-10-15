@@ -46,7 +46,7 @@
         android:id="@+id/et_email"
         android:nextFocusForward="@+id/et_code"
         android:lines="1"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
         android:maxLines="1"
         android:drawablePadding="5dp"
         android:backgroundTint="@color/white"/>

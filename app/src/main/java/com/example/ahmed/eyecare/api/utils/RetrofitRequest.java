@@ -143,8 +143,13 @@ public class RetrofitRequest {
         });
     }
 
-    public static void getAllAttendee(int pageNumber, final RetrofitResponse<List<AttendeLisWithLetter>> retrofitResponse){
-        Call<AttendeeListResponse> response = service.getAllAttendee(pageNumber,ParentRequest.getEventId());
+    public static void getAllAttendee(int pageNumber, String searchWord,final RetrofitResponse<List<AttendeLisWithLetter>> retrofitResponse){
+        Call<AttendeeListResponse> response ;
+        if(!searchWord.trim().isEmpty()){
+            response = service.searchAttendee(pageNumber,ParentRequest.getEventId(),searchWord);
+        }else {
+            response = service.getAllAttendee(pageNumber,ParentRequest.getEventId());
+        }
         response.enqueue(new Callback<AttendeeListResponse>() {
             @Override
             public void onResponse(Call<AttendeeListResponse> call, Response<AttendeeListResponse> response) {
