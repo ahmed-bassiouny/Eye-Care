@@ -35,6 +35,8 @@ public class Session {
     private String location;
     @SerializedName("list_of_speaker")
     private List<Speaker> speaker;
+    @SerializedName("add_to_agenda")
+    private String addToAgenda;
 
     public int getId() {
         try {
@@ -89,10 +91,18 @@ public class Session {
             speaker = new ArrayList<>();
         return speaker;
     }
-    public String getspeakerCount(){
+
+    public String getspeakerCount() {
         return String.valueOf(speaker.size());
     }
-    public String getFullTimeSession(){
-        return Utils.convert24FormatTo12Format(startTime) + " - " +Utils.convert24FormatTo12Format(endTime);
+
+    public String getFullTimeSession() {
+        return Utils.convert24FormatTo12Format(startTime) + " - " + Utils.convert24FormatTo12Format(endTime);
+    }
+
+    public boolean getAddToAgenda() {
+        if (addToAgenda.equals("1"))
+            return true;
+        return false;
     }
 }

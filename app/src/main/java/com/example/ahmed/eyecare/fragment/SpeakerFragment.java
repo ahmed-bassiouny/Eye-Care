@@ -13,8 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
-import com.example.ahmed.eyecare.adapter.SessionAdapter;
-import com.example.ahmed.eyecare.model.Session;
+import com.example.ahmed.eyecare.adapter.SessionSpeakerAdapter;
 import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.Utils;
@@ -35,7 +34,7 @@ public class SpeakerFragment extends Fragment {
     private RecyclerView recycleview;
 
     Speaker speaker;
-    SessionAdapter sessionAdapter;
+    SessionSpeakerAdapter sessionSpeakerAdapter;
     public SpeakerFragment() {
         // Required empty public constructor
     }
@@ -72,8 +71,8 @@ public class SpeakerFragment extends Fragment {
         tvBio.setText(speaker.getBio());
         if(!speaker.getImage().isEmpty())
             Utils.setImage(getContext(), speaker.getImage(), ivAvatar);
-        sessionAdapter = new SessionAdapter(speaker.getSession(),getContext());
-        recycleview.setAdapter(sessionAdapter);
+        sessionSpeakerAdapter = new SessionSpeakerAdapter(speaker.getSession(),getContext());
+        recycleview.setAdapter(sessionSpeakerAdapter);
 
     }
 
