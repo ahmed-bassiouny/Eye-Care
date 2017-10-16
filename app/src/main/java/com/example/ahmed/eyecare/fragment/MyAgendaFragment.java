@@ -58,6 +58,7 @@ public class MyAgendaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
         onClick();
+
     }
 
     @Override
@@ -81,11 +82,18 @@ public class MyAgendaFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                agendaList.get(position).getSessions();
-                if(sessionMyAgendaAdapter==null)
-                    sessionMyAgendaAdapter=new SessionMyAgendaAdapter(getContext());
-                sessionMyAgendaAdapter.setData(agendaList.get(position).getSessions());
-                recyclerView.setAdapter(sessionMyAgendaAdapter);
+                try{
+
+                    if(agendaList==null)
+                        getActivity().finish();
+                    agendaList.get(position).getSessions();
+                    if(sessionMyAgendaAdapter==null)
+                        sessionMyAgendaAdapter=new SessionMyAgendaAdapter(getContext());
+                    sessionMyAgendaAdapter.setData(agendaList.get(position).getSessions());
+                    recyclerView.setAdapter(sessionMyAgendaAdapter);
+                }catch (Exception e){
+                    getActivity().finish();
+                }
             }
 
             @Override

@@ -83,22 +83,25 @@ public class AgendaFragment extends Fragment {
         this.agendaList=agendaList;
         for(Agenda item:agendaList){
             days.add(item.getDayNumber()+" "+item.getEventDate());
-        }/*
-        if(getContext() ==null)
-            return;
-        adapterSpinner = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, days);
-        spinner.setAdapter(adapterSpinner);*/
+        }
     }
     private void onClick(){
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                agendaList.get(position).getSessions();
-                if(sessionAgendaAdapter==null)
-                    sessionAgendaAdapter=new SessionAgendaAdapter(getContext());
-                sessionAgendaAdapter.setData(agendaList.get(position).getSessions());
-                recyclerView.setAdapter(sessionAgendaAdapter);
+                try{
+                    if(agendaList==null)
+                        getActivity().finish();
+                    agendaList.get(position).getSessions();
+                    if(sessionAgendaAdapter==null)
+                        sessionAgendaAdapter=new SessionAgendaAdapter(getContext());
+                    sessionAgendaAdapter.setData(agendaList.get(position).getSessions());
+                    recyclerView.setAdapter(sessionAgendaAdapter);
+                }catch (Exception e){
+                    getActivity().finish();
+
+                }
             }
 
             @Override
