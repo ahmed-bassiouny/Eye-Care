@@ -37,6 +37,12 @@ public class Session {
     private List<Speaker> speaker;
     @SerializedName("add_to_agenda")
     private String addToAgenda;
+    @SerializedName("no_of_interested")
+    private String sessioninterested;
+    @SerializedName("session_comments")
+    private List<Comment> sessionComments;
+    @SerializedName("session_likes")
+    private String sessionLikes;
 
     public int getId() {
         try {
@@ -47,6 +53,8 @@ public class Session {
     }
 
     public String getSessionName() {
+        if(sessionName==null)
+            sessionName="";
         return sessionName;
     }
 
@@ -54,13 +62,7 @@ public class Session {
         return sessionDate;
     }
 
-    private String getStartTime() {
-        return startTime;
-    }
 
-    private String getEndTime() {
-        return endTime;
-    }
 
     private String getSessionTag() {
         return sessionTag;
@@ -92,17 +94,37 @@ public class Session {
         return speaker;
     }
 
-    public String getspeakerCount() {
+    /*public String getspeakerCount() {
         return String.valueOf(speaker.size());
     }
-
+*/
     public String getFullTimeSession() {
         return Utils.convert24FormatTo12Format(startTime) + " - " + Utils.convert24FormatTo12Format(endTime);
+    }
+    public String getStartTime(){
+        return Utils.convert24FormatTo12Format(startTime);
+    }
+    public String getEndTime(){
+        return Utils.convert24FormatTo12Format(endTime);
     }
 
     public boolean getAddToAgenda() {
         if (addToAgenda.equals("1"))
             return true;
         return false;
+    }
+
+    public String getSessioninterested() {
+        return sessioninterested;
+    }
+
+    public int getSessionComments() {
+       if(sessionComments==null)
+           sessionComments= new ArrayList<>();
+        return sessionComments.size();
+    }
+
+    public String  getSessionLikes() {
+        return sessionLikes;
     }
 }

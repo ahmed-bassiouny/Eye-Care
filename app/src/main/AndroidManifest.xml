@@ -41,7 +41,7 @@
         <activity
             android:name=".activity.MenuContainer"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activity.Agenda"
+        <activity android:name=".activity.AgendaActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

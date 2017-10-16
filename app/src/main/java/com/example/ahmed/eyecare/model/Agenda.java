@@ -35,4 +35,16 @@ public class Agenda {
             sessions= new ArrayList<>();
         return sessions;
     }
+
+    public void setDayNumber(String dayNumber) {
+        this.dayNumber = dayNumber;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
+    }
 }

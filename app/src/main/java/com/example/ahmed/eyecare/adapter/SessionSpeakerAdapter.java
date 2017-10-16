@@ -38,7 +38,7 @@ public class SessionSpeakerAdapter extends RecyclerView.Adapter<SessionSpeakerAd
         Session session = sessions.get(position);
         holder.tvSessionName.setText(session.getSessionName());
         holder.tvSessionLocation.setText(session.getLocation());
-        holder.tvSessionSpeaker.setText(session.getspeakerCount()+" "+context.getString(R.string.people_interested));
+        holder.tvSessionSpeaker.setText(session.getSessioninterested()+" "+context.getString(R.string.people_interested));
         holder.tvSessionTime.setText(session.getFullTimeSession());
     }
 

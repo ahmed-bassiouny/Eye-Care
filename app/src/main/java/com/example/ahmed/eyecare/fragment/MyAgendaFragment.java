@@ -16,10 +16,8 @@ import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.adapter.SessionAgendaAdapter;
-import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
-import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
+import com.example.ahmed.eyecare.adapter.SessionMyAgendaAdapter;
 import com.example.ahmed.eyecare.model.Agenda;
-import com.example.ahmed.eyecare.utils.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,26 +25,24 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AgendaFragment extends Fragment {
+public class MyAgendaFragment extends Fragment {
 
     List<Agenda> agendaList;
     Spinner spinner;
     RecyclerView recyclerView;
-    SessionAgendaAdapter sessionAgendaAdapter;
-    static AgendaFragment agendaFragment;
-    ArrayAdapter<String> adapterSpinner;
+    SessionMyAgendaAdapter sessionMyAgendaAdapter;
+    static MyAgendaFragment myAgendaFragment;
     static ArrayList<String> days ;
-
-
-    public AgendaFragment() {
+    ArrayAdapter<String> adapterSpinner;
+    public MyAgendaFragment() {
         // Required empty public constructor
     }
-    public static AgendaFragment newInstance(){
-        if(agendaFragment==null) {
-            agendaFragment = new AgendaFragment();
+    public static MyAgendaFragment newInstance(){
+        if(myAgendaFragment==null) {
+            myAgendaFragment = new MyAgendaFragment();
             days = new ArrayList<>();
         }
-        return agendaFragment;
+        return myAgendaFragment;
     }
 
 
@@ -54,51 +50,42 @@ public class AgendaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agenda, container, false);
+        return inflater.inflate(R.layout.fragment_my_agenda, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         findViewById(view);
         onClick();
     }
 
     @Override
     public void onResume() {
-        super.onResume();
+        super.onResume();/*
+        if(getActivity()!=null){
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, days);
+            spinner.setAdapter(adapter);
+        }*/
         adapterSpinner = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, days);
         spinner.setAdapter(adapterSpinner);
     }
-
     private void findViewById(View view) {
         spinner=view.findViewById(R.id.spinner);
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
-
-    public void setData(List<Agenda> agendaList){
-        this.agendaList=agendaList;
-        for(Agenda item:agendaList){
-            days.add(item.getDayNumber()+" "+item.getEventDate());
-        }/*
-        if(getContext() ==null)
-            return;
-        adapterSpinner = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, days);
-        spinner.setAdapter(adapterSpinner);*/
-    }
     private void onClick(){
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 agendaList.get(position).getSessions();
-                if(sessionAgendaAdapter==null)
-                    sessionAgendaAdapter=new SessionAgendaAdapter(getContext());
-                sessionAgendaAdapter.setData(agendaList.get(position).getSessions());
-                recyclerView.setAdapter(sessionAgendaAdapter);
+                if(sessionMyAgendaAdapter==null)
+                    sessionMyAgendaAdapter=new SessionMyAgendaAdapter(getContext());
+                sessionMyAgendaAdapter.setData(agendaList.get(position).getSessions());
+                recyclerView.setAdapter(sessionMyAgendaAdapter);
             }
 
             @Override
@@ -106,5 +93,11 @@ public class AgendaFragment extends Fragment {
 
             }
         });
+    }
+    public void setData(List<Agenda> agendaList){
+        this.agendaList=agendaList;
+        for(Agenda item:agendaList){
+            days.add(item.getDayNumber()+" "+item.getEventDate());
+        }
     }
 }
