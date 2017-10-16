@@ -4,6 +4,7 @@ import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
+import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
@@ -27,6 +28,7 @@ public interface RetrofitService {
     String ALL_SPEAKER = "all_speaker.php";
     String ALL_ATTENDEE = "all_attends.php";
     String SEARCH_ATTENDEE = "search_attendees.php";
+    String ALL_AGENDA = "agenda.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -66,4 +68,9 @@ public interface RetrofitService {
                                               @Field(ParentRequest.EVENT_KEY) int event_id,
                                               @Field(SearchAttendeeRequest.SEARCH_STRING) String searchWord);
 
+
+    @FormUrlEncoded
+    @POST(ALL_AGENDA)
+    Call<AgendaListResponse> getAllAgenda(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                           @Field(ParentRequest.EVENT_KEY) int event_id);
 }

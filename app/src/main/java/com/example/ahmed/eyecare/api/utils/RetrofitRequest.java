@@ -3,11 +3,13 @@ package com.example.ahmed.eyecare.api.utils;
 import android.util.Log;
 
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
+import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
+import com.example.ahmed.eyecare.model.Agenda;
 import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Attendee;
 import com.example.ahmed.eyecare.model.Post;
@@ -168,6 +170,31 @@ public class RetrofitRequest {
 
             @Override
             public void onFailure(Call<AttendeeListResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG , t.getLocalizedMessage()+"");
+            }
+        });
+    }
+    public static void getAllAgenda(int userId , final RetrofitResponse<List<Agenda>> retrofitResponse){
+        Call<AgendaListResponse> response = service.getAllAgenda(userId,ParentRequest.getEventId());
+        response.enqueue(new Callback<AgendaListResponse>() {
+            @Override
+            public void onResponse(Call<AgendaListResponse> call, Response<AgendaListResponse> response) {
+                if(response.code()==200){
+                    if(response.body().getStatus()){
+                        retrofitResponse.onSuccess(response.body().getAgendaList());
+                    }else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG , response.body().getMassage());
+                    }
+                }else {
+                    Log.e("onResponse: ",errorMessageForDevelopment );
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AgendaListResponse> call, Throwable t) {
                 retrofitResponse.onFailed(INTERNET_CONNECTION);
                 Log.e(TAG , t.getLocalizedMessage()+"");
             }

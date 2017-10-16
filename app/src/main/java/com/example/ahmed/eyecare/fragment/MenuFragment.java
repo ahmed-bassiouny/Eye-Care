@@ -1,6 +1,7 @@
 package com.example.ahmed.eyecare.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.activity.Agenda;
 import com.example.ahmed.eyecare.utils.Utils;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
@@ -149,6 +151,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_agenda:
             case R.id.iv_agenda:
+                getActivity().startActivity(new Intent(getContext(), Agenda.class));
                 break;
 
             case R.id.tv_logistics:
