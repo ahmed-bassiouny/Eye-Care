@@ -16,11 +16,11 @@
         <activity
             android:name=".activity.Splash"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
+<!--            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".activity.SignIn"
@@ -35,7 +35,13 @@
 
         <activity
             android:name=".activity.MainContainer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".dialog.AddPostDialog"
             android:theme="@style/AppThemeDialog" />
@@ -47,11 +53,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar">
-<!--            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
     </application>
 

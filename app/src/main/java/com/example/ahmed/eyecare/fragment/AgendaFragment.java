@@ -10,16 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.adapter.AgendaDayAdapter;
 import com.example.ahmed.eyecare.adapter.SessionAgendaAdapter;
-import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
-import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.Agenda;
-import com.example.ahmed.eyecare.utils.DummyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +30,7 @@ public class AgendaFragment extends Fragment {
     RecyclerView recyclerView;
     SessionAgendaAdapter sessionAgendaAdapter;
     static AgendaFragment agendaFragment;
-    ArrayAdapter<String> adapterSpinner;
+    AgendaDayAdapter adapterSpinner;
     static ArrayList<String> days ;
 
 
@@ -68,7 +64,7 @@ public class AgendaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        adapterSpinner = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, days);
+        adapterSpinner = new AgendaDayAdapter(getContext(),days);
         spinner.setAdapter(adapterSpinner);
     }
 
@@ -82,7 +78,7 @@ public class AgendaFragment extends Fragment {
     public void setData(List<Agenda> agendaList){
         this.agendaList=agendaList;
         for(Agenda item:agendaList){
-            days.add(item.getDayNumber()+" "+item.getEventDate());
+            days.add(item.getDayNumber()+","+item.getEventDate());
         }
     }
     private void onClick(){
