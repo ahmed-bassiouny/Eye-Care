@@ -172,7 +172,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_live_vote:
             case R.id.iv_live_vote:
-                loadLastQuestionKeyOpenVote();
+                Utils.goToFragment(getActivity(), new LiveVoteFragment(), "Back", null);
                 break;
 
             case R.id.tv_photo:
@@ -198,27 +198,4 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void loadLastQuestionKeyOpenVote(){
-        FirebaseDatabase.getInstance().getReference(Constant.USER).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    String id = snapshot.getKey();
-                    String lastQuestionKey="";
-                    if(id.equals(String.valueOf(SharedPref.getMyAccount(getContext()).getUserId()))){
-                        lastQuestionKey=snapshot.getValue(String.class);
-                    }
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Constant.INTENT_LAST_QUESTION_KEY,lastQuestionKey);
-                    if (SharedPref.getMyAccount(getContext()).getUserId() != 0)
-                        Utils.goToFragment(getActivity(), new LiveVoteFragment(), "Back", bundle);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 }

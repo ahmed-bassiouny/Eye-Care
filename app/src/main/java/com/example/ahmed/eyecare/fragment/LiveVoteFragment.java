@@ -21,12 +21,14 @@ import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.model.Answer;
 import com.example.ahmed.eyecare.model.Question;
 import com.example.ahmed.eyecare.utils.Constant;
+import com.example.ahmed.eyecare.utils.DummyData;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class LiveVoteFragment extends Fragment {
     List<Answer> listAnswer;
     ProgressBar progress;
     int userId;
+    boolean questionActive=false;
 
     String lastQuestionKey = "";
 
@@ -71,10 +74,9 @@ public class LiveVoteFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        userId=SharedPref.getMyAccount(getContext()).getUserId(); // get email from sharedpref
-        lastQuestionKey=getArguments().getString(Constant.INTENT_LAST_QUESTION_KEY);
+        userId=SharedPref.getMyAccount(getContext()).getUserId(); // get id from sharedpref
         initListenerFirebase();
-        addListener();
+        loadLastQuestionKeyOpenVote();
     }
 
     @Override
@@ -99,12 +101,14 @@ public class LiveVoteFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 setQuestios(dataSnapshot);
+                isNewQuestion(questionActive);
                 progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 setQuestios(dataSnapshot);
+                isNewQuestion(questionActive);
             }
 
             @Override
@@ -170,7 +174,8 @@ public class LiveVoteFragment extends Fragment {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             FirebaseDatabase.getInstance().getReference(Constant.USER).child(String.valueOf(userId)).setValue(lastQuestionKey);
-                            isNewQuestion(false);
+                            questionActive=false;
+                            isNewQuestion(questionActive);
                             btnSubmit.setEnabled(true);
                         }
                     });
@@ -196,8 +201,28 @@ public class LiveVoteFragment extends Fragment {
                 radioGroup.addView(radioButton);
             }
             radioGroupFrame.addView(radioGroup);
-            isNewQuestion(true);
+            questionActive=true;
         }
+    }
+
+    private void loadLastQuestionKeyOpenVote(){
+        FirebaseDatabase.getInstance().getReference(Constant.USER).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    String id = snapshot.getKey();
+                    if(id.equals(String.valueOf(userId))){
+                        lastQuestionKey=snapshot.getValue(String.class);
+                        break;
+                    }
+                }
+                addListener();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

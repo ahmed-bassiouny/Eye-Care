@@ -29,7 +29,9 @@
         <FrameLayout
             android:id="@+id/radio_group_frame"
             android:layout_width="match_parent"
+            android:layout_margin="20dp"
             android:layout_below="@+id/tv_question"
+            android:layout_centerHorizontal="true"
             android:visibility="gone"
             android:layout_height="wrap_content"></FrameLayout>
 
@@ -37,13 +39,14 @@
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
             android:background="@color/header"
             android:text="@string/submit"
             android:layout_below="@+id/radio_group_frame"
             android:textColor="@color/white"
             android:visibility="gone"
             android:textSize="15sp"
+            android:layout_margin="20dp"
             android:textStyle="bold" />
 
         <TextView

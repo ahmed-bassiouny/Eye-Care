@@ -17,7 +17,6 @@ public class Constant {
     // INTENT KEY
     public static final String INTENT_POST_KEY ="post";
     public static final String INTENT_OPEN_SPEAKER_KEY ="post";
-    public static final String INTENT_LAST_QUESTION_KEY ="last_question_key";
     public static final String  INTENT_ANOTHER_USER_ID_KEY ="another_user_id";
     public static final String INTENT_ANOTHER_USER_IMAGE_KEY ="another_user_image";
 
