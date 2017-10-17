@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -21,11 +22,14 @@ import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.model.Answer;
 import com.example.ahmed.eyecare.model.Question;
 import com.example.ahmed.eyecare.utils.Constant;
+import com.example.ahmed.eyecare.utils.MyAccount;
+import com.example.ahmed.eyecare.utils.SharedPref;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -36,15 +40,16 @@ public class LiveVoteFragment extends Fragment {
 
 
     private Toolbar mToolbar;
-    RecyclerView recycleview;
     ChildEventListener childEventListener;
     DatabaseReference myRef;
+    FrameLayout radioGroupFrame;
     RadioGroup radioGroup;
     Button btnSubmit;
-    TextView tvQuestion;
+    TextView tvQuestion,tvNoQuestion;
     List<Answer> listAnswer;
-    String questionKey;
+    int userId;
 
+    String lastQuestionKey;
 
     public LiveVoteFragment() {
         // Required empty public constructor
@@ -62,15 +67,17 @@ public class LiveVoteFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
+        isNewQuestion(false);
         onClick();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        initListenerFirebase();
-        addListener();
-        btnSubmit.setVisibility(View.INVISIBLE);
+        userId=SharedPref.getMyAccount(getContext()).getUserId(); // get email from sharedpref
+        initListenerFirebase(); // initial listener to get new question
+        loadLastQuestionKey(); // load last question which answered
+        addListener(); // load all question
     }
 
     @Override
@@ -95,25 +102,41 @@ public class LiveVoteFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Question item = dataSnapshot.getValue(Question.class);
-                if(item.getActivated()) {
-                    questionKey = dataSnapshot.getKey();
+                if(item.getActivated() && !dataSnapshot.getKey().equals(lastQuestionKey)) {
+                    lastQuestionKey = dataSnapshot.getKey();
                     listAnswer=item.answers;
                     tvQuestion.setText(item.question);
+                    radioGroupFrame.removeAllViews();
+                    radioGroup = new RadioGroup(getContext());
+                    radioGroup.setOrientation(RadioGroup.VERTICAL);
                     for(Answer answer : item.answers) {
                         RadioButton radioButton = new RadioButton(getContext());
                         radioButton.setText(answer.answer);
                         radioGroup.addView(radioButton);
                     }
-                    // found question
-                    if (true) {
-                        btnSubmit.setVisibility(View.VISIBLE);
-                    }
+                    radioGroupFrame.addView(radioGroup);
+                    isNewQuestion(true);
                 }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                Question item = dataSnapshot.getValue(Question.class);
+                if(item.getActivated() && !dataSnapshot.getKey().equals(lastQuestionKey)) {
+                    lastQuestionKey = dataSnapshot.getKey();
+                    listAnswer=item.answers;
+                    tvQuestion.setText(item.question);
+                    radioGroupFrame.removeAllViews();
+                    radioGroup = new RadioGroup(getContext());
+                    radioGroup.setOrientation(RadioGroup.VERTICAL);
+                    for(Answer answer : item.answers) {
+                        RadioButton radioButton = new RadioButton(getContext());
+                        radioButton.setText(answer.answer);
+                        radioGroup.addView(radioButton);
+                    }
+                    radioGroupFrame.addView(radioGroup);
+                    isNewQuestion(true);
+                }
             }
 
             @Override
@@ -133,12 +156,26 @@ public class LiveVoteFragment extends Fragment {
         };
     }
 
+    private void isNewQuestion(boolean question) {
+        if(question){
+            tvQuestion.setVisibility(View.VISIBLE);
+            radioGroupFrame.setVisibility(View.VISIBLE);
+            btnSubmit.setVisibility(View.VISIBLE);
+            tvNoQuestion.setVisibility(View.GONE);
+        }else {
+            tvQuestion.setVisibility(View.GONE);
+            radioGroupFrame.setVisibility(View.GONE);
+            btnSubmit.setVisibility(View.GONE);
+            tvNoQuestion.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void findViewById(View view) {
         mToolbar = view.findViewById(R.id.toolbar);
-        recycleview = view.findViewById(R.id.recycleview);
-        radioGroup = view.findViewById(R.id.radio_group);
+        radioGroupFrame = view.findViewById(R.id.radio_group_frame);
         btnSubmit = view.findViewById(R.id.btn_submit);
         tvQuestion=view.findViewById(R.id.tv_question);
+        tvNoQuestion=view.findViewById(R.id.tv_no_question);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -150,16 +187,43 @@ public class LiveVoteFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
-        radioGroup.setOrientation(RadioGroup.VERTICAL);
+        btnSubmit.setVisibility(View.INVISIBLE);
     }
     private void onClick(){
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int indexAnswer = (radioGroup.getCheckedRadioButtonId()-1);
-                Answer answer = listAnswer.get(indexAnswer);
-                Toast.makeText(getContext(), answer.votes+"", Toast.LENGTH_SHORT).show();
-                myRef.child(questionKey).child("answers").child(indexAnswer+"").child("votes").setValue((answer.votes+1));
+                try {
+                    btnSubmit.setEnabled(false);
+                    int indexAnswer = (radioGroup.getCheckedRadioButtonId() - 1);
+                    Answer answer = listAnswer.get(indexAnswer);
+                    myRef.child(lastQuestionKey).child("answers").child(indexAnswer + "").child("votes").setValue((answer.votes + 1), new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            FirebaseDatabase.getInstance().getReference(Constant.USER).child(String.valueOf(userId)).setValue(lastQuestionKey);
+                            isNewQuestion(false);
+                            btnSubmit.setEnabled(true);
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getContext(), getString(R.string.cant_send_vote), Toast.LENGTH_SHORT).show();
+                    btnSubmit.setEnabled(true);
+                }
+            }
+        });
+    }
+    private void loadLastQuestionKey(){
+        FirebaseDatabase.getInstance().getReference(Constant.USER).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String id = dataSnapshot.getKey();
+                if(id.equals(String.valueOf(userId))){
+                    lastQuestionKey=dataSnapshot.getValue(String.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

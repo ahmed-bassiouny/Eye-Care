@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.activity.AgendaActivity;
+import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
@@ -166,7 +167,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_live_vote:
             case R.id.iv_live_vote:
-                Utils.goToFragment(getActivity(), new LiveVoteFragment(), "Back", null);
+                if (SharedPref.getMyAccount(getContext()).getUserId() != 0)
+                    Utils.goToFragment(getActivity(), new LiveVoteFragment(), "Back", null);
                 break;
 
             case R.id.tv_photo:

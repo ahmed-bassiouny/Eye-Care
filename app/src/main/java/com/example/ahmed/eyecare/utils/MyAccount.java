@@ -8,18 +8,24 @@ public class MyAccount {
 
     public static final String TOKEN_KEY ="token";
     public static final String USER_ID_KEY ="userId";
+    public static final String USER_NAME_KEY ="userName";
     public static final String USER_IMAGE_KEY ="userImage";
+    public static final String EMAIL_KEY ="email";
+
 
     private String token;
     private int userId;
+    private String userName;
     private String userImage;
+    private String email;
 
-    private MyAccount(Builder builder) {
-        token = builder.token;
-        userId = builder.userId;
-        userImage=builder.userImage;
+    public MyAccount(int userId,String token,String userName,String userImage,String email){
+        this.userId=userId;
+        this.email=email;
+        this.userName=userName;
+        this.userImage=userImage;
+        this.token=token;
     }
-
 
     public String getToken() {
         return token;
@@ -33,30 +39,11 @@ public class MyAccount {
         return userId;
     }
 
-    public static final class Builder {
-        private String token;
-        private int userId;
-        private String userImage;
+    public String getEmail() {
+        return email;
+    }
 
-        public Builder() {
-        }
-
-        public Builder token(String val) {
-            token = val;
-            return this;
-        }
-
-        public Builder userId(int val) {
-            userId = val;
-            return this;
-        }
-        public Builder userImage(String val) {
-            userImage = val;
-            return this;
-        }
-
-        public MyAccount build() {
-            return new MyAccount(this);
-        }
+    public String getUserName() {
+        return userName;
     }
 }

@@ -25,6 +25,8 @@
     <string name="my_agenda">My Agenda</string>
 
     <string name="main_meeeting_room">Main Meeting Room</string>
+    <string name="no_question">No Question Active</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="cant_send_vote">Sorry we can\'t send your vote, Please try again</string>

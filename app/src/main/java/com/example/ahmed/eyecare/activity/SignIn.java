@@ -50,7 +50,7 @@ public class SignIn extends AppCompatActivity {
                         @Override
                         public void onSuccess(User user) {
                             if(user !=null){
-                                SharedPref.setFullData(SignIn.this,user.getId());
+                                SharedPref.setFullData(SignIn.this,user.getId(),user.getName(),user.getImageUrl(),user.getEmail());
                                 startActivity(new Intent(SignIn.this,MainContainer.class));
                                 finish();
                             }else {
