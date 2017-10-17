@@ -43,9 +43,23 @@
             android:text="@string/my_agenda"/>
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:id="@+id/main_container"
-        android:layout_height="match_parent"></FrameLayout>
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/spinner"
+        android:gravity="center"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recycleview"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
 </LinearLayout>

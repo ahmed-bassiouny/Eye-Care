@@ -16,9 +16,8 @@ public class AgendaDayAdapter extends BaseAdapter {
     LayoutInflater inflator;
     List<String> days;
 
-    public AgendaDayAdapter(Context context, List<String> days) {
+    public AgendaDayAdapter(Context context) {
         inflator = LayoutInflater.from(context);
-        this.days = days;
     }
 
     @Override
@@ -45,5 +44,8 @@ public class AgendaDayAdapter extends BaseAdapter {
         tvDay.setText(myday[0]);
         tvDate.setText(myday[1]);
         return convertView;
+    }
+    public void setDays(List<String> days){
+        this.days=days;
     }
 }

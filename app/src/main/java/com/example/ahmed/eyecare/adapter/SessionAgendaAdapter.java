@@ -26,9 +26,9 @@ public class SessionAgendaAdapter extends RecyclerView.Adapter<SessionAgendaAdap
     Context context;
     OnClickListenerAdapter onClickListenerAdapter;
 
-    public SessionAgendaAdapter(Context context, OnClickListenerAdapter onClickListenerAdapter) {
+    public SessionAgendaAdapter(Context context) {
         this.context = context;
-        this.onClickListenerAdapter = onClickListenerAdapter;
+        this.onClickListenerAdapter = (OnClickListenerAdapter) context;
     }
 
     @Override
