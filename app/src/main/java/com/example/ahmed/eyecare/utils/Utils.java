@@ -7,15 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.ahmed.eyecare.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -57,11 +54,19 @@ public class Utils {
     }
 
     public static void setImage(final Context context, String imgUrl, CircleImageView circleImageView) {
-        Glide.with(context)
-                .load(imgUrl)
-                .placeholder(R.drawable.placeholderperson)
-                .error(R.drawable.placeholderperson)
-                .into(circleImageView);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+        DisplayImageOptions.Builder options = new DisplayImageOptions.Builder()
+                .resetViewBeforeLoading(true)
+                .cacheInMemory(false)
+                .considerExifParams(true)
+                .cacheOnDisk(true)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
+        options.showImageOnLoading(R.drawable.placeholderperson);
+        options.showImageForEmptyUri(R.drawable.placeholderperson);
+        options.showImageOnFail(R.drawable.placeholderperson);
+        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.displayImage(imgUrl, circleImageView, options.build());
     }
 
     public static String getMothStringByNumber(int number) {
@@ -108,7 +113,7 @@ public class Utils {
         return result;
     }
 
-    public static String convert24FormatTo12Format(String originalTime){
+    public static String convert24FormatTo12Format(String originalTime) {
         DateFormat originalFormat = new SimpleDateFormat(Constant.DATE_FULL_TIME_FORMAT, Locale.ENGLISH);
         DateFormat targetFormat = new SimpleDateFormat(Constant.DATE_TIME_FORMAT);
         Date date = null;
@@ -120,7 +125,8 @@ public class Utils {
             return "";
         }
     }
-    public static SimpleDateFormat getSimpleDateFormate(){
-       return new SimpleDateFormat(Constant.DATE_FORMAT);
+
+    public static SimpleDateFormat getSimpleDateFormate() {
+        return new SimpleDateFormat(Constant.DATE_FORMAT);
     }
 }
