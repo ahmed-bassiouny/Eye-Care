@@ -5,10 +5,17 @@
     android:layout_height="match_parent"
     tools:context="com.example.ahmed.eyecare.activity.ChatActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar">
+    </include>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_below="@+id/toolbar"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear_container"/>
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -19,7 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/border_button_blue"
+        android:id="@+id/linear_container"
+        android:background="@color/header"
         android:layout_alignParentBottom="true"
         android:weightSum="4">
         <EditText
@@ -29,6 +37,7 @@
             android:minHeight="40dp"
             android:textColor="@color/black"
             android:padding="10dp"
+            android:layout_margin="10dp"
             android:id="@+id/et_message"
             android:layout_weight="1"/>
         <TextView
@@ -37,6 +46,7 @@
             android:text="@string/send"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_gravity="center"
             android:id="@+id/tv_send"
             android:gravity="center"

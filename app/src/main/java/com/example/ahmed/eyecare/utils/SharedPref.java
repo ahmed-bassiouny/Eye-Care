@@ -21,8 +21,9 @@ public class SharedPref {
     public static MyAccount getMyAccount(Context context){
         getSharedPref(context);
         String token = sharedPref.getString(MyAccount.TOKEN_KEY,"");
+        String image = sharedPref.getString(MyAccount.USER_IMAGE_KEY,"");
         int userId = sharedPref.getInt(MyAccount.USER_ID_KEY,0);
-        MyAccount account = new MyAccount.Builder().token(token).userId(userId).build();
+        MyAccount account = new MyAccount.Builder().token(token).userId(userId).userImage(image).build();
         return account;
     }
     public static void setFullData(Context context,int userId){

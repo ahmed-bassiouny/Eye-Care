@@ -33,11 +33,26 @@ public class Message {
     }
 
     public boolean isMyMessage() {
-        if(myMessage==1)
+        if (myMessage == 1)
             return true;
         return false;
     }
-    public String getTime(){
-        return String.valueOf(Utils.getCalender(messageTime).get(Calendar.HOUR)+":"+Utils.getCalender(messageTime).get(Calendar.MINUTE));
+
+    public String getTime() {
+        return String.valueOf(Utils.getCalender(messageTime).get(Calendar.HOUR) + ":" + Utils.getCalender(messageTime).get(Calendar.MINUTE));
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setMessageTime(String messageTime) {
+        this.messageTime = messageTime;
+    }
+
+    public void setMyMessage(boolean myMessage) {
+        if (myMessage)
+            this.myMessage = 1;
+        else this.myMessage = 0;
     }
 }

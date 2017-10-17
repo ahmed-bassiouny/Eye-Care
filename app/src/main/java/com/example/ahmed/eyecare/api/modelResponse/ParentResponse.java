@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by ahmed on 10/10/17.
  */
 
-public abstract class ParentResponse {
+public class ParentResponse {
 
     public static final String trueResult= "true";
 

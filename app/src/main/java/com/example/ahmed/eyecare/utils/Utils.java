@@ -120,4 +120,7 @@ public class Utils {
             return "";
         }
     }
+    public static SimpleDateFormat getSimpleDateFormate(){
+       return new SimpleDateFormat(Constant.DATE_FORMAT);
+    }
 }

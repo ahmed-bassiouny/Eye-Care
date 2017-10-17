@@ -9,6 +9,8 @@
     <string name="write_post">Write Post</string>
     <string name="check_in">Check in</string>
     <string name="cant_load_data">Sorry we can\'t load data</string>
+    <string name="cant_send_message">Sorry we can\'t send message</string>
+
     <string name="cancel">Cancel</string>
     <string name="post">Post</string>
     <string name="thanks">Thanks</string>
@@ -22,11 +24,10 @@
     <string name="agenda">Agenda</string>
     <string name="my_agenda">My Agenda</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="main_meeeting_room">Main Meeting Room</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cant_send_vote">Sorry we can\'t send your vote, Please try again</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.ahmed.eyecare.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.activity.ChatActivity;
 import com.example.ahmed.eyecare.model.Attendee;
 import com.example.ahmed.eyecare.model.Session;
+import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.Utils;
 
 import java.util.ArrayList;
@@ -42,7 +45,7 @@ public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.CutomV
 
     @Override
     public void onBindViewHolder(AttendeeAdapter.CutomViewHolder holder, int position) {
-        Attendee currentAttendee = attendees.get(position);
+        final Attendee currentAttendee = attendees.get(position);
         holder.tvName.setText(currentAttendee.getName());
         holder.tvCompany.setText(currentAttendee.getCompany());
         holder.tvPosition.setText(currentAttendee.getPosition());
@@ -61,6 +64,15 @@ public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.CutomV
                 holder.tvLetter.setText(currentAttendee.getName().charAt(0)+"");
             }
         }
+        holder.ivChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(context, ChatActivity.class);
+                intent.putExtra(Constant.INTENT_ANOTHER_USER_ID_KEY,currentAttendee.getId());
+                intent.putExtra(Constant.INTENT_ANOTHER_USER_IMAGE_KEY,currentAttendee.getImage());
+                context.startActivity(intent);
+            }
+        });
     }
 
 

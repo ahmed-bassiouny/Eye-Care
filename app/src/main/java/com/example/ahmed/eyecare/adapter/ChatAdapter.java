@@ -77,10 +77,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.CutomViewHolde
             ivAvatar=view.findViewById(R.id.iv_avatar);
         }
     }
-    public void addMessage(Message message){
+    public int addMessage(Message message){
         if(messageList == null)
             messageList = new ArrayList<>();
         messageList.add(message);
+        notifyDataSetChanged();
+        return messageList.size()-1;
+    }
+    public void removeMessage(int index){
+        messageList.remove(index);
         notifyDataSetChanged();
     }
 }
