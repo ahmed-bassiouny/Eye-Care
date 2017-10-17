@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,14 +21,12 @@ import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.model.Answer;
 import com.example.ahmed.eyecare.model.Question;
 import com.example.ahmed.eyecare.utils.Constant;
-import com.example.ahmed.eyecare.utils.MyAccount;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -47,9 +44,10 @@ public class LiveVoteFragment extends Fragment {
     Button btnSubmit;
     TextView tvQuestion,tvNoQuestion;
     List<Answer> listAnswer;
+    ProgressBar progress;
     int userId;
 
-    String lastQuestionKey;
+    String lastQuestionKey = "";
 
     public LiveVoteFragment() {
         // Required empty public constructor
@@ -67,7 +65,6 @@ public class LiveVoteFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
-        isNewQuestion(false);
         onClick();
     }
 
@@ -75,9 +72,9 @@ public class LiveVoteFragment extends Fragment {
     public void onStart() {
         super.onStart();
         userId=SharedPref.getMyAccount(getContext()).getUserId(); // get email from sharedpref
-        initListenerFirebase(); // initial listener to get new question
-        loadLastQuestionKey(); // load last question which answered
-        addListener(); // load all question
+        lastQuestionKey=getArguments().getString(Constant.INTENT_LAST_QUESTION_KEY);
+        initListenerFirebase();
+        addListener();
     }
 
     @Override
@@ -101,42 +98,13 @@ public class LiveVoteFragment extends Fragment {
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Question item = dataSnapshot.getValue(Question.class);
-                if(item.getActivated() && !dataSnapshot.getKey().equals(lastQuestionKey)) {
-                    lastQuestionKey = dataSnapshot.getKey();
-                    listAnswer=item.answers;
-                    tvQuestion.setText(item.question);
-                    radioGroupFrame.removeAllViews();
-                    radioGroup = new RadioGroup(getContext());
-                    radioGroup.setOrientation(RadioGroup.VERTICAL);
-                    for(Answer answer : item.answers) {
-                        RadioButton radioButton = new RadioButton(getContext());
-                        radioButton.setText(answer.answer);
-                        radioGroup.addView(radioButton);
-                    }
-                    radioGroupFrame.addView(radioGroup);
-                    isNewQuestion(true);
-                }
+                setQuestios(dataSnapshot);
+                progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Question item = dataSnapshot.getValue(Question.class);
-                if(item.getActivated() && !dataSnapshot.getKey().equals(lastQuestionKey)) {
-                    lastQuestionKey = dataSnapshot.getKey();
-                    listAnswer=item.answers;
-                    tvQuestion.setText(item.question);
-                    radioGroupFrame.removeAllViews();
-                    radioGroup = new RadioGroup(getContext());
-                    radioGroup.setOrientation(RadioGroup.VERTICAL);
-                    for(Answer answer : item.answers) {
-                        RadioButton radioButton = new RadioButton(getContext());
-                        radioButton.setText(answer.answer);
-                        radioGroup.addView(radioButton);
-                    }
-                    radioGroupFrame.addView(radioGroup);
-                    isNewQuestion(true);
-                }
+                setQuestios(dataSnapshot);
             }
 
             @Override
@@ -176,6 +144,7 @@ public class LiveVoteFragment extends Fragment {
         btnSubmit = view.findViewById(R.id.btn_submit);
         tvQuestion=view.findViewById(R.id.tv_question);
         tvNoQuestion=view.findViewById(R.id.tv_no_question);
+        progress = view.findViewById(R.id.progress);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -212,20 +181,23 @@ public class LiveVoteFragment extends Fragment {
             }
         });
     }
-    private void loadLastQuestionKey(){
-        FirebaseDatabase.getInstance().getReference(Constant.USER).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String id = dataSnapshot.getKey();
-                if(id.equals(String.valueOf(userId))){
-                    lastQuestionKey=dataSnapshot.getValue(String.class);
-                }
+    private void setQuestios(DataSnapshot dataSnapshot){
+        Question item = dataSnapshot.getValue(Question.class);
+        if(item.getActivated() && !dataSnapshot.getKey().equals(lastQuestionKey)) {
+            lastQuestionKey = dataSnapshot.getKey();
+            listAnswer=item.answers;
+            tvQuestion.setText(item.question);
+            radioGroupFrame.removeAllViews();
+            radioGroup = new RadioGroup(getContext());
+            radioGroup.setOrientation(RadioGroup.VERTICAL);
+            for(Answer answer : item.answers) {
+                RadioButton radioButton = new RadioButton(getContext());
+                radioButton.setText(answer.answer);
+                radioGroup.addView(radioButton);
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+            radioGroupFrame.addView(radioGroup);
+            isNewQuestion(true);
+        }
     }
+
 }

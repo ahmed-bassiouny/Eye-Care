@@ -14,8 +14,13 @@ import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.activity.AgendaActivity;
+import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
@@ -167,8 +172,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_live_vote:
             case R.id.iv_live_vote:
-                if (SharedPref.getMyAccount(getContext()).getUserId() != 0)
-                    Utils.goToFragment(getActivity(), new LiveVoteFragment(), "Back", null);
+                loadLastQuestionKeyOpenVote();
                 break;
 
             case R.id.tv_photo:
@@ -192,5 +196,29 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             case R.id.iv_admin:
                 break;
         }
+    }
+
+    private void loadLastQuestionKeyOpenVote(){
+        FirebaseDatabase.getInstance().getReference(Constant.USER).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    String id = snapshot.getKey();
+                    String lastQuestionKey="";
+                    if(id.equals(String.valueOf(SharedPref.getMyAccount(getContext()).getUserId()))){
+                        lastQuestionKey=snapshot.getValue(String.class);
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.INTENT_LAST_QUESTION_KEY,lastQuestionKey);
+                    if (SharedPref.getMyAccount(getContext()).getUserId() != 0)
+                        Utils.goToFragment(getActivity(), new LiveVoteFragment(), "Back", bundle);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

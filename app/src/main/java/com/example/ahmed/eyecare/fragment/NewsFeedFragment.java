@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
@@ -44,6 +45,9 @@ public class NewsFeedFragment extends Fragment {
     ImageView ivWritePost,ivChecIn,ivMenu;
     RecyclerView recycleview;
     NewsFeedAdapter newsFeedAdapter;
+    int pageNumber=1;
+    List<Post> postList;
+    ProgressBar progress;
 
     public NewsFeedFragment() {
         // Required empty public constructor
@@ -78,8 +82,29 @@ public class NewsFeedFragment extends Fragment {
         ivChecIn = view.findViewById(R.id.iv_checkin);
         recycleview = view.findViewById(R.id.recycleview);
         ivMenu = view.findViewById(R.id.iv_menu);
+        progress=view.findViewById(R.id.progress);
         recycleview.setNestedScrollingEnabled(false);
-        recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recycleview.setLayoutManager(linearLayoutManager);
+        recycleview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int itemno = linearLayoutManager.findLastVisibleItemPosition();
+                if (Constant.COUNT_ITEMS_PER_REQUEST-1 == itemno) {
+                    if ((postList.size() / Constant.COUNT_ITEMS_PER_REQUEST) == pageNumber) {
+                        pageNumber++;
+                        loadData();
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+            }
+        });
 
     }
     private void onClick(){
@@ -135,16 +160,24 @@ public class NewsFeedFragment extends Fragment {
         tabLayout.setupWithViewPager(pager, true);
     }
     private void loadData(){
-        RetrofitRequest.getPosts(DummyData.userID, Constant.PAGE_NUMBER, new RetrofitResponse<List<Post>>() {
+        progress.setVisibility(View.VISIBLE);
+        RetrofitRequest.getPosts(DummyData.userID, pageNumber, new RetrofitResponse<List<Post>>() {
             @Override
             public void onSuccess(List<Post> posts) {
-                newsFeedAdapter = new NewsFeedAdapter(posts,getContext());
-                recycleview.setAdapter(newsFeedAdapter);
+                postList=posts;
+                if(pageNumber==Constant.PAGE_NUMBER) {
+                    newsFeedAdapter = new NewsFeedAdapter(posts,getContext());
+                    recycleview.setAdapter(newsFeedAdapter);
+                }else {
+                    newsFeedAdapter.updateAttendee(postList);
+                }
+                progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailed(String errorMessage) {
                 Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                progress.setVisibility(View.GONE);
             }
         });
     }

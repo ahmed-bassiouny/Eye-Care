@@ -70,6 +70,11 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
         return posts.size();
     }
 
+    public void updateAttendee(List<Post> postList) {
+        this.posts=postList;
+        notifyDataSetChanged();
+    }
+
     class CutomViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvDay, tvMonth ,tvUserName ,tvUserPost , ivTime , ivComment ,ivLike;
