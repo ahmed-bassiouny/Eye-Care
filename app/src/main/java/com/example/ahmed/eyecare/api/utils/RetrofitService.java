@@ -1,13 +1,14 @@
 package com.example.ahmed.eyecare.api.utils;
 
 import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
+import com.example.ahmed.eyecare.api.modelRequest.MessageDetailsRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
-import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
+import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
@@ -29,6 +30,7 @@ public interface RetrofitService {
     String ALL_ATTENDEE = "all_attends.php";
     String SEARCH_ATTENDEE = "search_attendees.php";
     String ALL_AGENDA = "agenda.php";
+    String MESSAGE_DETAILS = "message_details.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -72,5 +74,12 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(ALL_AGENDA)
     Call<AgendaListResponse> getAllAgenda(@Field(ParentRequest.USER_ID_KEY) int userId,
-                                           @Field(ParentRequest.EVENT_KEY) int event_id);
+                                          @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(MESSAGE_DETAILS)
+    Call<MessageDetailsResponse> getMessageDetails(@Field(MessageDetailsRequest.CURRENT_USER) int userId,
+                                                   @Field(MessageDetailsRequest.OTHER_USER) int otherUserId,
+                                                   @Field(ParentRequest.EVENT_KEY) int event_id);
 }

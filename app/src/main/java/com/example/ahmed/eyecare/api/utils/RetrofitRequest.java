@@ -6,12 +6,14 @@ import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
+import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
 import com.example.ahmed.eyecare.model.Agenda;
 import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Attendee;
+import com.example.ahmed.eyecare.model.Message;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.model.User;
@@ -195,6 +197,31 @@ public class RetrofitRequest {
 
             @Override
             public void onFailure(Call<AgendaListResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG , t.getLocalizedMessage()+"");
+            }
+        });
+    }
+    public static void getMessageDetails(int userId , int otherUserId , final RetrofitResponse<List<Message>> retrofitResponse){
+        Call<MessageDetailsResponse> response = service.getMessageDetails(userId,otherUserId,ParentRequest.getEventId());
+        response.enqueue(new Callback<MessageDetailsResponse>() {
+            @Override
+            public void onResponse(Call<MessageDetailsResponse> call, Response<MessageDetailsResponse> response) {
+                if(response.code()==200){
+                    if(response.body().getStatus()){
+                        retrofitResponse.onSuccess(response.body().getMessageList());
+                    }else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG , response.body().getMassage());
+                    }
+                }else {
+                    Log.e("onResponse: ",errorMessageForDevelopment );
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageDetailsResponse> call, Throwable t) {
                 retrofitResponse.onFailed(INTERNET_CONNECTION);
                 Log.e(TAG , t.getLocalizedMessage()+"");
             }
