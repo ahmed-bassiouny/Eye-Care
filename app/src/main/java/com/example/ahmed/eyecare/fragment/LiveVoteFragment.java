@@ -95,7 +95,7 @@ public class LiveVoteFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Question item = dataSnapshot.getValue(Question.class);
-                if(item.activated) {
+                if(item.getActivated()) {
                     questionKey = dataSnapshot.getKey();
                     listAnswer=item.answers;
                     tvQuestion.setText(item.question);

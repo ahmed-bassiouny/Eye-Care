@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
@@ -18,6 +22,11 @@ public class ChatActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ChatAdapter chatAdapter;
+    ProgressBar progressBar;
+    TextView tvSend;
+    EditText edMessage;
+    int otherUserId =0; // this id about user i chat with him
+    String otherUserImage; //this image about user i chat with him
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +34,24 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         findViewById();
         loadData();
+        onClick();
     }
+
+    private void onClick() {
+        tvSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(edMessage.getText().toString().trim().isEmpty())
+                    return;
+            }
+        });
+    }
+
     private void findViewById() {
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        progressBar = (ProgressBar) findViewById(R.id.progress);
+        tvSend = (TextView) findViewById(R.id.tv_send);
+        edMessage = (EditText) findViewById(R.id.et_message);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setStackFromEnd(true);

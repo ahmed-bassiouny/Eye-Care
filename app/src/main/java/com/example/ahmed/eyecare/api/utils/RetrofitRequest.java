@@ -7,6 +7,7 @@ import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
+import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
@@ -226,5 +227,31 @@ public class RetrofitRequest {
                 Log.e(TAG , t.getLocalizedMessage()+"");
             }
         });
+    }
+    public static void sendMessage(int userId , int otherUserId ,String message, final RetrofitResponse<ParentResponse> retrofitResponse){
+        Call<ParentResponse> response = service.sendMessage(userId,otherUserId,message,"",ParentRequest.getEventId());
+        response.enqueue(new Callback<ParentResponse>() {
+            @Override
+            public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
+                if(response.code()==200){
+                    if(response.body().getStatus()){
+                        retrofitResponse.onSuccess(response.body().getMessageList());
+                    }else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG , response.body().getMassage());
+                    }
+                }else {
+                    Log.e("onResponse: ",errorMessageForDevelopment );
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParentResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG , t.getLocalizedMessage()+"");
+            }
+        });
+
     }
 }

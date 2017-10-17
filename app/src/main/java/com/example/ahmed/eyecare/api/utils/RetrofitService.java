@@ -2,6 +2,7 @@ package com.example.ahmed.eyecare.api.utils;
 
 import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
 import com.example.ahmed.eyecare.api.modelRequest.MessageDetailsRequest;
+import com.example.ahmed.eyecare.api.modelRequest.MessageSendRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
@@ -9,6 +10,7 @@ import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
+import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
@@ -31,6 +33,7 @@ public interface RetrofitService {
     String SEARCH_ATTENDEE = "search_attendees.php";
     String ALL_AGENDA = "agenda.php";
     String MESSAGE_DETAILS = "message_details.php";
+    String SEND_MESSAGE = "send_message.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -82,4 +85,12 @@ public interface RetrofitService {
     Call<MessageDetailsResponse> getMessageDetails(@Field(MessageDetailsRequest.CURRENT_USER) int userId,
                                                    @Field(MessageDetailsRequest.OTHER_USER) int otherUserId,
                                                    @Field(ParentRequest.EVENT_KEY) int event_id);
+
+    @FormUrlEncoded
+    @POST(SEND_MESSAGE)
+    Call<ParentResponse> sendMessage(@Field(MessageSendRequest.SENDER_ID) int userId,
+                                     @Field(MessageSendRequest.RECEIVER_ID) int otherUserId,
+                                     @Field(MessageSendRequest.MESSAGE) String message,
+                                     @Field(MessageSendRequest.IMAGE) String image,
+                                     @Field(ParentRequest.EVENT_KEY) int event_id);
 }

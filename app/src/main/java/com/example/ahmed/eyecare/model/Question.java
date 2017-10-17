@@ -8,7 +8,13 @@ import java.util.List;
 
 public class Question {
 
-    public boolean activated;
+    private String activated;
     public String question;
     public List<Answer> answers;
+
+    public boolean getActivated(){
+        if(activated.equals("1"))
+            return true;
+        return false;
+    }
 }
