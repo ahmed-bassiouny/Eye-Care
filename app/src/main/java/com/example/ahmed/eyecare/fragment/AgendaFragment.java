@@ -11,11 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.adapter.AgendaDayAdapter;
 import com.example.ahmed.eyecare.adapter.SessionAgendaAdapter;
+import com.example.ahmed.eyecare.interfaces.OnClickListenerAdapter;
 import com.example.ahmed.eyecare.model.Agenda;
+import com.example.ahmed.eyecare.model.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +34,15 @@ public class AgendaFragment extends Fragment {
     SessionAgendaAdapter sessionAgendaAdapter;
     static AgendaFragment agendaFragment;
     AgendaDayAdapter adapterSpinner;
-    static ArrayList<String> days ;
+    static ArrayList<String> days;
 
 
     public AgendaFragment() {
         // Required empty public constructor
     }
-    public static AgendaFragment newInstance(){
-        if(agendaFragment==null) {
+
+    public static AgendaFragment newInstance() {
+        if (agendaFragment == null) {
             agendaFragment = new AgendaFragment();
             days = new ArrayList<>();
         }
@@ -64,37 +68,48 @@ public class AgendaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        adapterSpinner = new AgendaDayAdapter(getContext(),days);
+        adapterSpinner = new AgendaDayAdapter(getContext(), days);
         spinner.setAdapter(adapterSpinner);
     }
 
     private void findViewById(View view) {
-        spinner=view.findViewById(R.id.spinner);
-        recyclerView=view.findViewById(R.id.recycleview);
+        spinner = view.findViewById(R.id.spinner);
+        recyclerView = view.findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
 
-    public void setData(List<Agenda> agendaList){
-        this.agendaList=agendaList;
-        for(Agenda item:agendaList){
-            days.add(item.getDayNumber()+","+item.getEventDate());
+    public void setData(List<Agenda> agendaList) {
+        this.agendaList = agendaList;
+        for (Agenda item : agendaList) {
+            days.add(item.getDayNumber() + "," + item.getEventDate());
         }
     }
-    private void onClick(){
+
+    private void onClick() {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                try{
-                    if(agendaList==null)
+                try {
+                    if (agendaList == null)
                         getActivity().finish();
                     agendaList.get(position).getSessions();
-                    if(sessionAgendaAdapter==null)
-                        sessionAgendaAdapter=new SessionAgendaAdapter(getContext());
+                    if (sessionAgendaAdapter == null) {
+                        sessionAgendaAdapter = new SessionAgendaAdapter(getContext(), new OnClickListenerAdapter() {
+                            @Override
+                            public void onClick(int position) {
+                                Session session = agendaList.get(spinner.getSelectedItemPosition()).getSessions().get(position);
+                                session.setisMyAgenda(true);
+                                agendaList.get(spinner.getSelectedItemPosition()).getSessions().set(position,session);
+                                sessionAgendaAdapter.updateData(agendaList.get(spinner.getSelectedItemPosition()).getSessions());
+                                Toast.makeText(getContext(), session.getSessionName()+"", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                     sessionAgendaAdapter.setData(agendaList.get(position).getSessions());
                     recyclerView.setAdapter(sessionAgendaAdapter);
-                }catch (Exception e){
+                } catch (Exception e) {
                     getActivity().finish();
 
                 }

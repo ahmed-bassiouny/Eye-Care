@@ -18,9 +18,7 @@ import com.example.ahmed.eyecare.utils.DummyData;
 import com.example.ahmed.eyecare.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class AgendaActivity extends AppCompatActivity {
 
@@ -80,7 +78,7 @@ public class AgendaActivity extends AppCompatActivity {
                for(Agenda currentAgenda:agendas){
                    mySession = new ArrayList<>();
                    for(Session session:currentAgenda.getSessions()){
-                       if(session.getAddToAgenda()){
+                       if(session.isMyAgenda()){
                            mySession.add(session);
                        }
                    }

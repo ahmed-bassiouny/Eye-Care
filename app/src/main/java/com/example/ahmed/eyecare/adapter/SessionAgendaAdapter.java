@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.interfaces.OnClickListenerAdapter;
 import com.example.ahmed.eyecare.model.Session;
 
 import java.util.List;
@@ -23,8 +24,11 @@ public class SessionAgendaAdapter extends RecyclerView.Adapter<SessionAgendaAdap
 
     List<Session> sessions;
     Context context;
-    public SessionAgendaAdapter(Context context) {
-        this.context=context;
+    OnClickListenerAdapter onClickListenerAdapter;
+
+    public SessionAgendaAdapter(Context context, OnClickListenerAdapter onClickListenerAdapter) {
+        this.context = context;
+        this.onClickListenerAdapter = onClickListenerAdapter;
     }
 
     @Override
@@ -35,16 +39,23 @@ public class SessionAgendaAdapter extends RecyclerView.Adapter<SessionAgendaAdap
     }
 
     @Override
-    public void onBindViewHolder(SessionAgendaAdapter.CutomViewHolder holder, int position) {
+    public void onBindViewHolder(SessionAgendaAdapter.CutomViewHolder holder, final int position) {
         Session session = sessions.get(position);
         holder.tvSessionName.setText(session.getSessionName());
         holder.tvSessionLocation.setText(session.getLocation());
-        holder.tvSessionSpeaker.setText(session.getSessioninterested()+" "+context.getString(R.string.people_interested));
+        holder.tvSessionSpeaker.setText(session.getSessioninterested() + " " + context.getString(R.string.people_interested));
         holder.tvSessionTime.setText(session.getFullTimeSession());
-        if(session.getAddToAgenda())
-            holder.ivAddToMyAgenda.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.calendarred));
-        else
-            holder.ivAddToMyAgenda.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.calendar));
+        if (session.isMyAgenda())
+            holder.ivAddToMyAgenda.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.calendarred));
+        else {
+            holder.ivAddToMyAgenda.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.calendar));
+            holder.ivAddToMyAgenda.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListenerAdapter.onClick(position);
+                }
+            });
+        }
     }
 
     @Override
@@ -65,11 +76,16 @@ public class SessionAgendaAdapter extends RecyclerView.Adapter<SessionAgendaAdap
             tvSessionTime = view.findViewById(R.id.tv_session_time);
             tvSessionLocation = view.findViewById(R.id.tv_session_location);
             tvSessionSpeaker = view.findViewById(R.id.tv_session_speaker);
-            ivAddToMyAgenda=view.findViewById(R.id.iv_add_to_my_agenda);
+            ivAddToMyAgenda = view.findViewById(R.id.iv_add_to_my_agenda);
 
         }
     }
-    public void setData(List<Session> sessions){
+
+    public void setData(List<Session> sessions) {
         this.sessions = sessions;
+    }
+    public void updateData(List<Session> sessions) {
+        this.sessions = sessions;
+        notifyDataSetChanged();
     }
 }

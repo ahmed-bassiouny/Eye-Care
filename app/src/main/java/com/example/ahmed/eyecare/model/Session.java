@@ -53,15 +53,14 @@ public class Session {
     }
 
     public String getSessionName() {
-        if(sessionName==null)
-            sessionName="";
+        if (sessionName == null)
+            sessionName = "";
         return sessionName;
     }
 
     public String getSessionDate() {
         return sessionDate;
     }
-
 
 
     private String getSessionTag() {
@@ -101,17 +100,27 @@ public class Session {
     public String getFullTimeSession() {
         return Utils.convert24FormatTo12Format(startTime) + " - " + Utils.convert24FormatTo12Format(endTime);
     }
-    public String getStartTime(){
+
+    public String getStartTime() {
         return Utils.convert24FormatTo12Format(startTime);
     }
-    public String getEndTime(){
+
+    public String getEndTime() {
         return Utils.convert24FormatTo12Format(endTime);
     }
 
-    public boolean getAddToAgenda() {
+    public boolean isMyAgenda() {
         if (addToAgenda.equals("1"))
             return true;
         return false;
+    }
+
+    public void setisMyAgenda(boolean agenda) {
+        if (agenda) {
+            addToAgenda = "1";
+        } else {
+            addToAgenda = "0";
+        }
     }
 
     public String getSessioninterested() {
@@ -119,12 +128,12 @@ public class Session {
     }
 
     public int getSessionComments() {
-       if(sessionComments==null)
-           sessionComments= new ArrayList<>();
+        if (sessionComments == null)
+            sessionComments = new ArrayList<>();
         return sessionComments.size();
     }
 
-    public String  getSessionLikes() {
+    public String getSessionLikes() {
         return sessionLikes;
     }
 }
