@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -22,12 +23,14 @@ import com.example.ahmed.eyecare.interfaces.OnClickListenerAdapter;
 import com.example.ahmed.eyecare.model.Agenda;
 import com.example.ahmed.eyecare.model.Session;
 import com.example.ahmed.eyecare.utils.DummyData;
+import com.example.ahmed.eyecare.utils.SharedPref;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaActivity extends AppCompatActivity implements OnClickListenerAdapter {
 
+    private Toolbar mToolbar;
     private TextView tvAgena;
     private TextView tvMyAgena;
     private ProgressBar progress;
@@ -111,17 +114,29 @@ public class AgendaActivity extends AppCompatActivity implements OnClickListener
     }
 
     private void findViewById() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         tvAgena = (TextView) findViewById(R.id.tv_agena);
         tvMyAgena = (TextView) findViewById(R.id.tv_my_agena);
         spinner = (Spinner) findViewById(R.id.spinner);
         progress = (ProgressBar) findViewById(R.id.progress);
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mToolbar.setNavigationIcon(R.drawable.ic_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void loadAgenda() {
         showData(false);
-        RetrofitRequest.getAllAgenda(DummyData.userID, new RetrofitResponse<List<com.example.ahmed.eyecare.model.Agenda>>() {
+        RetrofitRequest.getAllAgenda(SharedPref.getMyAccount(this).getUserId(), new RetrofitResponse<List<com.example.ahmed.eyecare.model.Agenda>>() {
             @Override
             public void onSuccess(List<Agenda> agendas) {
                 agendaList = agendas;
@@ -194,12 +209,29 @@ public class AgendaActivity extends AppCompatActivity implements OnClickListener
     }
 
     @Override
-    public void onClick(int position) {
+    public void onClick(final int position) {
         if(!currentTabMyAgenda) {
             Session session = agendaList.get(spinner.getSelectedItemPosition()).getSessions().get(position);
             session.setisMyAgenda(true);
             agendaList.get(spinner.getSelectedItemPosition()).getSessions().set(position, session);
             sessionAgendaAdapter.updateData(agendaList.get(spinner.getSelectedItemPosition()).getSessions());
+            RetrofitRequest.addToMyAgenda(SharedPref.getMyAccount(AgendaActivity.this).getUserId(), session.getId(), new RetrofitResponse<Boolean>() {
+                @Override
+                public void onSuccess(Boolean aBoolean) {
+                    Toast.makeText(AgendaActivity.this, R.string.session_added, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailed(String errorMessage) {
+                    Session session = agendaList.get(spinner.getSelectedItemPosition()).getSessions().get(position);
+                    session.setisMyAgenda(false);
+                    agendaList.get(spinner.getSelectedItemPosition()).getSessions().set(position, session);
+                    sessionAgendaAdapter.updateData(agendaList.get(spinner.getSelectedItemPosition()).getSessions());
+                    Toast.makeText(AgendaActivity.this, R.string.session_added_error, Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
         }
     }
 }

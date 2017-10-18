@@ -28,8 +28,11 @@
     <string name="no_question">No Question Active</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="cant_send_vote">Sorry we can\'t send your vote, Please try again</string>
+    <string name="session_added">Session added to your agenda</string>
+    <string name="session_added_error">Sorry we can\'t add this Session to your agenda</string>
+
+    <string name="no_message">No Message Found</string>
 
 
 </resources>

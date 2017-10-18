@@ -28,6 +28,7 @@ import com.example.ahmed.eyecare.dialog.AddPostDialog;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.DummyData;
+import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
 
 import java.util.List;
@@ -119,7 +120,7 @@ public class NewsFeedFragment extends Fragment {
         ivChecIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RetrofitRequest.checkIn(DummyData.userID, new RetrofitResponse<Post>() {
+                RetrofitRequest.checkIn(SharedPref.getMyAccount(getContext()).getUserId(), new RetrofitResponse<Post>() {
                     @Override
                     public void onSuccess(Post post) {
                         newsFeedAdapter.addPost(post);
@@ -161,7 +162,7 @@ public class NewsFeedFragment extends Fragment {
     }
     private void loadData(){
         progress.setVisibility(View.VISIBLE);
-        RetrofitRequest.getPosts(DummyData.userID, pageNumber, new RetrofitResponse<List<Post>>() {
+        RetrofitRequest.getPosts(SharedPref.getMyAccount(getContext()).getUserId(), pageNumber, new RetrofitResponse<List<Post>>() {
             @Override
             public void onSuccess(List<Post> posts) {
                 postList=posts;

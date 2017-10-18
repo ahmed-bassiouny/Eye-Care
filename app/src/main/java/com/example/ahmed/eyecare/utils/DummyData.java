@@ -5,5 +5,5 @@ package com.example.ahmed.eyecare.utils;
  */
 
 public class DummyData {
-    public final static int userID=13039;
+    //public final static int userID=13039;
 }

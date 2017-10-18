@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.api.utils;
 
+import com.example.ahmed.eyecare.api.modelRequest.AddToMyAgenda;
 import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
 import com.example.ahmed.eyecare.api.modelRequest.MessageDetailsRequest;
 import com.example.ahmed.eyecare.api.modelRequest.MessageSendRequest;
@@ -8,6 +9,7 @@ import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
+import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
@@ -34,6 +36,8 @@ public interface RetrofitService {
     String ALL_AGENDA = "agenda.php";
     String MESSAGE_DETAILS = "message_details.php";
     String SEND_MESSAGE = "send_message.php";
+    String ADD_TO_MY_AGENDA = "add_to_my_agenda.php";
+    String CHAT_LIST="all_message.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -93,4 +97,17 @@ public interface RetrofitService {
                                      @Field(MessageSendRequest.MESSAGE) String message,
                                      @Field(MessageSendRequest.IMAGE) String image,
                                      @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(ADD_TO_MY_AGENDA)
+    Call<ParentResponse> addToMyAgenda(@Field(AddToMyAgenda.SESSION_ID) int sessionId,
+                                           @Field(ParentRequest.USER_ID_KEY) int userId,
+                                          @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(CHAT_LIST)
+    Call<ChatListResponse> getChatList(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                        @Field(ParentRequest.EVENT_KEY) int event_id);
 }

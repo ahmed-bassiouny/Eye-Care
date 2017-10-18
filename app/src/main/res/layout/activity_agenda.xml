@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/header"
+        android:id="@+id/toolbar"
         android:elevation="4dp">
         <LinearLayout
             android:layout_width="match_parent"

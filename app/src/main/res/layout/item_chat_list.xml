@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/placeholderperson"
+        android:padding="5dp"
+        android:id="@+id/iv_avatar" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/iv_avatar"
+        android:layout_marginStart="5dp"
+        android:text="@string/app_name" />
+
+    <TextView
+        android:id="@+id/tv_last_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:layout_toEndOf="@+id/iv_avatar"
+        android:maxLines="1"
+        android:lines="1"
+        android:ellipsize="end"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="70dp"
+        android:text="TextViewTextViewTextViewTextViewTextViewTextView" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="09:30 AM"
+        android:layout_marginEnd="5dp"
+        android:layout_below="@+id/tv_name"
+        android:layout_alignParentEnd="true"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/iv_avatar"
+        android:background="@color/header"/>
+</RelativeLayout>

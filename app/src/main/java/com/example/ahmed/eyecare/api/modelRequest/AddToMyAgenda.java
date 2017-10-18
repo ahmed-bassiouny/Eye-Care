@@ -5,4 +5,5 @@ package com.example.ahmed.eyecare.api.modelRequest;
  */
 
 public class AddToMyAgenda {
+    public static final String SESSION_ID="session_id";
 }

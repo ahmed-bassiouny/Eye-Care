@@ -13,6 +13,7 @@ import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.DummyData;
+import com.example.ahmed.eyecare.utils.SharedPref;
 
 public class AddPostDialog extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class AddPostDialog extends AppCompatActivity {
             public void onClick(View v) {
                 if(edPost.getText().toString().trim().isEmpty())
                     return;
-                RetrofitRequest.addPost(DummyData.userID,edPost.getText().toString(), new RetrofitResponse<Post>() {
+                RetrofitRequest.addPost(SharedPref.getMyAccount(AddPostDialog.this).getUserId(),edPost.getText().toString(), new RetrofitResponse<Post>() {
                     @Override
                     public void onSuccess(Post post) {
                         Toast.makeText(AddPostDialog.this, R.string.thanks, Toast.LENGTH_SHORT).show();

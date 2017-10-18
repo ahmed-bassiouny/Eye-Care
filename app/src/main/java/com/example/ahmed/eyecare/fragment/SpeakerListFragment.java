@@ -27,6 +27,7 @@ import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.utils.DummyData;
+import com.example.ahmed.eyecare.utils.SharedPref;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,8 @@ public class SpeakerListFragment extends Fragment {
     private EditText edtSeach;
 
     RecyclerView recycleview;
-    SpeakerAdapter speakerAdapter;
     ProgressBar progress;
+    SpeakerAdapter speakerAdapter;
 
     List<Speaker> speakerList;
     List<Speaker> speakerListFilter;
@@ -233,7 +234,7 @@ public class SpeakerListFragment extends Fragment {
         }).start();
     }
     private void loadData() {
-        RetrofitRequest.getAllSpeaker(DummyData.userID, new RetrofitResponse<List<com.example.ahmed.eyecare.model.Speaker>>() {
+        RetrofitRequest.getAllSpeaker(SharedPref.getMyAccount(getContext()).getUserId(), new RetrofitResponse<List<com.example.ahmed.eyecare.model.Speaker>>() {
             @Override
             public void onSuccess(List<com.example.ahmed.eyecare.model.Speaker> speakers) {
                 speakerList = speakers;

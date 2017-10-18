@@ -80,6 +80,7 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.CutomVie
             tvName = view.findViewById(R.id.tv_name);
             tvPosition = view.findViewById(R.id.tv_position);
             tvCompany = view.findViewById(R.id.tv_company);
+            ivAvatar=view.findViewById(R.id.iv_avatar);
             relativeLayoutContianer = view.findViewById(R.id.relative_container);
         }
     }

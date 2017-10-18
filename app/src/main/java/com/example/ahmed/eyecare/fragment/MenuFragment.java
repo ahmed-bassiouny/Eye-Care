@@ -185,6 +185,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_message:
             case R.id.iv_message:
+                Utils.goToFragment(getActivity(), new ChatListFragment(), "Back", null);
                 break;
             case R.id.tv_setting:
             case R.id.iv_setting:

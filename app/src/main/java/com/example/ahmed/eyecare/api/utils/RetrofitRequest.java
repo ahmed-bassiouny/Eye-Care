@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
+import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
@@ -13,6 +14,7 @@ import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
 import com.example.ahmed.eyecare.model.Agenda;
 import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
+import com.example.ahmed.eyecare.model.Chat;
 import com.example.ahmed.eyecare.model.Message;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.model.Speaker;
@@ -250,6 +252,53 @@ public class RetrofitRequest {
 
             @Override
             public void onFailure(Call<ParentResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG, t.getLocalizedMessage() + "");
+            }
+        });
+
+    }
+    public static void addToMyAgenda(int userId,int sessionId,final RetrofitResponse<Boolean> retrofitResponse){
+        Call<ParentResponse> response = service.addToMyAgenda(sessionId, userId, ParentRequest.getEventId());
+        response.enqueue(new Callback<ParentResponse>() {
+            @Override
+            public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
+                if (response.code() == 200) {
+                    retrofitResponse.onSuccess(response.body().getStatus());
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParentResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG, t.getLocalizedMessage() + "");
+            }
+        });
+
+    }
+    public static void getChatList(int userId, final RetrofitResponse<List<Chat>> retrofitResponse){
+        Call<ChatListResponse> response = service.getChatList(userId, ParentRequest.getEventId());
+        response.enqueue(new Callback<ChatListResponse>() {
+            @Override
+            public void onResponse(Call<ChatListResponse> call, Response<ChatListResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body().getChatLists());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChatListResponse> call, Throwable t) {
                 retrofitResponse.onFailed(INTERNET_CONNECTION);
                 Log.e(TAG, t.getLocalizedMessage() + "");
             }
