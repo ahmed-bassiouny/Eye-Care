@@ -19,6 +19,8 @@ public class Constant {
     public static final String INTENT_OPEN_SPEAKER_KEY ="post";
     public static final String  INTENT_ANOTHER_USER_ID_KEY ="another_user_id";
     public static final String INTENT_ANOTHER_USER_IMAGE_KEY ="another_user_image";
+    public static final String INTENT_TWITTER_ABOUT_KEY ="twitter_about_page";
+
 
     //FireBase
     public static final String QUESTION ="questions";

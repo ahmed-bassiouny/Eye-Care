@@ -184,8 +184,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_twitter:
             case R.id.iv_twitter:
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constant.INTENT_TWITTER_ABOUT_KEY,AboutAndTwitterFragment.TWITTER_PAGE);
+                Utils.goToFragment(getActivity(), new AboutAndTwitterFragment(), "Back", bundle);
                 break;
-
             case R.id.tv_message:
             case R.id.iv_message:
                 Utils.goToFragment(getActivity(), new ChatListFragment(), "Back", null);
@@ -195,6 +197,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_about:
             case R.id.iv_about:
+                Bundle bundle2 = new Bundle();
+                bundle2.putInt(Constant.INTENT_TWITTER_ABOUT_KEY,AboutAndTwitterFragment.ABOUT_PAGE);
+                Utils.goToFragment(getActivity(), new AboutAndTwitterFragment(), "Back", bundle2);
                 break;
             case R.id.tv_admin:
             case R.id.iv_admin:

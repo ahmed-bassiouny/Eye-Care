@@ -7,6 +7,7 @@ import com.example.ahmed.eyecare.api.modelRequest.MessageSendRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
+import com.example.ahmed.eyecare.api.modelResponse.AboutResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
@@ -42,7 +43,8 @@ public interface RetrofitService {
     String CHAT_LIST = "all_message.php";
     String MESSAGE_COUNT = "message_count.php";
     String LIKE_POST = "add_post_like.php";
-    String LIST_NOTIFICATION ="list_of_user_notification.php";
+    String LIST_NOTIFICATION = "list_of_user_notification.php";
+    String ABOUT = "about_event.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -125,13 +127,17 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(LIKE_POST)
     Call<ParentResponse> addLikeToPost(@Field(ParentRequest.USER_ID_KEY) int userId,
-                                         @Field(PostRequest.POST_ID_KEY) int postId,
-                                         @Field(ParentRequest.EVENT_KEY) int event_id);
+                                       @Field(PostRequest.POST_ID_KEY) int postId,
+                                       @Field(ParentRequest.EVENT_KEY) int event_id);
 
 
     @FormUrlEncoded
     @POST(LIST_NOTIFICATION)
     Call<NotificationListResponse> getListNotification(@Field(ParentRequest.USER_ID_KEY) int userId,
                                                        @Field(ParentRequest.EVENT_KEY) int event_id);
+
+    @FormUrlEncoded
+    @POST(ABOUT)
+    Call<AboutResponse> getAbout(@Field(ParentRequest.EVENT_KEY) int event_id);
 
 }

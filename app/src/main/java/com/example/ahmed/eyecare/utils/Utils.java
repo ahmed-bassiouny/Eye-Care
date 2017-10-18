@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.widget.ImageView;
 
 import com.example.ahmed.eyecare.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -53,7 +55,7 @@ public class Utils {
         return cal;
     }
 
-    public static void setImage(final Context context, String imgUrl, CircleImageView circleImageView) {
+    public static void setImage(final Context context, String imgUrl, ImageView circleImageView) {
         ImageLoader imageLoader = ImageLoader.getInstance();
 
         DisplayImageOptions.Builder options = new DisplayImageOptions.Builder()
@@ -128,5 +130,8 @@ public class Utils {
 
     public static SimpleDateFormat getSimpleDateFormate() {
         return new SimpleDateFormat(Constant.DATE_FORMAT);
+    }
+    public static String getTwitterUrl(String tag){
+        return "https://twitter.com/search?q=%23"+tag+"&src=typd&lang=en";
     }
 }
