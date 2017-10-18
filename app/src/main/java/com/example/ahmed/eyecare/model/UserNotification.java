@@ -17,4 +17,16 @@ public class UserNotification {
     private String body;
     @SerializedName("notification_time")
     private String notificationTime;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getNotificationTime() {
+        return notificationTime;
+    }
 }
