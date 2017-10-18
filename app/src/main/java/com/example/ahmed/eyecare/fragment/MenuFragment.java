@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.activity.AgendaActivity;
+import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
+import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
@@ -197,6 +199,27 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             case R.id.iv_admin:
                 break;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getTotalMessage();
+    }
+
+    private void getTotalMessage(){
+        RetrofitRequest.getMessageCount(SharedPref.getMyAccount(getContext()).getUserId(), new RetrofitResponse<Integer>() {
+            @Override
+            public void onSuccess(Integer integer) {
+                if(integer > 0)
+                    tvMessage.setText("Messaging ( "+integer+" )");
+            }
+
+            @Override
+            public void onFailed(String errorMessage) {
+
+            }
+        });
     }
 
 }

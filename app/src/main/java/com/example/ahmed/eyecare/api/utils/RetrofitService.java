@@ -11,6 +11,7 @@ import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
+import com.example.ahmed.eyecare.api.modelResponse.MessageCountResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
@@ -38,6 +39,7 @@ public interface RetrofitService {
     String SEND_MESSAGE = "send_message.php";
     String ADD_TO_MY_AGENDA = "add_to_my_agenda.php";
     String CHAT_LIST="all_message.php";
+    String MESSAGE_COUNT="message_count.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -110,4 +112,10 @@ public interface RetrofitService {
     @POST(CHAT_LIST)
     Call<ChatListResponse> getChatList(@Field(ParentRequest.USER_ID_KEY) int userId,
                                         @Field(ParentRequest.EVENT_KEY) int event_id);
+
+    @FormUrlEncoded
+    @POST(MESSAGE_COUNT)
+    Call<MessageCountResponse> getMessageCount(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                               @Field(ParentRequest.EVENT_KEY) int event_id);
+
 }
