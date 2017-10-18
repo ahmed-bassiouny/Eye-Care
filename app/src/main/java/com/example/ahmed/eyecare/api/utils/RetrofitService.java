@@ -13,6 +13,7 @@ import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageCountResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
+import com.example.ahmed.eyecare.api.modelResponse.NotificationListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
@@ -41,6 +42,7 @@ public interface RetrofitService {
     String CHAT_LIST = "all_message.php";
     String MESSAGE_COUNT = "message_count.php";
     String LIKE_POST = "add_post_like.php";
+    String LIST_NOTIFICATION ="list_of_user_notification.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -125,5 +127,11 @@ public interface RetrofitService {
     Call<ParentResponse> addLikeToPost(@Field(ParentRequest.USER_ID_KEY) int userId,
                                          @Field(PostRequest.POST_ID_KEY) int postId,
                                          @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(LIST_NOTIFICATION)
+    Call<NotificationListResponse> getListNotification(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                                       @Field(ParentRequest.EVENT_KEY) int event_id);
 
 }
