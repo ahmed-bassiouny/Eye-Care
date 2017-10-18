@@ -11,7 +11,7 @@ import java.util.List;
  * Created by ahmed on 11/10/17.
  */
 
-public class Post implements Serializable{
+public class Post implements Serializable {
 
 
     @SerializedName("id")
@@ -37,8 +37,13 @@ public class Post implements Serializable{
     @SerializedName("likes")
     private String numberOfLike;
 
-    public String getPostId() {
-        return postId;
+    public int getPostId() {
+        try{
+            return Integer.parseInt(postId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public String getUserId() {
@@ -58,19 +63,28 @@ public class Post implements Serializable{
     }
 
 
-
     public boolean getIsMakeLike() {
         if (makeLike == 1)
             return true;
         return false;
     }
-    public String getDayDate(){
+
+    public void setIsMakeLike(boolean like) {
+        if (like)
+            makeLike = 1;
+        else
+            makeLike = 0;
+    }
+
+    public String getDayDate() {
         return String.valueOf(Utils.getCalender(postDate).get(Calendar.DAY_OF_MONTH));
     }
-    public String getTime(){
-        return String.valueOf(Utils.getCalender(postDate).get(Calendar.HOUR)+":"+Utils.getCalender(postDate).get(Calendar.MINUTE));
+
+    public String getTime() {
+        return String.valueOf(Utils.getCalender(postDate).get(Calendar.HOUR) + ":" + Utils.getCalender(postDate).get(Calendar.MINUTE));
     }
-    public String getMonth(){
+
+    public String getMonth() {
         return String.valueOf(Utils.getMothStringByNumber(Utils.getCalender(postDate).get(Calendar.MONTH)));
     }
 
@@ -81,8 +95,19 @@ public class Post implements Serializable{
     public String getNumberOfLike() {
         return numberOfLike;
     }
+    public boolean increaseNumberOfLike(){
+        try{
+            int temp;
+            temp =Integer.parseInt(numberOfLike);
+            temp++;
+            numberOfLike=String.valueOf(temp);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
-    public String getCommentsSize(){
+    public String getCommentsSize() {
         return String.valueOf(comments.size());
     }
 

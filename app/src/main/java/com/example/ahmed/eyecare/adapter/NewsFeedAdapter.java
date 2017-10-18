@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.interfaces.OnClickListenerAdapter;
+import com.example.ahmed.eyecare.interfaces.OnClickPostAdapter;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.utils.Utils;
 
@@ -30,9 +33,11 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
 
     List<Post> posts;
     Context context;
-    public NewsFeedAdapter(List<Post> posts ,Context context) {
+    OnClickPostAdapter onClickListenerAdapter;
+    public NewsFeedAdapter(List<Post> posts , Context context, Fragment fragment) {
         this.posts=posts;
         this.context=context;
+        this.onClickListenerAdapter= (OnClickPostAdapter) fragment;
     }
 
     @Override
@@ -43,9 +48,8 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
     }
 
     @Override
-    public void onBindViewHolder(NewsFeedAdapter.CutomViewHolder holder, int position) {
+    public void onBindViewHolder(NewsFeedAdapter.CutomViewHolder holder, final int position) {
 
-        // TODO : SET DATA
         Post post = posts.get(position);
         holder.tvDay.setText(post.getDayDate());
         holder.tvMonth.setText(post.getMonth());
@@ -56,10 +60,15 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
         holder.ivComment.setText(post.getCommentsSize());
         holder.ivLike.setText(post.getNumberOfLike());
         if(post.getIsMakeLike()){
-            // TODO red image
             holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmartred),null,null,null);
         }else {
             holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmart),null,null,null);
+            holder.ivLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListenerAdapter.likePost(position);
+                }
+            });
         }
         if(!post.getAvatar().isEmpty())
             Utils.setImage(context,post.getAvatar(),holder.ivAvatar);

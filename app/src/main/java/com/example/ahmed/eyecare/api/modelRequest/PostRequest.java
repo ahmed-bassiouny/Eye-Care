@@ -6,5 +6,6 @@ package com.example.ahmed.eyecare.api.modelRequest;
 
 public class PostRequest {
     public static final String POST_KEY = "post";
+    public static final String POST_ID_KEY = "post_id";
     public static final String CHECK_IN_KEY = "check_in";
 }

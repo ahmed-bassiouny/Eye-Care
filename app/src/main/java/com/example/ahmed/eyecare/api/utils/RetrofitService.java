@@ -38,8 +38,9 @@ public interface RetrofitService {
     String MESSAGE_DETAILS = "message_details.php";
     String SEND_MESSAGE = "send_message.php";
     String ADD_TO_MY_AGENDA = "add_to_my_agenda.php";
-    String CHAT_LIST="all_message.php";
-    String MESSAGE_COUNT="message_count.php";
+    String CHAT_LIST = "all_message.php";
+    String MESSAGE_COUNT = "message_count.php";
+    String LIKE_POST = "add_post_like.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -104,18 +105,25 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(ADD_TO_MY_AGENDA)
     Call<ParentResponse> addToMyAgenda(@Field(AddToMyAgenda.SESSION_ID) int sessionId,
-                                           @Field(ParentRequest.USER_ID_KEY) int userId,
-                                          @Field(ParentRequest.EVENT_KEY) int event_id);
+                                       @Field(ParentRequest.USER_ID_KEY) int userId,
+                                       @Field(ParentRequest.EVENT_KEY) int event_id);
 
 
     @FormUrlEncoded
     @POST(CHAT_LIST)
     Call<ChatListResponse> getChatList(@Field(ParentRequest.USER_ID_KEY) int userId,
-                                        @Field(ParentRequest.EVENT_KEY) int event_id);
+                                       @Field(ParentRequest.EVENT_KEY) int event_id);
 
     @FormUrlEncoded
     @POST(MESSAGE_COUNT)
     Call<MessageCountResponse> getMessageCount(@Field(ParentRequest.USER_ID_KEY) int userId,
                                                @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(LIKE_POST)
+    Call<ParentResponse> addLikeToPost(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                         @Field(PostRequest.POST_ID_KEY) int postId,
+                                         @Field(ParentRequest.EVENT_KEY) int event_id);
 
 }
