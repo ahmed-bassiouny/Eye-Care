@@ -38,6 +38,7 @@ public class AnnouncementFragment extends Fragment {
     private ProgressBar progress;
     List<Announcement> announcementList;
     CheckBox checkBox;
+
     public AnnouncementFragment() {
         // Required empty public constructor
     }
@@ -54,14 +55,6 @@ public class AnnouncementFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
-        view.findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(String item:announcementSelected){
-                    Toast.makeText(getContext(), item, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     @Override
