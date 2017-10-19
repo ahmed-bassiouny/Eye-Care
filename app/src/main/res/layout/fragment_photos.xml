@@ -6,24 +6,39 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar">
-    </include>
+        layout="@layout/toolbar"></include>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
         android:layout_below="@+id/toolbar"
-        android:id="@+id/recycleview"/>
+        android:layout_marginEnd="5dp"/>
+
     <ProgressBar
+        android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/progress"/>
-    <Button
+        android:layout_centerInParent="true" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"/>
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/btn_select_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_camera"
+            android:gravity="center"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:text="@string/snap_photo"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </FrameLayout>
 
 </RelativeLayout>
