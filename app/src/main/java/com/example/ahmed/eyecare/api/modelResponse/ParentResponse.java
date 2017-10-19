@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.api.modelResponse;
 
+import com.example.ahmed.eyecare.R;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -22,8 +23,8 @@ public class ParentResponse {
     }
 
     public String getMassage() {
-        if(message==null)
-            message="";
+        if(message==null || message.isEmpty())
+            message= "Sorry we can\'t load data";
         return message;
     }
 }

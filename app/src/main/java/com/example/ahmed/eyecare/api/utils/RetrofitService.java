@@ -16,6 +16,7 @@ import com.example.ahmed.eyecare.api.modelResponse.MessageCountResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.NotificationListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
+import com.example.ahmed.eyecare.api.modelResponse.PhotoListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
@@ -45,6 +46,7 @@ public interface RetrofitService {
     String LIKE_POST = "add_post_like.php";
     String LIST_NOTIFICATION = "list_of_user_notification.php";
     String ABOUT = "about_event.php";
+    String PHOTO_LIST = "all_photos.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -139,5 +141,11 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(ABOUT)
     Call<AboutResponse> getAbout(@Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(PHOTO_LIST)
+    Call<PhotoListResponse> getPhotoList(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                         @Field(ParentRequest.EVENT_KEY) int event_id);
 
 }

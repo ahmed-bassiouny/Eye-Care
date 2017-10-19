@@ -15,6 +15,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.adapter.PhotoListAdapter;
+import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
+import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
+import com.example.ahmed.eyecare.model.Photo;
+import com.example.ahmed.eyecare.utils.SharedPref;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,7 @@ public class PhotosFragment extends Fragment {
     RecyclerView recycleview;
     ProgressBar progress;
     private Toolbar mToolbar;
+    private PhotoListAdapter photoListAdapter;
 
 
     public PhotosFragment() {
@@ -71,5 +79,17 @@ public class PhotosFragment extends Fragment {
     }
 
     private void loadData() {
+        RetrofitRequest.getPhotoList(SharedPref.getMyAccount(getContext()).getUserId(), new RetrofitResponse<List<Photo>>() {
+            @Override
+            public void onSuccess(List<Photo> photos) {
+                photoListAdapter=new PhotoListAdapter(getContext(),photos);
+                recycleview.setAdapter(photoListAdapter);
+            }
+
+            @Override
+            public void onFailed(String errorMessage) {
+
+            }
+        });
     }
 }

@@ -180,6 +180,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_photo:
             case R.id.iv_photo:
+                Utils.goToFragment(getActivity(), new PhotosFragment(), "Back", null);
                 break;
 
             case R.id.tv_twitter:

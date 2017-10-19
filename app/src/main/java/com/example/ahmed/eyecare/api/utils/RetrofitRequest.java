@@ -12,6 +12,7 @@ import com.example.ahmed.eyecare.api.modelResponse.MessageCountResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
 import com.example.ahmed.eyecare.api.modelResponse.NotificationListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ParentResponse;
+import com.example.ahmed.eyecare.api.modelResponse.PhotoListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
@@ -20,6 +21,7 @@ import com.example.ahmed.eyecare.model.Agenda;
 import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Chat;
 import com.example.ahmed.eyecare.model.Message;
+import com.example.ahmed.eyecare.model.Photo;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.model.User;
@@ -411,5 +413,31 @@ public class RetrofitRequest {
             }
         });
 
+    }
+
+    public static void getPhotoList(int userId,final RetrofitResponse<List<Photo>> retrofitResponse){
+        Call<PhotoListResponse> response = service.getPhotoList(userId,ParentRequest.getEventId());
+        response.enqueue(new Callback<PhotoListResponse>() {
+            @Override
+            public void onResponse(Call<PhotoListResponse> call, Response<PhotoListResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body().getPhotos());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PhotoListResponse> call, Throwable t) {
+                Log.e("onResponse: ", errorMessageForDevelopment);
+                retrofitResponse.onFailed(errorMessageForDevelopment);
+            }
+        });
     }
 }
