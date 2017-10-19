@@ -6,6 +6,7 @@ import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AboutResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AddPhotoResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
+import com.example.ahmed.eyecare.api.modelResponse.AnnouncementListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
@@ -19,6 +20,7 @@ import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
 import com.example.ahmed.eyecare.model.About;
 import com.example.ahmed.eyecare.model.Agenda;
+import com.example.ahmed.eyecare.model.Announcement;
 import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Chat;
 import com.example.ahmed.eyecare.model.Message;
@@ -465,6 +467,30 @@ public class RetrofitRequest {
                 retrofitResponse.onFailed(errorMessageForDevelopment);
             }
         });
+    }
+    public static void getAnnouncementList(final RetrofitResponse<List<Announcement>> retrofitResponse){
+        Call<AnnouncementListResponse> response = service.getAnnouncementList(ParentRequest.getEventId());
+        response.enqueue(new Callback<AnnouncementListResponse>() {
+            @Override
+            public void onResponse(Call<AnnouncementListResponse> call, Response<AnnouncementListResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body().getAnnouncements());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<AnnouncementListResponse> call, Throwable t) {
+                Log.e("onResponse: ", errorMessageForDevelopment);
+                retrofitResponse.onFailed(errorMessageForDevelopment);
+            }
+        });
     }
 }

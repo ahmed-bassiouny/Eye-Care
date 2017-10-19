@@ -37,4 +37,11 @@
     <string name="snap_photo">Snap a Photo</string>
     <string name="upload_error">Sorry we can\'t upload data</string>
 
+
+    <string name="event_admin">Event admins access only</string>
+    <string name="send_announcement">Send Announcement</string>
+
+    <string name="choose_recipients">Choose Recipients</string>
+
+
 </resources>

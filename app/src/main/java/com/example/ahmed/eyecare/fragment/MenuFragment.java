@@ -204,6 +204,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_admin:
             case R.id.iv_admin:
+                Utils.goToFragment(getActivity(), new AdminFragment(), "Back", null);
                 break;
         }
     }
