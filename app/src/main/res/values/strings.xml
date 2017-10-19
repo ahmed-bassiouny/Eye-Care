@@ -35,6 +35,6 @@
     <string name="no_message">No Message Found</string>
 
     <string name="snap_photo">Snap a Photo</string>
-
+    <string name="upload_error">Sorry we can\'t upload data</string>
 
 </resources>

@@ -27,8 +27,17 @@ public class Photo {
     @SerializedName("make_like")
     private int makeLike;
 
-    private String getId() {
-        return id;
+    public Photo(String id,String imagUrl){
+        this.id=id;
+        this.image=imagUrl;
+    }
+
+    public int getId() {
+        try{
+            return Integer.parseInt(id);
+        }catch (Exception e){
+            return 0;
+        }
     }
 
     private String getUserId() {

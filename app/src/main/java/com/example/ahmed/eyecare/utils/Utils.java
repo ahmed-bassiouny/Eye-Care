@@ -67,7 +67,8 @@ public class Utils {
         options.showImageOnLoading(R.drawable.placeholderperson);
         options.showImageForEmptyUri(R.drawable.placeholderperson);
         options.showImageOnFail(R.drawable.placeholderperson);
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        if(!imageLoader.isInited())
+            imageLoader.init(ImageLoaderConfiguration.createDefault(context));
         imageLoader.displayImage(imgUrl, circleImageView, options.build());
     }
 

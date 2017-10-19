@@ -39,6 +39,12 @@
             android:text="@string/snap_photo"
             android:textColor="@color/white"
             android:textSize="20sp" />
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/progressupload"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical"/>
     </FrameLayout>
 
 </RelativeLayout>

@@ -62,4 +62,8 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Cuto
             imageView = view.findViewById(R.id.image);
         }
     }
+    public void addPhoto(Photo photo){
+        this.photos.add(photo);
+        notifyDataSetChanged();
+    }
 }

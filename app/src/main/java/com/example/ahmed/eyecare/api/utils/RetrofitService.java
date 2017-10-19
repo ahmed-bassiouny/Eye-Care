@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.api.utils;
 
+import com.example.ahmed.eyecare.api.modelRequest.AddPhotoRequest;
 import com.example.ahmed.eyecare.api.modelRequest.AddToMyAgenda;
 import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
 import com.example.ahmed.eyecare.api.modelRequest.MessageDetailsRequest;
@@ -8,6 +9,7 @@ import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AboutResponse;
+import com.example.ahmed.eyecare.api.modelResponse.AddPhotoResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
@@ -47,6 +49,7 @@ public interface RetrofitService {
     String LIST_NOTIFICATION = "list_of_user_notification.php";
     String ABOUT = "about_event.php";
     String PHOTO_LIST = "all_photos.php";
+    String ADD_PHOTO = "add_photo.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -147,5 +150,12 @@ public interface RetrofitService {
     @POST(PHOTO_LIST)
     Call<PhotoListResponse> getPhotoList(@Field(ParentRequest.USER_ID_KEY) int userId,
                                          @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(ADD_PHOTO)
+    Call<AddPhotoResponse> addPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                    @Field(ParentRequest.EVENT_KEY) int event_id,
+                                    @Field(AddPhotoRequest.imagePath) String imagePathEncode);
 
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AboutResponse;
+import com.example.ahmed.eyecare.api.modelResponse.AddPhotoResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
@@ -439,5 +440,31 @@ public class RetrofitRequest {
                 retrofitResponse.onFailed(errorMessageForDevelopment);
             }
         });
+    }
+    public static void addPhoto(int userId,String imagePathEncode,final RetrofitResponse<Photo> retrofitResponse){
+        Call<AddPhotoResponse> response = service.addPhoto(userId,ParentRequest.getEventId(),imagePathEncode);
+        response.enqueue(new Callback<AddPhotoResponse>() {
+            @Override
+            public void onResponse(Call<AddPhotoResponse> call, Response<AddPhotoResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        Photo photo = new Photo(response.body().getPhotoId(),response.body().getImage());
+                        retrofitResponse.onSuccess(photo);
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", response.body().getMassage());
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+            @Override
+            public void onFailure(Call<AddPhotoResponse> call, Throwable t) {
+                Log.e("onResponse: ", t.getLocalizedMessage()+"");
+                retrofitResponse.onFailed(errorMessageForDevelopment);
+            }
+        });
+
     }
 }
