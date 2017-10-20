@@ -45,5 +45,8 @@
     <string name="insert_data">Please insert data to this field</string>
     <string name="notification​_sent​_successfully">Notification​ ​ Sent​ ​ Successfully</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
