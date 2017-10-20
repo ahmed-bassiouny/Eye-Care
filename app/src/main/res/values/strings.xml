@@ -42,6 +42,8 @@
     <string name="send_announcement">Send Announcement</string>
 
     <string name="choose_recipients">Choose Recipients</string>
+    <string name="insert_data">Please insert data to this field</string>
+    <string name="notification​_sent​_successfully">Notification​ ​ Sent​ ​ Successfully</string>
 
 
 </resources>

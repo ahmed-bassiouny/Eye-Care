@@ -1,5 +1,6 @@
 package com.example.ahmed.eyecare.api.utils;
 
+import com.example.ahmed.eyecare.api.modelRequest.AddNotificationRequest;
 import com.example.ahmed.eyecare.api.modelRequest.AddPhotoRequest;
 import com.example.ahmed.eyecare.api.modelRequest.AddToMyAgenda;
 import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
@@ -23,6 +24,8 @@ import com.example.ahmed.eyecare.api.modelResponse.PhotoListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -52,6 +55,7 @@ public interface RetrofitService {
     String PHOTO_LIST = "all_photos.php";
     String ADD_PHOTO = "add_photo.php";
     String ANNOUNCEMENT_LIST = "announcement_list.php";
+    String ADD_NOTIFICATION = "send_notification.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -164,5 +168,13 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(ANNOUNCEMENT_LIST)
     Call<AnnouncementListResponse> getAnnouncementList(@Field(ParentRequest.EVENT_KEY) int event_id);
+
+    @FormUrlEncoded
+    @POST(ADD_NOTIFICATION)
+    Call<ParentResponse> addNotification(@Field(ParentRequest.EVENT_KEY) int event_id,
+                                         @Field(AddNotificationRequest.TITLE) String title,
+                                         @Field(AddNotificationRequest.BODY) String body,
+                                         @Field(AddNotificationRequest.ADD_TO_DRAFT) int draft,
+                                         @Field(AddNotificationRequest.TARGET) String target);
 
 }

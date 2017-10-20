@@ -11,7 +11,7 @@ public  class ParentRequest {
     public static final String PAGE_NUMBER_KEY = "page_number";
 
 
-    static private int eventId = 1; // fixed
+    private final static int eventId = 1;
 
     public static int getEventId(){
         return eventId;

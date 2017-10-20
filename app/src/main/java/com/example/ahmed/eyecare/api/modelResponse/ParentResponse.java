@@ -9,12 +9,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class ParentResponse {
 
-    public static final String trueResult= "true";
+    public static final String trueResult = "true";
 
     @SerializedName("status")
     private String status;
     @SerializedName("message")
     private String message;
+    @SerializedName("massage")
+    private String massage;
 
     public boolean getStatus() {
         if (status.equals(trueResult))
@@ -23,8 +25,11 @@ public class ParentResponse {
     }
 
     public String getMassage() {
-        if(message==null || message.isEmpty())
-            message= "Sorry we can\'t load data";
-        return message;
+        if (!message.isEmpty())
+            return message;
+        else if (!massage.isEmpty())
+            return massage;
+        else
+            return "Sorry we can\'t load data";
     }
 }

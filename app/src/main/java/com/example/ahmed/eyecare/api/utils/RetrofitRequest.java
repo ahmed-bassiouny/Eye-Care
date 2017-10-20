@@ -2,6 +2,7 @@ package com.example.ahmed.eyecare.api.utils;
 
 import android.util.Log;
 
+import com.example.ahmed.eyecare.api.modelRequest.AddNotificationRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AboutResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AddPhotoResponse;
@@ -29,7 +30,9 @@ import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.model.Speaker;
 import com.example.ahmed.eyecare.model.User;
 import com.example.ahmed.eyecare.model.UserNotification;
+import com.google.gson.Gson;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -490,6 +493,34 @@ public class RetrofitRequest {
             public void onFailure(Call<AnnouncementListResponse> call, Throwable t) {
                 Log.e("onResponse: ", errorMessageForDevelopment);
                 retrofitResponse.onFailed(errorMessageForDevelopment);
+            }
+        });
+    }
+    public static void addNotification(String title, String body, HashMap<String,String> targets, final RetrofitResponse<Boolean> retrofitResponse){
+        Gson g = new Gson();
+        String targetString = g.toJson(targets);
+        targetString="{\"targets\":["+targetString+"]}";
+        Call<ParentResponse> response = service.addNotification(ParentRequest.getEventId(),title,body, AddNotificationRequest.addToDraft(),targetString);
+        response.enqueue(new Callback<ParentResponse>() {
+            @Override
+            public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body().getStatus());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParentResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG, t.getLocalizedMessage() + "");
             }
         });
     }

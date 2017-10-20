@@ -71,7 +71,7 @@
             android:hint="Message Title"
             android:background="@drawable/border_button"
             android:layout_margin="10dp"
-            android:id="@+id/tv_title"
+            android:id="@+id/et_title"
             android:padding="5dp"
             android:textColor="@color/black"
             android:textSize="20sp"/>
@@ -82,15 +82,22 @@
             android:hint="Message content to be pushed to all selected user."
             android:background="@drawable/border_button"
             android:layout_margin="10dp"
-            android:id="@+id/tv_body"
+            android:id="@+id/et_body"
             android:padding="5dp"
             android:textColor="@color/black"
             android:textSize="20sp"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:id="@+id/progress_send"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/border_button_blue"
             android:text="@string/send"
+            android:enabled="false"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:layout_gravity="center"
