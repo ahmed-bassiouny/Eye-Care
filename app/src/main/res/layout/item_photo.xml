@@ -10,4 +10,13 @@
         android:adjustViewBounds="true"
         android:layout_margin="5dp"
         android:id="@+id/image"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/like"
+        android:id="@+id/iv_like"
+        android:scaleX=".7"
+        android:scaleY=".7"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom|right"/>
 </FrameLayout>

@@ -22,6 +22,7 @@ import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.adapter.PhotoListAdapter;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
+import com.example.ahmed.eyecare.interfaces.OnClickListenerAdapter;
 import com.example.ahmed.eyecare.model.Photo;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.mvc.imagepicker.ImagePicker;
@@ -32,7 +33,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PhotosFragment extends Fragment {
+public class PhotosFragment extends Fragment implements OnClickListenerAdapter {
 
 
     RecyclerView recycleview;
@@ -41,6 +42,7 @@ public class PhotosFragment extends Fragment {
     private PhotoListAdapter photoListAdapter;
     private TextView btnSelectImage;
     int userId;
+    private List<Photo> photoList;
 
 
     public PhotosFragment() {
@@ -123,7 +125,8 @@ public class PhotosFragment extends Fragment {
         RetrofitRequest.getPhotoList(userId, new RetrofitResponse<List<Photo>>() {
             @Override
             public void onSuccess(List<Photo> photos) {
-                photoListAdapter = new PhotoListAdapter(getContext(), photos);
+                photoList=photos;
+                photoListAdapter = new PhotoListAdapter(getContext(), photos,PhotosFragment.this);
                 recycleview.setAdapter(photoListAdapter);
                 progress.setVisibility(View.GONE);
             }
@@ -143,8 +146,9 @@ public class PhotosFragment extends Fragment {
                 startUpload(false);
                 if (photo.getId() == 0)
                     return;
-                if (photoListAdapter != null)
+                if (photoListAdapter != null) {
                     photoListAdapter.addPhoto(photo);
+                }
             }
 
             @Override
@@ -163,5 +167,27 @@ public class PhotosFragment extends Fragment {
             progressupload.setVisibility(View.GONE);
             btnSelectImage.setEnabled(true);
         }
+    }
+
+    @Override
+    public void onClick(final int position) {
+        final Photo photo =photoList.get(position);
+        photo.changeLike();
+        photoListAdapter.updatePhoto(position,photo);
+        RetrofitRequest.addLikeToPhoto(userId, photo.getId(), new RetrofitResponse<Boolean>() {
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+                if(!aBoolean) {
+                    onFailed("");
+                }
+            }
+
+            @Override
+            public void onFailed(String errorMessage) {
+                photo.changeLike();
+                photoListAdapter.updatePhoto(position,photo);
+                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

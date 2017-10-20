@@ -191,13 +191,9 @@ public class NewsFeedFragment extends Fragment implements OnClickPostAdapter {
         final Post post = postList.get(position);
         if (post.getPostId() == 0)
             return;
-        // try to increase number of like if something wrong happened return false and don't continue this operation
-        if(!post.increaseNumberOfLike()){
-            return;
-        }
-        post.setIsMakeLike(true);
+        post.setLike();
         postList.set(position, post);
-        newsFeedAdapter.updateAttendee(postList);
+        newsFeedAdapter.updatePost(position,post);
         RetrofitRequest.addLikeToPost(userId, post.getPostId(), new RetrofitResponse<Boolean>() {
             @Override
             public void onSuccess(Boolean aBoolean) {
@@ -206,9 +202,9 @@ public class NewsFeedFragment extends Fragment implements OnClickPostAdapter {
 
             @Override
             public void onFailed(String errorMessage) {
-                post.setIsMakeLike(false);
+                post.setLike();
                 postList.set(position, post);
-                newsFeedAdapter.updateAttendee(postList);
+                newsFeedAdapter.updatePost(position,post);
             }
         });
     }

@@ -63,13 +63,13 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
             holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmartred),null,null,null);
         }else {
             holder.ivLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.vectorsmart),null,null,null);
-            holder.ivLike.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickListenerAdapter.likePost(position);
-                }
-            });
         }
+        holder.ivLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListenerAdapter.likePost(position);
+            }
+        });
         if(!post.getAvatar().isEmpty())
             Utils.setImage(context,post.getAvatar(),holder.ivAvatar);
     }
@@ -104,5 +104,9 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
     public void addPost(Post post){
         this.posts.add(0,post);
         notifyDataSetChanged();
+    }
+    public void updatePost(int position,Post post){
+        this.posts.set(position,post);
+        notifyItemChanged(position);
     }
 }

@@ -25,8 +25,6 @@ import com.example.ahmed.eyecare.api.modelResponse.PostListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.PostResponse;
 import com.example.ahmed.eyecare.api.modelResponse.SpeakerListResponse;
 
-import java.util.HashMap;
-
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -56,6 +54,7 @@ public interface RetrofitService {
     String ADD_PHOTO = "add_photo.php";
     String ANNOUNCEMENT_LIST = "announcement_list.php";
     String ADD_NOTIFICATION = "send_notification.php";
+    String LIKE_PHOTO ="add_photo_like.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -162,7 +161,7 @@ public interface RetrofitService {
     @POST(ADD_PHOTO)
     Call<AddPhotoResponse> addPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
                                     @Field(ParentRequest.EVENT_KEY) int event_id,
-                                    @Field(AddPhotoRequest.imagePath) String imagePathEncode);
+                                    @Field(AddPhotoRequest.IMAGE_PATH) String imagePathEncode);
 
 
     @FormUrlEncoded
@@ -176,5 +175,12 @@ public interface RetrofitService {
                                          @Field(AddNotificationRequest.BODY) String body,
                                          @Field(AddNotificationRequest.ADD_TO_DRAFT) int draft,
                                          @Field(AddNotificationRequest.TARGET) String target);
+
+
+    @FormUrlEncoded
+    @POST(LIKE_PHOTO)
+    Call<ParentResponse> addLikeToPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                       @Field(AddPhotoRequest.PHOTO_ID) int photoId,
+                                       @Field(ParentRequest.EVENT_KEY) int event_id);
 
 }

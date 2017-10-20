@@ -38,9 +38,9 @@ public class Post implements Serializable {
     private String numberOfLike;
 
     public int getPostId() {
-        try{
+        try {
             return Integer.parseInt(postId);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
@@ -69,11 +69,15 @@ public class Post implements Serializable {
         return false;
     }
 
-    public void setIsMakeLike(boolean like) {
-        if (like)
-            makeLike = 1;
-        else
+    public void setLike() {
+        if (makeLike==1) {
             makeLike = 0;
+            decreaseNumberOfLike();
+        }
+        else {
+            makeLike = 1;
+            increaseNumberOfLike();
+        }
     }
 
     public String getDayDate() {
@@ -95,16 +99,19 @@ public class Post implements Serializable {
     public String getNumberOfLike() {
         return numberOfLike;
     }
-    public boolean increaseNumberOfLike(){
-        try{
-            int temp;
-            temp =Integer.parseInt(numberOfLike);
-            temp++;
-            numberOfLike=String.valueOf(temp);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+
+    public void increaseNumberOfLike() {
+        int temp;
+        temp = Integer.parseInt(numberOfLike);
+        temp++;
+        numberOfLike = String.valueOf(temp);
+    }
+
+    public void decreaseNumberOfLike() {
+        int temp;
+        temp = Integer.parseInt(numberOfLike);
+        temp--;
+        numberOfLike = String.valueOf(temp);
     }
 
     public String getCommentsSize() {

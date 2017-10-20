@@ -65,4 +65,11 @@ public class Photo {
             return true;
         return false;
     }
+
+    public void changeLike() {
+        if(makeLike == 0)
+            makeLike = 1;
+        else
+            makeLike=0;
+    }
 }

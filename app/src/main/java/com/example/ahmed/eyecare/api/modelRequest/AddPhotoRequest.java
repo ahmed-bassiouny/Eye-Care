@@ -6,5 +6,6 @@ package com.example.ahmed.eyecare.api.modelRequest;
 
 public class AddPhotoRequest {
 
-    public static final String imagePath="image";
+    public static final String IMAGE_PATH ="image";
+    public static final String PHOTO_ID ="photo_id";
 }
