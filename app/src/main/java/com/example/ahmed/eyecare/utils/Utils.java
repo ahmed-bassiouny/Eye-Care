@@ -1,6 +1,7 @@
 package com.example.ahmed.eyecare.utils;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -118,5 +119,9 @@ public class Utils {
     }
     public static String getTwitterUrl(String tag){
         return "https://twitter.com/search?q=%23"+tag+"&src=typd&lang=en";
+    }
+    public static boolean isNetworkAvailable(final Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

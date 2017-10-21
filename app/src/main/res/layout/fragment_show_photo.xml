@@ -40,7 +40,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableStart="@drawable/ic_thump_up"
+            android:drawableTint="@color/white"
+            android:drawableStart="@drawable/chat"
             android:layout_weight="1"
             android:text="@string/comment"
             android:id="@+id/tv_comment"
@@ -51,7 +52,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableStart="@drawable/ic_thump_up"
+            android:drawableStart="@drawable/ic_share"
             android:padding="10dp"
             android:id="@+id/tv_share"
             android:layout_weight="1"
@@ -61,4 +62,16 @@
             android:textColor="@color/white"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/tv_save"
+        android:layout_margin="15dp"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/border_button"/>
 </RelativeLayout>

@@ -2,10 +2,13 @@ package com.example.ahmed.eyecare.fragment;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +19,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.Manifest;
+import android.widget.Toast;
+
+import com.artjimlop.altex.AltexImageDownloader;
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
@@ -24,16 +31,12 @@ import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
 
-import java.io.FileNotFoundException;
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ShowPhotoFragment extends Fragment {
 
+    private static final int WRITEEXTERNALSTORAGE =123 ;
     private Toolbar mToolbar;
     ImageView imageView;
-    TextView tvLike, tvComment, tvShare;
+    TextView tvLike, tvComment, tvShare,tvSave;
     Photo photo;
     int userId;
 
@@ -105,6 +108,29 @@ public class ShowPhotoFragment extends Fragment {
                 shareTextUrl();
             }
         });
+        tvSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.isNetworkAvailable(getContext())) {
+                    if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITEEXTERNALSTORAGE);
+                    }else {
+                        downloadImage();
+                    }
+
+                }else {
+                    Toast.makeText(getContext(), "Check Your Connection", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode ==WRITEEXTERNALSTORAGE && (grantResults.length > 0) && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            downloadImage();
+        }
     }
 
     private void findViewById(View view) {
@@ -112,6 +138,7 @@ public class ShowPhotoFragment extends Fragment {
         tvLike = view.findViewById(R.id.tv_like);
         tvComment = view.findViewById(R.id.tv_comment);
         tvShare = view.findViewById(R.id.tv_share);
+        tvSave = view.findViewById(R.id.tv_save);
         mToolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -144,5 +171,10 @@ public class ShowPhotoFragment extends Fragment {
         i.putExtra(Intent.EXTRA_SUBJECT, "Sharing Image");
         i.putExtra(Intent.EXTRA_TEXT, photo.getImage());
         startActivity(Intent.createChooser(i, "Share Image"));
+    }
+
+    private void downloadImage() {
+        AltexImageDownloader.writeToDisk(getContext(),photo.getImage(),"");
+        Toast.makeText(getContext(), "Downloading", Toast.LENGTH_SHORT).show();
     }
 }

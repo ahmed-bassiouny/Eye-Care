@@ -50,6 +50,7 @@
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="share">Share</string>
+    <string name="save">Save</string>
 
 
 </resources>
