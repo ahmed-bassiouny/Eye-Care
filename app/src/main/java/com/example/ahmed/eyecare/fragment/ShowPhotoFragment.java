@@ -1,7 +1,10 @@
 package com.example.ahmed.eyecare.fragment;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -21,6 +24,8 @@ import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
 
+import java.io.FileNotFoundException;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -28,9 +33,10 @@ public class ShowPhotoFragment extends Fragment {
 
     private Toolbar mToolbar;
     ImageView imageView;
-    TextView tvLike,tvComment,tvShare;
+    TextView tvLike, tvComment, tvShare;
     Photo photo;
     int userId;
+
     public ShowPhotoFragment() {
         // Required empty public constructor
     }
@@ -58,10 +64,10 @@ public class ShowPhotoFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        photo= (Photo) getArguments().getSerializable(Constant.INTENT_SHOW_PHOTO_KEY);
-        if(photo==null)
+        photo = (Photo) getArguments().getSerializable(Constant.INTENT_SHOW_PHOTO_KEY);
+        if (photo == null)
             getActivity().onBackPressed();
-        Utils.setImage(getContext(),photo.getImage(),imageView);
+        Utils.setImage(getContext(), photo.getImage(), imageView);
         setLikeColor();
     }
 
@@ -74,7 +80,7 @@ public class ShowPhotoFragment extends Fragment {
                 RetrofitRequest.addLikeToPhoto(userId, photo.getId(), new RetrofitResponse<Boolean>() {
                     @Override
                     public void onSuccess(Boolean aBoolean) {
-                        if(!aBoolean) {
+                        if (!aBoolean) {
                             onFailed("");
                         }
                     }
@@ -87,13 +93,25 @@ public class ShowPhotoFragment extends Fragment {
                 });
             }
         });
+        tvComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        tvShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareTextUrl();
+            }
+        });
     }
 
     private void findViewById(View view) {
-        imageView=view.findViewById(R.id.img);
-        tvLike=view.findViewById(R.id.tv_like);
-        tvComment=view.findViewById(R.id.tv_comment);
-        tvShare=view.findViewById(R.id.tv_share);
+        imageView = view.findViewById(R.id.img);
+        tvLike = view.findViewById(R.id.tv_like);
+        tvComment = view.findViewById(R.id.tv_comment);
+        tvShare = view.findViewById(R.id.tv_share);
         mToolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,13 +125,24 @@ public class ShowPhotoFragment extends Fragment {
             }
         });
     }
-    private void setLikeColor(){
-        if(photo.isLiked()) {
-            tvLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(),R.drawable.ic_thump_up_red),null,null,null);
-            tvLike.setTextColor(ContextCompat.getColor(getContext(),R.color.red_like));
-        }else {
-            tvLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(),R.drawable.ic_thump_up),null,null,null);
-            tvLike.setTextColor(ContextCompat.getColor(getContext(),R.color.white));
+
+    private void setLikeColor() {
+        if (photo.isLiked()) {
+            tvLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.ic_thump_up_red), null, null, null);
+            tvLike.setTextColor(ContextCompat.getColor(getContext(), R.color.red_like));
+        } else {
+            tvLike.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.ic_thump_up), null, null, null);
+            tvLike.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
         }
+    }
+
+    private void shareTextUrl() {
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_SUBJECT, "Share Image");
+        i.putExtra(Intent.EXTRA_SUBJECT, "Sharing Image");
+        i.putExtra(Intent.EXTRA_TEXT, photo.getImage());
+        startActivity(Intent.createChooser(i, "Share Image"));
     }
 }
