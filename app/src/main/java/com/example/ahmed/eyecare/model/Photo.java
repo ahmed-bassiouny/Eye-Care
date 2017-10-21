@@ -2,13 +2,14 @@ package com.example.ahmed.eyecare.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by bassiouny on 19/10/17.
  */
 
-public class Photo {
+public class Photo implements Serializable{
 
     @SerializedName("id")
     private String id;

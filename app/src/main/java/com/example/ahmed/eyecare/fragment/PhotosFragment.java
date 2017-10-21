@@ -62,6 +62,8 @@ public class PhotosFragment extends Fragment implements OnClickListenerAdapter {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
         onClick();
+        userId = SharedPref.getMyAccount(getContext()).getUserId();
+        loadData();
     }
 
     private void onClick() {
@@ -117,8 +119,6 @@ public class PhotosFragment extends Fragment implements OnClickListenerAdapter {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userId = SharedPref.getMyAccount(getContext()).getUserId();
-        loadData();
     }
 
     private void loadData() {
@@ -126,7 +126,7 @@ public class PhotosFragment extends Fragment implements OnClickListenerAdapter {
             @Override
             public void onSuccess(List<Photo> photos) {
                 photoList=photos;
-                photoListAdapter = new PhotoListAdapter(getContext(), photos,PhotosFragment.this);
+                photoListAdapter = new PhotoListAdapter(getActivity(), photos,PhotosFragment.this);
                 recycleview.setAdapter(photoListAdapter);
                 progress.setVisibility(View.GONE);
             }

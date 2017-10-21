@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.fragment.ShowPhotoFragment;
 import com.example.ahmed.eyecare.fragment.SpeakerFragment;
 import com.example.ahmed.eyecare.interfaces.OnClickListenerAdapter;
 import com.example.ahmed.eyecare.model.Photo;
@@ -33,11 +34,11 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Cuto
 
 
     List<Photo> photos;
-    Context context;
+    FragmentActivity fragmentActivity;
     OnClickListenerAdapter onClickListenerAdapter;
-    public PhotoListAdapter(Context context, List<Photo> photos, Fragment fragment) {
+    public PhotoListAdapter(FragmentActivity fragmentActivity, List<Photo> photos, Fragment fragment) {
         this.photos=photos;
-        this.context=context;
+        this.fragmentActivity=fragmentActivity;
         onClickListenerAdapter = (OnClickListenerAdapter) fragment;
     }
 
@@ -52,9 +53,9 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Cuto
     public void onBindViewHolder(PhotoListAdapter.CutomViewHolder holder, final int position) {
 
         final Photo photo = photos.get(position);
-        Utils.setImage(context, photo.getImage(), holder.imageView);
+        Utils.setImage(fragmentActivity, photo.getImage(), holder.imageView);
         if(photo.isLiked()) {
-            holder.ivLike.setColorFilter(ContextCompat.getColor(context, R.color.red_like));
+            holder.ivLike.setColorFilter(ContextCompat.getColor(fragmentActivity, R.color.red_like));
         }else {
             holder.ivLike.setColorFilter(null);
         }
@@ -62,6 +63,14 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Cuto
             @Override
             public void onClick(View v) {
                 onClickListenerAdapter.onClick(position);
+            }
+        });
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.INTENT_SHOW_PHOTO_KEY,photo);
+                Utils.goToFragment(fragmentActivity, new ShowPhotoFragment(), "Back", bundle);
             }
         });
     }

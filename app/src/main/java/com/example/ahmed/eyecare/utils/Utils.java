@@ -10,11 +10,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.ahmed.eyecare.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,8 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ahmed on 11/10/17.
@@ -55,21 +50,10 @@ public class Utils {
         return cal;
     }
 
-    public static void setImage(final Context context, String imgUrl, ImageView circleImageView) {
-        ImageLoader imageLoader = ImageLoader.getInstance();
-
-        DisplayImageOptions.Builder options = new DisplayImageOptions.Builder()
-                .resetViewBeforeLoading(true)
-                .cacheInMemory(false)
-                .considerExifParams(true)
-                .cacheOnDisk(true)
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
-        options.showImageOnLoading(R.drawable.placeholderperson);
-        options.showImageForEmptyUri(R.drawable.placeholderperson);
-        options.showImageOnFail(R.drawable.placeholderperson);
-        if(!imageLoader.isInited())
-            imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-        imageLoader.displayImage(imgUrl, circleImageView, options.build());
+    public static void setImage(final Context context, String imgUrl, ImageView imageView) {
+        Glide.with(context)
+                .load(imgUrl)
+                .into(imageView);
     }
 
     public static String getMothStringByNumber(int number) {

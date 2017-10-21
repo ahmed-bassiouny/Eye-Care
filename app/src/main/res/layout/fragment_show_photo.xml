@@ -1,13 +1,64 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context="com.example.ahmed.eyecare.fragment.ShowPhotoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar">
+    </include>
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/img"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="10dp"
+        android:layout_above="@+id/container"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/container"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_thump_up"
+            android:layout_weight="1"
+            android:text="@string/like"
+            android:id="@+id/tv_like"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_thump_up"
+            android:layout_weight="1"
+            android:text="@string/comment"
+            android:id="@+id/tv_comment"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_thump_up"
+            android:padding="10dp"
+            android:id="@+id/tv_share"
+            android:layout_weight="1"
+            android:text="@string/share"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</RelativeLayout>

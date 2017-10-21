@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by ahmed on 11/10/17.
  */
 
-class Comment {
+public class Comment {
 
     @SerializedName("id")
     private String commentId;
