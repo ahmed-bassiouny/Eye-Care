@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Eye Care</string>
     <string name="sign_in">Sign in</string>
-    <string name="email_address">E-mail Address</string>
+    <string name="email_address">Username</string>
     <string name="code">Code</string>
-    <string name="please_enter_email">Please Enter E-mail Address</string>
+    <string name="please_enter_email">Please Enter Username</string>
     <string name="please_enter_code">Please Enter Your Code</string>
     <string name="reinstall_app">Error Happened Please reinstall Application</string>
     <string name="write_post">Write Post</string>
