@@ -2,6 +2,7 @@ package com.example.ahmed.eyecare.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -30,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +52,7 @@ public class LiveVoteFragment extends Fragment {
     ProgressBar progress;
     int userId;
     boolean questionActive=false;
-
+    int indexAnswer = 0;
     String lastQuestionKey = "";
 
     public LiveVoteFragment() {
@@ -168,7 +171,6 @@ public class LiveVoteFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     btnSubmit.setEnabled(false);
-                    int indexAnswer = (radioGroup.getCheckedRadioButtonId() - 1);
                     Answer answer = listAnswer.get(indexAnswer);
                     myRef.child(lastQuestionKey).child("answers").child(indexAnswer + "").child("votes").setValue((answer.votes + 1), new DatabaseReference.CompletionListener() {
                         @Override
@@ -190,14 +192,24 @@ public class LiveVoteFragment extends Fragment {
         Question item = dataSnapshot.getValue(Question.class);
         if(item.getActivated() && !dataSnapshot.getKey().equals(lastQuestionKey)) {
             lastQuestionKey = dataSnapshot.getKey();
-            listAnswer=item.answers;
+            listAnswer =item.answers;
             tvQuestion.setText(item.question);
             radioGroupFrame.removeAllViews();
             radioGroup = new RadioGroup(getContext());
             radioGroup.setOrientation(RadioGroup.VERTICAL);
-            for(Answer answer : item.answers) {
+            for(int i=0;i<item.answers.size();i++) {
+                Answer answer = listAnswer.get(i);
                 RadioButton radioButton = new RadioButton(getContext());
                 radioButton.setText(answer.answer);
+                final int finalI = i;
+                radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked){
+                            indexAnswer = finalI;
+                        }
+                    }
+                });
                 radioGroup.addView(radioButton);
             }
             radioGroupFrame.addView(radioGroup);
