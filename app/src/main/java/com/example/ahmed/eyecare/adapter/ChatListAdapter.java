@@ -61,6 +61,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.CutomV
                 onClickListenerAdapter.onClick(position);
             }
         });
+        if(chat.isUnread()){
+            holder.viewUnread.setVisibility(View.VISIBLE);
+        }else {
+            holder.viewUnread.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -75,6 +80,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.CutomV
         private TextView tvLastMessage;
         private TextView tvTime;
         RelativeLayout relativeLayout;
+        private View viewUnread;
         public CutomViewHolder(View view) {
             super(view);
             ivAvatar = view.findViewById(R.id.iv_avatar);
@@ -82,6 +88,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.CutomV
             tvLastMessage = view.findViewById(R.id.tv_last_message);
             tvTime = view.findViewById(R.id.tv_time);
             relativeLayout=view.findViewById(R.id.container);
+            viewUnread = view.findViewById(R.id.view_unread);
         }
     }
 }

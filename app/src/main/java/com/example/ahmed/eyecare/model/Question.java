@@ -13,7 +13,7 @@ public class Question {
     public List<Answer> answers;
 
     public boolean getActivated(){
-        if(activated.equals("1"))
+        if(activated!=null &&activated.equals("1"))
             return true;
         return false;
     }

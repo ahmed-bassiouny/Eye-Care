@@ -21,6 +21,8 @@ public class Chat {
     private String message;
     @SerializedName("message_time")
     private String messageTime;
+    @SerializedName("unread_meassage")
+    private String unread;
 
     public int getId() {
         try {
@@ -48,5 +50,10 @@ public class Chat {
     }
     public String getTime(){
         return String.valueOf(Utils.getCalender(messageTime).get(Calendar.HOUR)+":"+Utils.getCalender(messageTime).get(Calendar.MINUTE));
+    }
+    public boolean isUnread(){
+        if(unread.equals("1"))
+            return true;
+        return false;
     }
 }
