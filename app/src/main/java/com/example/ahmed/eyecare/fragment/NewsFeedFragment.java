@@ -28,7 +28,9 @@ import com.example.ahmed.eyecare.interfaces.OnClickPostAdapter;
 import com.example.ahmed.eyecare.model.Post;
 import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.SharedPref;
+import com.example.ahmed.eyecare.utils.Utils;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -211,6 +213,9 @@ public class NewsFeedFragment extends Fragment implements OnClickPostAdapter {
 
     @Override
     public void commentPost(int position) {
-
+        final Post post = postList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constant.INTENT_SHOW_COMMENT_KEY, (Serializable) post.getComments());
+        Utils.goToFragment(getActivity(),new CommentFragment(),"Back",bundle);
     }
 }

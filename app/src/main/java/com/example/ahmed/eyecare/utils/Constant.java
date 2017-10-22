@@ -21,6 +21,7 @@ public class Constant {
     public static final String INTENT_ANOTHER_USER_IMAGE_KEY ="another_user_image";
     public static final String INTENT_TWITTER_ABOUT_KEY ="twitter_about_page";
     public static final String INTENT_SHOW_PHOTO_KEY ="show_photo";
+    public static final String INTENT_SHOW_COMMENT_KEY ="show_comment";
 
 
     //FireBase

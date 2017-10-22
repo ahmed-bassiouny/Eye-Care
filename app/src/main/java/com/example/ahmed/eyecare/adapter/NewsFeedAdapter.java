@@ -70,6 +70,12 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.CutomV
                 onClickListenerAdapter.likePost(position);
             }
         });
+        holder.ivComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListenerAdapter.commentPost(position);
+            }
+        });
         if(!post.getAvatar().isEmpty())
             Utils.setImage(context,post.getAvatar(),holder.ivAvatar);
     }

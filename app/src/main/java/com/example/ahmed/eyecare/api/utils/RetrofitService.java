@@ -3,6 +3,7 @@ package com.example.ahmed.eyecare.api.utils;
 import com.example.ahmed.eyecare.api.modelRequest.AddNotificationRequest;
 import com.example.ahmed.eyecare.api.modelRequest.AddPhotoRequest;
 import com.example.ahmed.eyecare.api.modelRequest.AddToMyAgenda;
+import com.example.ahmed.eyecare.api.modelRequest.CommentRequest;
 import com.example.ahmed.eyecare.api.modelRequest.LoginRequest;
 import com.example.ahmed.eyecare.api.modelRequest.MessageDetailsRequest;
 import com.example.ahmed.eyecare.api.modelRequest.MessageSendRequest;
@@ -54,7 +55,9 @@ public interface RetrofitService {
     String ADD_PHOTO = "add_photo.php";
     String ANNOUNCEMENT_LIST = "announcement_list.php";
     String ADD_NOTIFICATION = "send_notification.php";
-    String LIKE_PHOTO ="add_photo_like.php";
+    String LIKE_PHOTO = "add_photo_like.php";
+    String COMMENT_PHOTO = "add_photo_comment.php";
+    String COMMENT_POST = "add_post_comment.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -180,7 +183,23 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(LIKE_PHOTO)
     Call<ParentResponse> addLikeToPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
-                                       @Field(AddPhotoRequest.PHOTO_ID) int photoId,
-                                       @Field(ParentRequest.EVENT_KEY) int event_id);
+                                        @Field(AddPhotoRequest.PHOTO_ID) int photoId,
+                                        @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(COMMENT_PHOTO)
+    Call<ParentResponse> addCommentToPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                           @Field(CommentRequest.COMMENT) String comment,
+                                           @Field(CommentRequest.PHOTO_ID) int photoId,
+                                           @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(COMMENT_POST)
+    Call<ParentResponse> addCommentToPost(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                          @Field(CommentRequest.COMMENT) String comment,
+                                          @Field(CommentRequest.POST_ID) int postId,
+                                          @Field(ParentRequest.EVENT_KEY) int event_id);
 
 }
