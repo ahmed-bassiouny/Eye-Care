@@ -60,7 +60,8 @@ public interface RetrofitService {
     String LIKE_PHOTO = "add_photo_like.php";
     String COMMENT_PHOTO = "add_photo_comment.php";
     String COMMENT_POST = "add_post_comment.php";
-    String UPDATE_USER_INFO ="update_data_after_login.php";
+    String UPDATE_USER_INFO = "update_data_after_login.php";
+    String UPDATE_MESSAGE_STATUS = "update_message_status.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -193,9 +194,9 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST(COMMENT_PHOTO)
     Call<CommentResponse> addCommentToPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
-                                           @Field(CommentRequest.COMMENT) String comment,
-                                           @Field(CommentRequest.PHOTO_ID) int photoId,
-                                           @Field(ParentRequest.EVENT_KEY) int event_id);
+                                            @Field(CommentRequest.COMMENT) String comment,
+                                            @Field(CommentRequest.PHOTO_ID) int photoId,
+                                            @Field(ParentRequest.EVENT_KEY) int event_id);
 
 
     @FormUrlEncoded
@@ -214,4 +215,10 @@ public interface RetrofitService {
                                         @Field(UserInfoRequest.EMAIL_KEY) String email,
                                         @Field(UserInfoRequest.MOBILE_KEY) String mobile,
                                         @Field(UserInfoRequest.HOSPITAL_KEY) String hospital);
+
+    @FormUrlEncoded
+    @POST(UPDATE_MESSAGE_STATUS)
+    Call<ParentResponse> updateMessageStatus(@Field(MessageDetailsRequest.CURRENT_USER_ID) int userId,
+                                             @Field(MessageDetailsRequest.OTHER_USER_ID) int otherUserId,
+                                             @Field(ParentRequest.EVENT_KEY) int event_id);
 }

@@ -56,10 +56,9 @@ public class ChatListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         findViewById(view);
     }
-
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         loadData();
     }
 

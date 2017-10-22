@@ -48,6 +48,7 @@ public class ChatActivity extends AppCompatActivity {
         getData();
         onClick();
         makeRequestWithHandler();
+        updateMessageStatus();
     }
 
     private void getData() {
@@ -163,6 +164,20 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+    // this method make message read from me
+    private void updateMessageStatus(){
+        RetrofitRequest.updateMessageStatus(myId, otherUserId, new RetrofitResponse<Boolean>() {
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+
+            }
+
+            @Override
+            public void onFailed(String errorMessage) {
+                Toast.makeText(ChatActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
