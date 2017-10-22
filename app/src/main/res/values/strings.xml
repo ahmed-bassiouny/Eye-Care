@@ -47,6 +47,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="add_to_my_agenda">Add To My Agenda</string>
+    <string name="added_to_Your_agenda">Added To Your Agenda</string>
+
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="share">Share</string>

@@ -14,9 +14,9 @@ public class ParentResponse {
     @SerializedName("status")
     private String status;
     @SerializedName("message")
-    private String message;
+    private String message="";
     @SerializedName("massage")
-    private String massage;
+    private String massage="";
 
     public boolean getStatus() {
         if (status.equals(trueResult))
