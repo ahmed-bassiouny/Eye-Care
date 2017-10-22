@@ -9,12 +9,12 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:hardwareAccelerated="false"
         android:theme="@style/AppTheme">
 
         <!-- Activity -->
@@ -40,8 +40,7 @@
 
         <activity
             android:name=".activity.MainContainer"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".dialog.AddPostDialog"
             android:theme="@style/AppThemeDialog" />
@@ -50,11 +49,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.AgendaActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity android:name=".activity.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.UpdateUserInfoActivity"></activity>
     </application>
 
 </manifest>

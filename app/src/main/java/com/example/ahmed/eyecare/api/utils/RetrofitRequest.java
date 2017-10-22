@@ -601,6 +601,30 @@ public class RetrofitRequest {
                 Log.e(TAG, t.getLocalizedMessage() + "");
             }
         });
+    }
+    public static void updateUserInfo(int userId,String country,String email,String mobile,String hospital,final RetrofitResponse<Boolean> retrofitResponse){
+        Call<ParentResponse> response = service.updateUserInfo(userId, ParentRequest.getEventId(),country,email,mobile,hospital);
+        response.enqueue(new Callback<ParentResponse>() {
+            @Override
+            public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body().getStatus());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ParentResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG, t.getLocalizedMessage() + "");
+            }
+        });
     }
 }

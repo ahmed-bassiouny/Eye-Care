@@ -35,7 +35,7 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(etEmail.getText().toString().trim().isEmpty()){
-                    etEmail.setError(getString(R.string.please_enter_email));
+                    etEmail.setError(getString(R.string.please_enter_username));
                 }else if(etCode.getText().toString().trim().isEmpty()){
                     etCode.setError(getString(R.string.please_enter_code));
                 }else {

@@ -10,6 +10,7 @@ import com.example.ahmed.eyecare.api.modelRequest.MessageSendRequest;
 import com.example.ahmed.eyecare.api.modelRequest.ParentRequest;
 import com.example.ahmed.eyecare.api.modelRequest.PostRequest;
 import com.example.ahmed.eyecare.api.modelRequest.SearchAttendeeRequest;
+import com.example.ahmed.eyecare.api.modelRequest.UserInfoRequest;
 import com.example.ahmed.eyecare.api.modelResponse.AboutResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AddPhotoResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
@@ -59,6 +60,7 @@ public interface RetrofitService {
     String LIKE_PHOTO = "add_photo_like.php";
     String COMMENT_PHOTO = "add_photo_comment.php";
     String COMMENT_POST = "add_post_comment.php";
+    String UPDATE_USER_INFO ="update_data_after_login.php";
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -202,5 +204,14 @@ public interface RetrofitService {
                                            @Field(CommentRequest.COMMENT) String comment,
                                            @Field(CommentRequest.POST_ID) int postId,
                                            @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @POST(LIKE_PHOTO)
+    Call<ParentResponse> updateUserInfo(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                        @Field(ParentRequest.EVENT_KEY) int event_id,
+                                        @Field(UserInfoRequest.COUNTRY_KEY) String country,
+                                        @Field(UserInfoRequest.EMAIL_KEY) String email,
+                                        @Field(UserInfoRequest.MOBILE_KEY) String mobile,
+                                        @Field(UserInfoRequest.HOSPITAL_KEY) String hospital);
 
 }
