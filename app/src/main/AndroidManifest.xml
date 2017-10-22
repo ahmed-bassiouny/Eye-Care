@@ -53,7 +53,8 @@
         <activity
             android:name=".activity.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activity.UpdateUserInfoActivity"></activity>
+        <activity android:name=".activity.UpdateUserInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

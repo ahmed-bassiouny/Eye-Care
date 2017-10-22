@@ -602,14 +602,14 @@ public class RetrofitRequest {
             }
         });
     }
-    public static void updateUserInfo(int userId,String country,String email,String mobile,String hospital,final RetrofitResponse<Boolean> retrofitResponse){
+    public static void updateUserInfo(int userId,String country,String email,String mobile,String hospital,final RetrofitResponse<String> retrofitResponse){
         Call<ParentResponse> response = service.updateUserInfo(userId, ParentRequest.getEventId(),country,email,mobile,hospital);
         response.enqueue(new Callback<ParentResponse>() {
             @Override
             public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
                 if (response.code() == 200) {
                     if (response.body().getStatus()) {
-                        retrofitResponse.onSuccess(response.body().getStatus());
+                        retrofitResponse.onSuccess(response.body().getMassage());
                     } else {
                         retrofitResponse.onFailed(response.body().getMassage());
                         Log.e(TAG, response.body().getMassage());

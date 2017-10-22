@@ -56,4 +56,10 @@ public class User {
     public String getImageUrl() {
         return imageUrl;
     }
+
+    public boolean isAdmin(){
+        if(admin.equals("1"))
+            return true;
+        return false;
+    }
 }

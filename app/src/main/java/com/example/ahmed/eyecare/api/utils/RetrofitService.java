@@ -206,12 +206,12 @@ public interface RetrofitService {
                                            @Field(ParentRequest.EVENT_KEY) int event_id);
 
 
-    @POST(LIKE_PHOTO)
+    @FormUrlEncoded
+    @POST(UPDATE_USER_INFO)
     Call<ParentResponse> updateUserInfo(@Field(ParentRequest.USER_ID_KEY) int userId,
                                         @Field(ParentRequest.EVENT_KEY) int event_id,
                                         @Field(UserInfoRequest.COUNTRY_KEY) String country,
                                         @Field(UserInfoRequest.EMAIL_KEY) String email,
                                         @Field(UserInfoRequest.MOBILE_KEY) String mobile,
                                         @Field(UserInfoRequest.HOSPITAL_KEY) String hospital);
-
 }
