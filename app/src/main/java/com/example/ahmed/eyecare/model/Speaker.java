@@ -41,8 +41,8 @@ public class Speaker implements Serializable {
     }
 
     public String getBio() {
-        if(bio==null)
-            bio="";
+        if (bio == null)
+            bio = "";
         return bio;
     }
 
@@ -55,8 +55,8 @@ public class Speaker implements Serializable {
     }
 
     public String getCompany() {
-        if(company==null)
-            company="";
+        if (company == null)
+            company = "";
         return company;
     }
 
@@ -64,5 +64,10 @@ public class Speaker implements Serializable {
         if (session == null)
             session = new ArrayList<>();
         return session;
+    }
+
+    public void setSessions(List<Session> session) {
+        if (session != null)
+            this.session = session;
     }
 }

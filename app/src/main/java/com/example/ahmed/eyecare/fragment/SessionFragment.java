@@ -31,6 +31,8 @@ import com.example.ahmed.eyecare.utils.SharedPref;
 public class SessionFragment extends Fragment {
 
 
+    public static int sessionId; // this attribute save last id session addes to my agenda
+
     private Toolbar mToolbar;
     private TextView tvName;
     private TextView tvCleanTech;
@@ -68,6 +70,7 @@ public class SessionFragment extends Fragment {
     public void onStart() {
         super.onStart();
         session = (Session) getArguments().getSerializable(Constant.INTENT_SESSION_KEY);
+        sessionId=0;
         if(session!=null)
             setData();
     }
@@ -124,6 +127,7 @@ public class SessionFragment extends Fragment {
                     public void onSuccess(Boolean aBoolean) {
                         ivAddToMyAgenda.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.calendarred));
                         tvAddToMyAgenda.setText(getString(R.string.added_to_Your_agenda));
+                        sessionId=session.getId();
                     }
 
                     @Override

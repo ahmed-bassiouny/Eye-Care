@@ -28,7 +28,7 @@ public class SessionSpeakerAdapter extends RecyclerView.Adapter<SessionSpeakerAd
 
     List<Session> sessions;
     FragmentActivity fragmentActivity;
-    public SessionSpeakerAdapter(List<Session> sessions , FragmentActivity fragmentActivity) {
+    public SessionSpeakerAdapter(List<Session> sessions, FragmentActivity fragmentActivity) {
         this.sessions = sessions;
         this.fragmentActivity=fragmentActivity;
     }
@@ -78,5 +78,9 @@ public class SessionSpeakerAdapter extends RecyclerView.Adapter<SessionSpeakerAd
             tvSessionSpeaker = view.findViewById(R.id.tv_session_speaker);
             container = view.findViewById(R.id.container);
         }
+    }
+    public void updateSession(int position,Session sessions){
+        this.sessions.set(position,sessions);
+        notifyItemChanged(position);
     }
 }
