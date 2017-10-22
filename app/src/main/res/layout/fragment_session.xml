@@ -1,0 +1,125 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:context="com.example.ahmed.eyecare.fragment.SessionFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar">
+        </include>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="10dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/view"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/toolbar"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="glkdndjfbnjnbgf" />
+
+        <TextView
+            android:id="@+id/tv_clean_tech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_margin="10dp"
+            android:layout_toEndOf="@+id/view"
+            android:background="@color/blue"
+            android:text="Clean Tech"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:id="@+id/linear_container"
+            android:layout_below="@+id/tv_clean_tech"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_date"
+                android:gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:drawableStart="@drawable/ic_today"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_time"
+                android:gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:drawableStart="@drawable/ic_session_time"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_session_location"
+            android:layout_margin="20dp"
+            android:id="@+id/tv_location"
+            android:gravity="center"
+            android:text="@string/main_meeeting_room"
+            android:layout_below="@+id/linear_container"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/iv_add_to_my_agenda"
+            android:layout_below="@+id/tv_location">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/calendar"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/add_to_my_agenda"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:id="@+id/tv_session_body"
+            android:layout_below="@+id/iv_add_to_my_agenda"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_session_body"
+            android:text="Speakers"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            android:id="@+id/speaker"
+            android:textStyle="bold"
+            android:textColor="@color/blue"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/recycleview"
+            android:layout_below="@+id/speaker"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
