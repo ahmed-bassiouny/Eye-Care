@@ -72,5 +72,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CutomVie
             tvDate = view.findViewById(R.id.tv_date);
         }
     }
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+        notifyItemInserted(this.comments.size()-1);
+    }
 
 }

@@ -22,6 +22,9 @@ public class Constant {
     public static final String INTENT_TWITTER_ABOUT_KEY ="twitter_about_page";
     public static final String INTENT_SHOW_PHOTO_KEY ="show_photo";
     public static final String INTENT_SHOW_COMMENT_KEY ="show_comment";
+    public static final String INTENT_COMMENT_TYPE = "comment_type";
+    public static final String INTENT_ITEM_ID_TYPE = "comment_type";
+
 
 
     //FireBase

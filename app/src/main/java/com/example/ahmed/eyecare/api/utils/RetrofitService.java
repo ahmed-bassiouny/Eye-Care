@@ -16,6 +16,7 @@ import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AnnouncementListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
+import com.example.ahmed.eyecare.api.modelResponse.CommentResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageCountResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
@@ -189,7 +190,7 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST(COMMENT_PHOTO)
-    Call<ParentResponse> addCommentToPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
+    Call<CommentResponse> addCommentToPhoto(@Field(ParentRequest.USER_ID_KEY) int userId,
                                            @Field(CommentRequest.COMMENT) String comment,
                                            @Field(CommentRequest.PHOTO_ID) int photoId,
                                            @Field(ParentRequest.EVENT_KEY) int event_id);
@@ -197,9 +198,9 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST(COMMENT_POST)
-    Call<ParentResponse> addCommentToPost(@Field(ParentRequest.USER_ID_KEY) int userId,
-                                          @Field(CommentRequest.COMMENT) String comment,
-                                          @Field(CommentRequest.POST_ID) int postId,
-                                          @Field(ParentRequest.EVENT_KEY) int event_id);
+    Call<CommentResponse> addCommentToPost(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                           @Field(CommentRequest.COMMENT) String comment,
+                                           @Field(CommentRequest.POST_ID) int postId,
+                                           @Field(ParentRequest.EVENT_KEY) int event_id);
 
 }

@@ -10,6 +10,7 @@ import com.example.ahmed.eyecare.api.modelResponse.AgendaListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AnnouncementListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.AttendeeListResponse;
 import com.example.ahmed.eyecare.api.modelResponse.ChatListResponse;
+import com.example.ahmed.eyecare.api.modelResponse.CommentResponse;
 import com.example.ahmed.eyecare.api.modelResponse.LoginResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageCountResponse;
 import com.example.ahmed.eyecare.api.modelResponse.MessageDetailsResponse;
@@ -24,6 +25,7 @@ import com.example.ahmed.eyecare.model.Agenda;
 import com.example.ahmed.eyecare.model.Announcement;
 import com.example.ahmed.eyecare.model.AttendeLisWithLetter;
 import com.example.ahmed.eyecare.model.Chat;
+import com.example.ahmed.eyecare.model.Comment;
 import com.example.ahmed.eyecare.model.Message;
 import com.example.ahmed.eyecare.model.Photo;
 import com.example.ahmed.eyecare.model.Post;
@@ -548,5 +550,57 @@ public class RetrofitRequest {
                 Log.e(TAG, t.getLocalizedMessage() + "");
             }
         });
+    }
+    public static void addCommentToPhoto(int userId,String comment,int photoId,final RetrofitResponse<Comment> retrofitResponse){
+        Call<CommentResponse> response = service.addCommentToPhoto(userId,comment,photoId, ParentRequest.getEventId());
+        response.enqueue(new Callback<CommentResponse>() {
+            @Override
+            public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body().getComment());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommentResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG, t.getLocalizedMessage() + "");
+            }
+        });
+
+    }
+    public static void addCommentToPost(int userId,String comment,int postId,final RetrofitResponse<Comment> retrofitResponse){
+        Call<CommentResponse> response = service.addCommentToPost(userId,comment,postId, ParentRequest.getEventId());
+        response.enqueue(new Callback<CommentResponse>() {
+            @Override
+            public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body().getComment());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", errorMessageForDevelopment);
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommentResponse> call, Throwable t) {
+                retrofitResponse.onFailed(INTERNET_CONNECTION);
+                Log.e(TAG, t.getLocalizedMessage() + "");
+            }
+        });
+
     }
 }
