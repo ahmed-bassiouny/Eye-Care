@@ -32,10 +32,12 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.CutomVie
 
     List<Speaker> speakers;
     FragmentActivity activity;
+    int color;
 
-    public SpeakerAdapter(List<Speaker> speakers, FragmentActivity activity) {
+    public SpeakerAdapter(List<Speaker> speakers, FragmentActivity activity,int color) {
         this.speakers = speakers;
         this.activity = activity;
+        this.color=color;
     }
 
     @Override
@@ -49,9 +51,12 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.CutomVie
     public void onBindViewHolder(SpeakerAdapter.CutomViewHolder holder, int position) {
 
         final Speaker speaker = speakers.get(position);
-        holder.tvName.setText(speaker.getName());
-        holder.tvPosition.setText(speaker.getPosition());
-        holder.tvCompany.setText(speaker.getCompany());
+            holder.tvName.setText(speaker.getName());
+            holder.tvName.setTextColor(ContextCompat.getColor(activity,color));
+            holder.tvPosition.setText(speaker.getPosition());
+            holder.tvPosition.setTextColor(ContextCompat.getColor(activity,color));
+            holder.tvCompany.setText(speaker.getCompany());
+            holder.tvCompany.setTextColor(ContextCompat.getColor(activity,color));
 
         if (!speaker.getImage().isEmpty())
             Utils.setImage(activity, speaker.getImage(), holder.ivAvatar);

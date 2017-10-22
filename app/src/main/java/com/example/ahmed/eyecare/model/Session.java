@@ -3,14 +3,16 @@ package com.example.ahmed.eyecare.model;
 import com.example.ahmed.eyecare.utils.Utils;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Created by ahmed on 13/10/17.
  */
 
-public class Session {
+public class Session implements Serializable {
 
 
     @SerializedName("id")
@@ -67,7 +69,7 @@ public class Session {
         return sessionTag;
     }
 
-    private String getDesc() {
+    public String getDesc() {
         return desc;
     }
 
@@ -87,16 +89,13 @@ public class Session {
         return location;
     }
 
-    private List<Speaker> getSpeaker() {
+    public List<Speaker> getSpeaker() {
         if (speaker == null)
             speaker = new ArrayList<>();
         return speaker;
     }
 
-    /*public String getspeakerCount() {
-        return String.valueOf(speaker.size());
-    }
-*/
+
     public String getFullTimeSession() {
         return Utils.convert24FormatTo12Format(startTime) + " - " + Utils.convert24FormatTo12Format(endTime);
     }
@@ -132,8 +131,18 @@ public class Session {
             sessionComments = new ArrayList<>();
         return sessionComments.size();
     }
+    public String getTime(){
+        return startTime ;
+    }
+    public String getMonth() {
+        return String.valueOf(Utils.getMothStringByNumber(Utils.getCalenderWithThreeDigit(sessionDate).get(Calendar.MONTH)));
+    }
+    public String getDayDate() {
+        return String.valueOf(Utils.getCalenderWithThreeDigit(sessionDate).get(Calendar.DAY_OF_MONTH));
+    }
 
     public String getSessionLikes() {
         return sessionLikes;
     }
+
 }

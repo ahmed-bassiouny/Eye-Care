@@ -25,9 +25,9 @@ public class ParentResponse {
     }
 
     public String getMassage() {
-        if (!message.isEmpty())
+        if (message !=null &&!message.isEmpty())
             return message;
-        else if (!massage.isEmpty())
+        else if (massage !=null &&!massage.isEmpty())
             return massage;
         else
             return "Sorry we can\'t load data";

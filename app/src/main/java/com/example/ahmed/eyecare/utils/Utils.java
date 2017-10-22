@@ -3,12 +3,10 @@ package com.example.ahmed.eyecare.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -40,6 +38,17 @@ public class Utils {
     }
 
     public static Calendar getCalender(String dateTime) {
+        Date date = null;
+        try {
+            date = new SimpleDateFormat(Constant.DATE_TIME_FORMAT).parse(dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
+    }
+    public static Calendar getCalenderWithThreeDigit(String dateTime) {
         Date date = null;
         try {
             date = new SimpleDateFormat(Constant.DATE_FORMAT).parse(dateTime);
@@ -103,7 +112,7 @@ public class Utils {
 
     public static String convert24FormatTo12Format(String originalTime) {
         DateFormat originalFormat = new SimpleDateFormat(Constant.DATE_FULL_TIME_FORMAT, Locale.ENGLISH);
-        DateFormat targetFormat = new SimpleDateFormat(Constant.DATE_TIME_FORMAT);
+        DateFormat targetFormat = new SimpleDateFormat(Constant.TIME_FORMAT);
         Date date = null;
         try {
             date = originalFormat.parse(originalTime);
@@ -115,7 +124,7 @@ public class Utils {
     }
 
     public static SimpleDateFormat getSimpleDateFormate() {
-        return new SimpleDateFormat(Constant.DATE_FORMAT);
+        return new SimpleDateFormat(Constant.DATE_TIME_FORMAT);
     }
     public static String getTwitterUrl(String tag){
         return "https://twitter.com/search?q=%23"+tag+"&src=typd&lang=en";

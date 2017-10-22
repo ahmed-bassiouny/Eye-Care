@@ -239,7 +239,7 @@ public class SpeakerListFragment extends Fragment {
             public void onSuccess(List<com.example.ahmed.eyecare.model.Speaker> speakers) {
                 speakerList = speakers;
                 speakerListFilter = speakers;
-                speakerAdapter = new SpeakerAdapter(speakers, getActivity());
+                speakerAdapter = new SpeakerAdapter(speakers, getActivity(),R.color.white);
                 recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                 recycleview.setAdapter(speakerAdapter);
                 progress.setVisibility(View.GONE);

@@ -71,7 +71,7 @@ public class SpeakerFragment extends Fragment {
         tvBio.setText(speaker.getBio());
         if(!speaker.getImage().isEmpty())
             Utils.setImage(getContext(), speaker.getImage(), ivAvatar);
-        sessionSpeakerAdapter = new SessionSpeakerAdapter(speaker.getSession(),getContext());
+        sessionSpeakerAdapter = new SessionSpeakerAdapter(speaker.getSession(),getActivity());
         recycleview.setAdapter(sessionSpeakerAdapter);
 
     }
