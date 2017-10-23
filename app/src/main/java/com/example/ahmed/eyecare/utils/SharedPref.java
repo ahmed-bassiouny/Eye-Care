@@ -76,6 +76,16 @@ public class SharedPref {
         getSharedPref(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(MyAccount.USER_ID_KEY,0);
+
+        editor.putString(MyAccount.USER_NAME_KEY,"");
+        editor.putString(MyAccount.USER_IMAGE_KEY,"");
+        editor.putString(MyAccount.EMAIL_KEY,"");
+        editor.putBoolean(MyAccount.ADMIN_KEY,false);
+        editor.putString(MyAccount.BIO_KEY,"");
+        editor.putString(MyAccount.POSITION_KEY,"");
+        editor.putString(MyAccount.COUNTRY_KEY,"");
+        editor.putString(MyAccount.HOSPITAL_KEY,"");
+        editor.putString(MyAccount.MOBILE_KEY,"");
         editor.putString(MyAccount.EMAIL_KEY,"");
         editor.commit();
     }
