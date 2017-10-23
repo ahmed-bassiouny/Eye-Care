@@ -23,7 +23,7 @@ public class Splash extends AppCompatActivity {
                     if (SharedPref.getMyAccount(Splash.this).getEmail().isEmpty()) {
                         startActivity(new Intent(Splash.this, UpdateUserInfoActivity.class));
                     } else {
-                        startActivity(new Intent(Splash.this, MainContainer.class));
+                        startActivity(new Intent(Splash.this, MenuContainer.class));
                     }
                 } else {
                     Intent mainIntent = new Intent(Splash.this, SignIn.class);

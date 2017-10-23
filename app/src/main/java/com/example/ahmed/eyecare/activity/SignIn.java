@@ -54,7 +54,7 @@ public class SignIn extends AppCompatActivity {
                                 if(user.getEmail().isEmpty()) {
                                     startActivity(new Intent(SignIn.this, UpdateUserInfoActivity.class));
                                 }else {
-                                    startActivity(new Intent(SignIn.this,MainContainer.class));
+                                    startActivity(new Intent(SignIn.this,MenuContainer.class));
                                 }
                                 finish();
                             }else {

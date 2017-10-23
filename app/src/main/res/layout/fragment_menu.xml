@@ -10,6 +10,7 @@
 
     <include
         android:id="@+id/toolbar"
+        android:visibility="gone"
         layout="@layout/toolbar">
     </include>
 

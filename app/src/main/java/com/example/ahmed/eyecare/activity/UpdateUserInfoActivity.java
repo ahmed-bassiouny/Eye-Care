@@ -45,7 +45,7 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
                                 Toast.makeText(UpdateUserInfoActivity.this, s, Toast.LENGTH_SHORT).show();
                                 SharedPref.setSubInfo(UpdateUserInfoActivity.this,etCountry.getText().toString(),etHospital.getText().toString(),
                                         etMobile.getText().toString(),etEmail.getText().toString());
-                                startActivity(new Intent(UpdateUserInfoActivity.this,MainContainer.class));
+                                startActivity(new Intent(UpdateUserInfoActivity.this,MenuContainer.class));
                                 finish();
                             }
 

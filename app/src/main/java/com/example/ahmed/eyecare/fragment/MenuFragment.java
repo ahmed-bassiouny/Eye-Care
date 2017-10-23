@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.activity.AgendaActivity;
+import com.example.ahmed.eyecare.activity.LogisticsActivity;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.utils.Constant;
@@ -162,10 +163,12 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_logistics:
             case R.id.iv_logistics:
+                getActivity().startActivity(new Intent(getContext(), LogisticsActivity.class));
                 break;
 
             case R.id.tv_newfeed:
             case R.id.iv_newfeed:
+                Utils.goToFragment(getActivity(), new NewsFeedFragment(), "Back", null);
                 break;
 
             case R.id.tv_announcement:
