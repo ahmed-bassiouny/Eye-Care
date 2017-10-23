@@ -21,6 +21,8 @@ import com.example.ahmed.eyecare.model.Comment;
 import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.SharedPref;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,8 +84,11 @@ public class CommentFragment extends Fragment {
                     RetrofitRequest.addCommentToPhoto(userId, etComment.getText().toString(), itemId, new RetrofitResponse<Comment>() {
                         @Override
                         public void onSuccess(Comment comment) {
-                            if (commentAdapter != null)
+                            if (commentAdapter != null) {
+                                comment.setCommentDate(new SimpleDateFormat(Constant.DATE_TIME_FORMAT).format(new Date()));
+                                comment.setUserAvatar(SharedPref.getMyAccount(getContext()).getUserImage());
                                 commentAdapter.addComment(comment);
+                            }
                         }
 
                         @Override

@@ -4,11 +4,21 @@
     android:layout_height="match_parent"
     tools:context="com.example.ahmed.eyecare.fragment.CommentFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comment"
+        android:textSize="25sp"
+        android:id="@+id/comment"
+        android:layout_margin="10dp"
+        android:textColor="@color/blue"
+        android:gravity="center"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:layout_below="@+id/comment"
         android:id="@+id/recycleview"/>
     <View
         android:layout_width="match_parent"

@@ -45,4 +45,12 @@ public class Comment {
     public String getUserAvatar() {
         return userAvatar;
     }
+
+    public void setCommentDate(String commentDate) {
+        this.commentDate = commentDate;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
 }

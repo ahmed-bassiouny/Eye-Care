@@ -29,7 +29,7 @@
             android:textSize="15sp"
             android:textColor="@color/black"
             android:gravity="center_vertical"
-            android:text="Hilton Park"/>
+            android:text="Hotel Name :Hilton Park"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:textSize="15sp"
             android:textColor="@color/black"
             android:gravity="center_vertical"
-            android:text="Nicosia"/>
+            android:text="Address :Nicosia"/>
     </LinearLayout>
 
 </LinearLayout>
