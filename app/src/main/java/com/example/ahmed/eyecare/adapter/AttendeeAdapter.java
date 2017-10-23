@@ -46,9 +46,25 @@ public class AttendeeAdapter extends RecyclerView.Adapter<AttendeeAdapter.CutomV
     @Override
     public void onBindViewHolder(AttendeeAdapter.CutomViewHolder holder, int position) {
         final Attendee currentAttendee = attendees.get(position);
-        holder.tvName.setText(currentAttendee.getName());
-        holder.tvCompany.setText(currentAttendee.getCompany());
-        holder.tvPosition.setText(currentAttendee.getPosition());
+        if(currentAttendee.getName().isEmpty()){
+            holder.tvName.setVisibility(View.GONE);
+        }else {
+            holder.tvName.setVisibility(View.VISIBLE);
+            holder.tvName.setText(currentAttendee.getName());
+        }
+        if(currentAttendee.getCompany().isEmpty()){
+            holder.tvCompany.setVisibility(View.GONE);
+        }else {
+            holder.tvCompany.setVisibility(View.VISIBLE);
+            holder.tvCompany.setText(currentAttendee.getCompany());
+        }
+        if(currentAttendee.getPosition().isEmpty()){
+            holder.tvPosition.setVisibility(View.GONE);
+        }else {
+            holder.tvPosition.setVisibility(View.VISIBLE);
+            holder.tvPosition.setText(currentAttendee.getPosition());
+        }
+
 
         if (!currentAttendee.getImage().isEmpty())
             Utils.setImage(context, currentAttendee.getImage(), holder.ivAvatar);

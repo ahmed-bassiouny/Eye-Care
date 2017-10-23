@@ -232,6 +232,10 @@ public class SpeakerListFragment extends Fragment {
                 }
             }
         }).start();
+        if(filter.size()==0){
+            speakerListFilter=filter;
+            speakerAdapter.updateList(filter);
+        }
     }
     private void loadData() {
         RetrofitRequest.getAllSpeaker(SharedPref.getMyAccount(getContext()).getUserId(), new RetrofitResponse<List<com.example.ahmed.eyecare.model.Speaker>>() {

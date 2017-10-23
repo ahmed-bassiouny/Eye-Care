@@ -43,7 +43,7 @@ public class NewsFeedFragment extends Fragment implements OnClickPostAdapter {
     ViewPager pager;
     PagerAdapter adapter;
     TabLayout tabLayout;
-    ImageView ivWritePost, ivChecIn, ivMenu;
+    ImageView ivWritePost, ivChecIn, ivMenu ,ivBack;
     RecyclerView recycleview;
     NewsFeedAdapter newsFeedAdapter;
     int pageNumber = 1;
@@ -86,6 +86,7 @@ public class NewsFeedFragment extends Fragment implements OnClickPostAdapter {
         ivChecIn = view.findViewById(R.id.iv_checkin);
         recycleview = view.findViewById(R.id.recycleview);
         ivMenu = view.findViewById(R.id.iv_menu);
+        ivBack = view.findViewById(R.id.iv_back);
         progress = view.findViewById(R.id.progress);
         recycleview.setNestedScrollingEnabled(false);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -143,6 +144,12 @@ public class NewsFeedFragment extends Fragment implements OnClickPostAdapter {
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), MenuContainer.class));
 
+            }
+        });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
             }
         });
     }

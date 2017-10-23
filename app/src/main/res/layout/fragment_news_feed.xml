@@ -28,6 +28,14 @@
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp" />
 
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_back" />
             <ImageView
                 android:id="@+id/iv_menu"
                 android:layout_width="wrap_content"
