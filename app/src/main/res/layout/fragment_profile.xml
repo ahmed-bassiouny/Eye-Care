@@ -9,194 +9,216 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
+            layout="@layout/toolbar" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/placeholderperson"
-        android:id="@+id/iv_avatar"/>
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_name"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:layout_toEndOf="@+id/iv_avatar"
-        android:textSize="20sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_position"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/tv_name"
-        android:layout_toEndOf="@+id/iv_avatar"
-        android:textSize="15sp"/>
-        </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bio"
-        android:padding="5dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:background="@color/gray"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/tv_position"/>
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:id="@+id/progress"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"/>
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/placeholderperson" />
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit"
+                    android:tint="@color/header"
+                    android:id="@+id/btn_select_image"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:id="@+id/tv_edit_bio"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:textColor="@color/blue"
-            android:text="@string/edit"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:padding="5dp"
-            android:minHeight="50dp"
-            android:enabled="false"
-            android:hint="Your Boi is empty"
-            android:gravity="center"
-            android:background="@drawable/borderwhite"
-            android:id="@+id/et_bio"/>
-<!--
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="User Information"
-            android:padding="10dp"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:background="@color/gray"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/tv_position"/>
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/iv_avatar"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/iv_avatar"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_position"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Bio"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:id="@+id/tv_edit_user_info"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:textColor="@color/blue"
-            android:text="@string/edit"/>
+            <TextView
+                android:id="@+id/tv_edit_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="10dp"
+                android:text="@string/edit"
+                android:textColor="@color/blue"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/email_address"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="40dp"
-            android:background="@drawable/borderwhite"
-            android:id="@+id/et_email"
-            android:padding="5dp"
-            android:textSize="15sp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mobile"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ed_mobile"
-            android:minHeight="40dp"
-            android:background="@drawable/borderwhite"
-            android:textSize="15sp"
-            android:inputType="number"
-            android:padding="5dp"
-            android:digits="0123456789"
-            android:lines="1"
-            android:maxLines="1"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/country"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_country"
-            android:padding="5dp"
-            android:textSize="15sp"
-            android:minHeight="40dp"
-            android:background="@drawable/borderwhite"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>
+            <EditText
+                android:id="@+id/et_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/borderwhite"
+                android:enabled="false"
+                android:gravity="center"
+                android:hint="Your Boi is empty"
+                android:minHeight="50dp"
+                android:padding="5dp"
+                android:textSize="15sp" />
+            <!--
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="User Information"
+                        android:padding="10dp"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@color/gray"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/tv_position"/>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/hospital"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:id="@+id/tv_edit_user_info"
+                        android:textSize="15sp"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue"
+                        android:text="@string/edit"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_hospital"
-            android:textSize="15sp"
-            android:padding="5dp"
-            android:minHeight="40dp"
-            android:background="@drawable/borderwhite"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_position"/>-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email_address"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>
 
-    </LinearLayout>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="40dp"
+                        android:background="@drawable/borderwhite"
+                        android:id="@+id/et_email"
+                        android:padding="5dp"
+                        android:textSize="15sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mobile"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ed_mobile"
+                        android:minHeight="40dp"
+                        android:background="@drawable/borderwhite"
+                        android:textSize="15sp"
+                        android:inputType="number"
+                        android:padding="5dp"
+                        android:digits="0123456789"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/country"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_country"
+                        android:padding="5dp"
+                        android:textSize="15sp"
+                        android:minHeight="40dp"
+                        android:background="@drawable/borderwhite"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hospital"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_hospital"
+                        android:textSize="15sp"
+                        android:padding="5dp"
+                        android:minHeight="40dp"
+                        android:background="@drawable/borderwhite"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/tv_position"/>-->
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

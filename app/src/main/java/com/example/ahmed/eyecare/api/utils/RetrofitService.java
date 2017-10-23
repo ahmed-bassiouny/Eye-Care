@@ -63,6 +63,7 @@ public interface RetrofitService {
     String UPDATE_USER_INFO = "update_data_after_login.php";
     String UPDATE_MESSAGE_STATUS = "update_message_status.php";
     String UPDATE_BIO = "edit_bio.php";
+    String EDIT_IMAGE ="edit_image.php";
 
 
     @FormUrlEncoded
@@ -230,4 +231,12 @@ public interface RetrofitService {
     Call<ParentResponse> updateBio(@Field(ParentRequest.USER_ID_KEY) int userId,
                                              @Field(UserInfoRequest.BIO_KEY) String bio,
                                              @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(EDIT_IMAGE)
+    Call<AddPhotoResponse> editUserImage(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                    @Field(ParentRequest.EVENT_KEY) int event_id,
+                                    @Field(UserInfoRequest.IMAGE_KEY) String imagePathEncode);
+
 }

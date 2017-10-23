@@ -679,4 +679,28 @@ public class RetrofitRequest {
         });
 
     }
+    public static void editUserImage(int userId,String imagePathEncode,final RetrofitResponse<AddPhotoResponse> retrofitResponse){
+        Call<AddPhotoResponse> response = service.editUserImage(userId,ParentRequest.getEventId(),imagePathEncode);
+        response.enqueue(new Callback<AddPhotoResponse>() {
+            @Override
+            public void onResponse(Call<AddPhotoResponse> call, Response<AddPhotoResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        retrofitResponse.onSuccess(response.body());
+                    } else {
+                        retrofitResponse.onFailed(response.body().getMassage());
+                        Log.e(TAG, response.body().getMassage());
+                    }
+                } else {
+                    Log.e("onResponse: ", response.body().getMassage()+"");
+                    retrofitResponse.onFailed(errorMessageForDevelopment);
+                }
+            }
+            @Override
+            public void onFailure(Call<AddPhotoResponse> call, Throwable t) {
+                Log.e("onResponse: ", t.getLocalizedMessage()+"");
+                retrofitResponse.onFailed(errorMessageForDevelopment);
+            }
+        });
+    }
 }

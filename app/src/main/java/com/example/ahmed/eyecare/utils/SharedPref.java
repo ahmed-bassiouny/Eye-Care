@@ -66,5 +66,11 @@ public class SharedPref {
         editor.putString(MyAccount.BIO_KEY, bio);
         editor.commit();
     }
+    public static void setUserImage(Context context,String image){
+        getSharedPref(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(MyAccount.USER_IMAGE_KEY, image);
+        editor.commit();
+    }
 
 }

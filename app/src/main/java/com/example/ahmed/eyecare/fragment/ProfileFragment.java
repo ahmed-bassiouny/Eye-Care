@@ -1,25 +1,34 @@
 package com.example.ahmed.eyecare.fragment;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.eyecare.R;
+import com.example.ahmed.eyecare.api.modelResponse.AddPhotoResponse;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
+import com.example.ahmed.eyecare.model.Photo;
 import com.example.ahmed.eyecare.utils.MyAccount;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
+import com.mvc.imagepicker.ImagePicker;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +37,7 @@ public class ProfileFragment extends Fragment {
 
 
     private Toolbar mToolbar;
+    ProgressBar progress;
 
     private ImageView ivAvatar;
     private TextView tvName;
@@ -35,6 +45,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvEditBio;
     //private TextView tvEditUserInfo;
     private EditText /*etEmail, etCountry, etMobile, etHospital,*/ etBio;
+    private ImageView btnSelectImage;
 
     private boolean bioEditable = false;
     MyAccount myAccount;
@@ -72,6 +83,12 @@ public class ProfileFragment extends Fragment {
                 editBio();
             }
         });
+        btnSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImagePicker.pickImage(ProfileFragment.this, "Select your image:");
+            }
+        });
     }
 
     private void findViewById(View view) {
@@ -81,6 +98,8 @@ public class ProfileFragment extends Fragment {
         tvName = view.findViewById(R.id.tv_name);
         tvPosition = view.findViewById(R.id.tv_position);
         tvEditBio = view.findViewById(R.id.tv_edit_bio);
+        btnSelectImage = view.findViewById(R.id.btn_select_image);
+        progress = view.findViewById(R.id.progress);
         //tvEditUserInfo = view.findViewById(R.id.tv_edit_user_info);
         /*
         etEmail = view.findViewById(R.id.et_email);
@@ -135,6 +154,56 @@ public class ProfileFragment extends Fragment {
             tvEditBio.setText(getString(R.string.save));
             bioEditable=true;
         }
+    }
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            startUpload(true);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Bitmap bitmap = ImagePicker.getImageFromResult(getContext(), requestCode, resultCode, data);
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
+                    final String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    uploadImage(encoded);
+                }
+            }).start();
+        }
+    }
+
+    private void startUpload(boolean start) {
+        if (start) {
+            progress.setVisibility(View.VISIBLE);
+            btnSelectImage.setVisibility(View.GONE);
+        } else {
+            progress.setVisibility(View.GONE);
+            btnSelectImage.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void uploadImage(String imagePathEncode) {
+        RetrofitRequest.editUserImage(myAccount.getUserId(), imagePathEncode, new RetrofitResponse<AddPhotoResponse>() {
+            @Override
+            public void onSuccess(AddPhotoResponse addPhotoResponse) {
+                startUpload(false);
+                if(addPhotoResponse.getStatus()){
+                    SharedPref.setUserImage(getContext(),addPhotoResponse.getImage());
+                    Utils.setImage(getContext(),addPhotoResponse.getImage(),ivAvatar);
+
+                }else {
+                    Toast.makeText(getContext(), addPhotoResponse.getMassage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailed(String errorMessage) {
+                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                startUpload(false);
+            }
+        });
     }
 }
 
