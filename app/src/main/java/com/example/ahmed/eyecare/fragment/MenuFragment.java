@@ -195,6 +195,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_setting:
             case R.id.iv_setting:
+                Utils.goToFragment(getActivity(), new ProfileFragment(), "Back", null);
                 break;
             case R.id.tv_about:
             case R.id.iv_about:

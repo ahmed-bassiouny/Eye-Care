@@ -9,4 +9,6 @@ public class UserInfoRequest {
     public static final String EMAIL_KEY="email";
     public static final String MOBILE_KEY="mobile";
     public static final String HOSPITAL_KEY="hospital";
+    public static final String BIO_KEY="bio";
+
 }

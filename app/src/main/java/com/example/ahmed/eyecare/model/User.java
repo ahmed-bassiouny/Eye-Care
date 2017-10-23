@@ -62,4 +62,16 @@ public class User {
             return true;
         return false;
     }
+
+    public String getBio() {
+        if(bio==null)
+            bio="";
+        return bio;
+    }
+
+    public String getPosition() {
+        if(position==null)
+            position="";
+        return position;
+    }
 }

@@ -50,7 +50,7 @@ public class SignIn extends AppCompatActivity {
                         @Override
                         public void onSuccess(User user) {
                             if(user !=null){
-                                SharedPref.setMainInfo(SignIn.this,user.getId(),user.getName(),user.getImageUrl(),user.getEmail(),user.isAdmin());
+                                SharedPref.setMainInfo(SignIn.this,user.getId(),user.getName(),user.getImageUrl(),user.getEmail(),user.getBio(),user.isAdmin(),user.getPosition());
                                 if(user.getEmail().isEmpty()) {
                                     startActivity(new Intent(SignIn.this, UpdateUserInfoActivity.class));
                                 }else {
@@ -60,7 +60,6 @@ public class SignIn extends AppCompatActivity {
                             }else {
                                 onFailed(getString(R.string.cant_load_data));
                             }
-                            // TODO: open main activity
                         }
 
                         @Override

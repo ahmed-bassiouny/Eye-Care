@@ -60,8 +60,11 @@
     <string name="comment">Comment</string>
     <string name="share">Share</string>
     <string name="save">Save</string>
+    <string name="edit">Edit</string>
     <string name="user_info">User Information</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="edit_successfully">Modified successfully</string>
 
 
 </resources>

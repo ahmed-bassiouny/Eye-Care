@@ -62,6 +62,8 @@ public interface RetrofitService {
     String COMMENT_POST = "add_post_comment.php";
     String UPDATE_USER_INFO = "update_data_after_login.php";
     String UPDATE_MESSAGE_STATUS = "update_message_status.php";
+    String UPDATE_BIO = "edit_bio.php";
+
 
     @FormUrlEncoded
     @POST(LOGIN)
@@ -220,5 +222,12 @@ public interface RetrofitService {
     @POST(UPDATE_MESSAGE_STATUS)
     Call<ParentResponse> updateMessageStatus(@Field(MessageDetailsRequest.CURRENT_USER_ID) int userId,
                                              @Field(MessageDetailsRequest.OTHER_USER_ID) int otherUserId,
+                                             @Field(ParentRequest.EVENT_KEY) int event_id);
+
+
+    @FormUrlEncoded
+    @POST(UPDATE_BIO)
+    Call<ParentResponse> updateBio(@Field(ParentRequest.USER_ID_KEY) int userId,
+                                             @Field(UserInfoRequest.BIO_KEY) String bio,
                                              @Field(ParentRequest.EVENT_KEY) int event_id);
 }

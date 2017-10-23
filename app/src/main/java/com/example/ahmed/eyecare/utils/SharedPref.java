@@ -26,10 +26,12 @@ public class SharedPref {
         String userImage= sharedPref.getString(MyAccount.USER_IMAGE_KEY,"");
         String email = sharedPref.getString(MyAccount.EMAIL_KEY,"");
         boolean admin = sharedPref.getBoolean(MyAccount.ADMIN_KEY,false);
-        MyAccount account = new MyAccount(userId,token,userName,userImage,email,admin);
+        String bio = sharedPref.getString(MyAccount.BIO_KEY,"");
+        String position = sharedPref.getString(MyAccount.POSITION_KEY,"");
+        MyAccount account = new MyAccount(userId,token,userName,userImage,email,admin,bio,position);
         return account;
     }
-    public static void setMainInfo(Context context, int userId, String userName, String userImage, String email, boolean admin){
+    public static void setMainInfo(Context context, int userId, String userName, String userImage, String email,String bio, boolean admin,String position){
         getSharedPref(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(MyAccount.USER_ID_KEY,userId);
@@ -37,6 +39,9 @@ public class SharedPref {
         editor.putString(MyAccount.USER_IMAGE_KEY,userImage);
         editor.putString(MyAccount.EMAIL_KEY,email);
         editor.putBoolean(MyAccount.ADMIN_KEY,admin);
+        editor.putString(MyAccount.BIO_KEY,bio);
+        editor.putString(MyAccount.POSITION_KEY,position);
+
         editor.commit();
     }
     public static void setSubInfo(Context context, String country, String hospital, String mobile,String email){
@@ -53,6 +58,12 @@ public class SharedPref {
         getSharedPref(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(MyAccount.TOKEN_KEY, token);
+        editor.commit();
+    }
+    public static void setBio(Context context,String bio){
+        getSharedPref(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(MyAccount.BIO_KEY, bio);
         editor.commit();
     }
 
