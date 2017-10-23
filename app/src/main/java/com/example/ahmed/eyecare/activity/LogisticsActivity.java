@@ -27,9 +27,11 @@ public class LogisticsActivity extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng sydney = new LatLng(LAT,LNG);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney"));
+        MarkerOptions markerOptions =new MarkerOptions().position(sydney).title("Cyprus");
+        googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        googleMap.setMaxZoomPreference(17);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markerOptions.getPosition(), 15), 1000, null);
+
+
     }
 }

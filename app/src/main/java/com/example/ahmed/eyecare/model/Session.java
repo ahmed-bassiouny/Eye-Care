@@ -84,9 +84,7 @@ public class Session implements Serializable {
     }
 
     public String getLocation() {
-        if (location == null || location.isEmpty())
-            location = "No Location";
-        return location;
+        return "Main Meeting Room";
     }
 
     public List<Speaker> getSpeaker() {
