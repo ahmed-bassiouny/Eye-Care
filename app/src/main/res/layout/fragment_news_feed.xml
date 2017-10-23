@@ -23,6 +23,7 @@
                 android:id="@+id/tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:visibility="gone"
                 android:layout_alignParentBottom="true"
                 app:tabBackground="@drawable/tab_selector"
                 app:tabGravity="center"

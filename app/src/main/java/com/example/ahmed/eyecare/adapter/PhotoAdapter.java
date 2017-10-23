@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class PhotoAdapter extends PagerAdapter {
 
 
-    private int [] IMAGES = {R.drawable.layer,R.drawable.layer};
+    private int [] IMAGES = {R.drawable.layer};
     private LayoutInflater inflater;
 
     public PhotoAdapter(Context context) {

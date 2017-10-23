@@ -31,6 +31,8 @@ import com.example.ahmed.eyecare.utils.Constant;
 import com.example.ahmed.eyecare.utils.SharedPref;
 import com.example.ahmed.eyecare.utils.Utils;
 
+import java.io.Serializable;
+
 public class ShowPhotoFragment extends Fragment {
 
     private static final int WRITEEXTERNALSTORAGE =123 ;
@@ -99,7 +101,11 @@ public class ShowPhotoFragment extends Fragment {
         tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.INTENT_SHOW_COMMENT_KEY, (Serializable) photo.getComments());
+                bundle.putInt(Constant.INTENT_ITEM_ID_TYPE,photo.getId());
+                bundle.putInt(Constant.INTENT_COMMENT_TYPE,CommentFragment.COMMENT_PHOTO);
+                Utils.goToFragment(getActivity(),new CommentFragment(),"Back",bundle);
             }
         });
         tvShare.setOnClickListener(new View.OnClickListener() {

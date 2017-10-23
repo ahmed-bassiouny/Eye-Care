@@ -224,6 +224,7 @@ public class NewsFeedFragment extends Fragment implements OnClickPostAdapter {
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constant.INTENT_SHOW_COMMENT_KEY, (Serializable) post.getComments());
         bundle.putInt(Constant.INTENT_ITEM_ID_TYPE,post.getPostId());
+        bundle.putInt(Constant.INTENT_COMMENT_TYPE,CommentFragment.COMMENT_POST);
         Utils.goToFragment(getActivity(),new CommentFragment(),"Back",bundle);
     }
 }

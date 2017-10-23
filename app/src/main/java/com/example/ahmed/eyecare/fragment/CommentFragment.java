@@ -79,7 +79,18 @@ public class CommentFragment extends Fragment {
                         }
                     });
                 } else if (type == COMMENT_PHOTO) {
+                    RetrofitRequest.addCommentToPhoto(userId, etComment.getText().toString(), itemId, new RetrofitResponse<Comment>() {
+                        @Override
+                        public void onSuccess(Comment comment) {
+                            if (commentAdapter != null)
+                                commentAdapter.addComment(comment);
+                        }
 
+                        @Override
+                        public void onFailed(String errorMessage) {
+                            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 etComment.setText("");
             }

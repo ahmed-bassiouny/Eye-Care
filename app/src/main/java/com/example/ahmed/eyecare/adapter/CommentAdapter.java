@@ -73,8 +73,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CutomVie
         }
     }
     public void addComment(Comment comment){
-        this.comments.add(comment);
-        notifyItemInserted(this.comments.size()-1);
+        this.comments.add(0,comment);
+        notifyItemInserted(0);
     }
 
 }
