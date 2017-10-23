@@ -146,6 +146,11 @@ public class AgendaActivity extends AppCompatActivity implements OnClickListener
                 }
                 agendaDayAdapter.setDays(days);
                 spinner.setAdapter(agendaDayAdapter);
+                if(days.size()==1){
+                    spinner.setEnabled(false);
+                }else{
+                    spinner.setEnabled(true);
+                }
                 showData(true);
             }
 
@@ -188,6 +193,11 @@ public class AgendaActivity extends AppCompatActivity implements OnClickListener
                     public void run() {
                         agendaDayAdapter.setDays(days);
                         spinner.setAdapter(agendaDayAdapter);
+                        if(days.size()==1){
+                            spinner.setEnabled(false);
+                        }else{
+                            spinner.setEnabled(true);
+                        }
                         showData(true);
                     }
                 });

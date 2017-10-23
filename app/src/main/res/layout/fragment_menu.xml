@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,309 +9,319 @@
 
     <include
         android:id="@+id/toolbar"
-        android:visibility="gone"
-        layout="@layout/toolbar">
-    </include>
+        layout="@layout/toolbar"
+        android:visibility="gone"></include>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/tv_speeker"
-            android:text="Speaker"
-            android:textColor="@color/white" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/tv_attendee"
-            android:gravity="center"
-            android:text="attendees"
-            android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/tv_agenda"
-            android:text="Agenda"
-            android:textColor="@color/white" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_speeker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Speaker"
+                    android:textColor="@color/white" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
+                <TextView
+                    android:id="@+id/tv_attendee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="attendees"
+                    android:textColor="@color/white" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_speeker"
-            android:scaleY=".5"
-            android:src="@drawable/vectorsmartobject4" />
+                <TextView
+                    android:id="@+id/tv_agenda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Agenda"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_attendee"
-            android:scaleY=".5"
-            android:src="@drawable/attendees" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_agenda"
-            android:scaleY=".5"
-            android:src="@drawable/notebook" />
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_speeker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/vectorsmartobject4" />
 
-    <!---second row -->
+                <ImageView
+                    android:id="@+id/iv_attendee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/attendees" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
+                <ImageView
+                    android:id="@+id/iv_agenda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/notebook" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/tv_logistics"
-            android:gravity="center"
-            android:text="Logistics"
-            android:textColor="@color/white" />
+            <!---second row -->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="NewsFeed"
-            android:id="@+id/tv_newfeed"
-            android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/tv_announcement"
-            android:text="Announcement"
-            android:textColor="@color/white" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_logistics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Logistics"
+                    android:textColor="@color/white" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
+                <TextView
+                    android:id="@+id/tv_newfeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="NewsFeed"
+                    android:textColor="@color/white" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_logistics"
-            android:scaleY=".5"
-            android:src="@drawable/placeholder" />
+                <TextView
+                    android:id="@+id/tv_announcement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Announcement"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:scaleY=".5"
-            android:id="@+id/iv_newfeed"
-            android:src="@drawable/rss" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/iv_announcement"
-            android:scaleX=".5"
-            android:scaleY=".5"
-            android:src="@drawable/megaphone" />
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_logistics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/placeholder" />
 
-    <!---third row -->
+                <ImageView
+                    android:id="@+id/iv_newfeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/rss" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
+                <ImageView
+                    android:id="@+id/iv_announcement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/megaphone" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/tv_live_vote"
-            android:text="Live Vote"
-            android:textColor="@color/white" />
+            <!---third row -->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/tv_photo"
-            android:text="Photos"
-            android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Twitter"
-            android:id="@+id/tv_twitter"
-            android:textColor="@color/white" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_live_vote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Live Vote"
+                    android:textColor="@color/white" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
+                <TextView
+                    android:id="@+id/tv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Photos"
+                    android:textColor="@color/white" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_live_vote"
-            android:scaleY=".5"
-            android:src="@drawable/livevoteicon" />
+                <TextView
+                    android:id="@+id/tv_twitter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Twitter"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:scaleY=".5"
-            android:id="@+id/iv_photo"
-            android:src="@drawable/photoicon" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_twitter"
-            android:scaleY=".5"
-            android:src="@drawable/twitter" />
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_live_vote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/livevoteicon" />
 
-    <!---fourth row -->
+                <ImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/photoicon" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
+                <ImageView
+                    android:id="@+id/iv_twitter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/twitter" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Messaging"
-            android:id="@+id/tv_message"
-            android:textColor="@color/white" />
+            <!---fourth row -->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/tv_setting"
-            android:text="Setting"
-            android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="About INSCA"
-            android:id="@+id/tv_about"
-            android:textColor="@color/white" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Messaging"
+                    android:textColor="@color/white" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
+                <TextView
+                    android:id="@+id/tv_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Setting"
+                    android:textColor="@color/white" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_message"
-            android:scaleY=".5"
-            android:src="@drawable/envelope" />
+                <TextView
+                    android:id="@+id/tv_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="About INSCA"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:scaleY=".5"
-            android:id="@+id/iv_setting"
-            android:src="@drawable/vectorsmartobject" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleX=".5"
-            android:id="@+id/iv_about"
-            android:scaleY=".5"
-            android:src="@drawable/i" />
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/envelope" />
 
-    <!---fifth row -->
+                <ImageView
+                    android:id="@+id/iv_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/vectorsmartobject" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Admin"
-        android:id="@+id/tv_admin"
-        android:textColor="@color/white" />
+                <ImageView
+                    android:id="@+id/iv_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:src="@drawable/i" />
+            </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleX=".5"
-        android:scaleY=".5"
-        android:id="@+id/iv_admin"
-        android:src="@drawable/admin" />
+            <!---fifth row -->
 
+            <TextView
+                android:id="@+id/tv_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Admin"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/iv_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleX=".5"
+                android:scaleY=".5"
+                android:src="@drawable/admin" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
