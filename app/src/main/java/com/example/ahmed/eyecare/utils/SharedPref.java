@@ -72,5 +72,12 @@ public class SharedPref {
         editor.putString(MyAccount.USER_IMAGE_KEY, image);
         editor.commit();
     }
+    public static void clear(Context context){
+        getSharedPref(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(MyAccount.USER_ID_KEY,0);
+        editor.putString(MyAccount.EMAIL_KEY,"");
+        editor.commit();
+    }
 
 }
