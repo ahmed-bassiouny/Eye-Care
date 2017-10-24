@@ -39,7 +39,7 @@ public class Message {
     }
 
     public String getTime() {
-        return String.valueOf(Utils.getCalender(messageTime).get(Calendar.HOUR) + ":" + Utils.getCalender(messageTime).get(Calendar.MINUTE));
+        return messageTime;//String.valueOf(Utils.getCalender(messageTime).get(Calendar.HOUR) + ":" + Utils.getCalender(messageTime).get(Calendar.MINUTE));
     }
 
     public void setMessage(String message) {

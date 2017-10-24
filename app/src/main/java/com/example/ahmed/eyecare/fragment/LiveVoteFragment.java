@@ -89,6 +89,7 @@ public class LiveVoteFragment extends Fragment {
     }
 
     private void removeListener() {
+        if(childEventListener!= null && myRef!= null )
         myRef.removeEventListener(childEventListener);
     }
 

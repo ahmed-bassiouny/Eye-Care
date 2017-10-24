@@ -5,8 +5,10 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.ahmed.eyecare.R;
 import com.example.ahmed.eyecare.utils.SharedPref;
+import io.fabric.sdk.android.Fabric;
 
 public class Splash extends AppCompatActivity {
 
@@ -15,6 +17,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.splash);
         new Handler().postDelayed(new Runnable() {
             @Override

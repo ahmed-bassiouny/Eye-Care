@@ -48,7 +48,7 @@ import retrofit2.Response;
 public class RetrofitRequest {
 
     private static RetrofitService service = RetrofitConfi.getRetrofit().create(RetrofitService.class);
-    private static final String errorMessageForDevelopment = "Error Message For Development";
+    private static final String errorMessageForDevelopment = "Sorry we can\'t load data";
     private static final String INTERNET_CONNECTION = "Error No Internet Connection";
     private static final String TAG = "TAG";
 

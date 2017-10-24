@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="attendees"
+                    android:text="Attendees"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -79,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleX=".5"
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
                     android:scaleY=".5"
                     android:src="@drawable/attendees" />
@@ -218,6 +219,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:scaleX=".5"
+                    android:layout_marginBottom="3dp"
                     android:scaleY=".5"
                     android:src="@drawable/livevoteicon" />
 

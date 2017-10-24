@@ -12,8 +12,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.*;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -26,7 +31,6 @@ import com.example.ahmed.eyecare.adapter.SpeakerAdapter;
 import com.example.ahmed.eyecare.api.utils.RetrofitRequest;
 import com.example.ahmed.eyecare.api.utils.RetrofitResponse;
 import com.example.ahmed.eyecare.model.Speaker;
-import com.example.ahmed.eyecare.utils.DummyData;
 import com.example.ahmed.eyecare.utils.SharedPref;
 
 import java.util.ArrayList;
@@ -65,7 +69,7 @@ public class SpeakerListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return  inflater.inflate(R.layout.fragment_speaker_list, container, false);
+        return inflater.inflate(R.layout.fragment_speaker_list, container, false);
     }
 
     @Override
@@ -165,11 +169,9 @@ public class SpeakerListFragment extends Fragment {
 
                     if (s.toString().trim().isEmpty()) {
                         speakerAdapter.updateList(speakerList);
-                    }
-                    else if (speakerList != null &&s.toString().trim().length() == 1 || before == 1) {
+                    } else if (speakerList != null && s.toString().trim().length() == 1 || before == 1) {
                         searchInSpeaker(s.toString());
-                    }
-                    else if(speakerListFilter != null) {
+                    } else if (speakerListFilter != null) {
                         searchInFilter(s.toString());
                     }
                 }
@@ -194,18 +196,18 @@ public class SpeakerListFragment extends Fragment {
         }
     }
 
-    private void searchInSpeaker(final String text){
+    private void searchInSpeaker(final String text) {
         final ArrayList<Speaker> filter = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for(Speaker item: speakerList){
-                    if(item.getName().toLowerCase().contains(text.toLowerCase())){
+                for (Speaker item : speakerList) {
+                    if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                         filter.add(item);
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                speakerListFilter=filter;
+                                speakerListFilter = filter;
                                 speakerAdapter.updateList(speakerListFilter);
                             }
                         });
@@ -214,37 +216,45 @@ public class SpeakerListFragment extends Fragment {
             }
         }).start();
     }
-    private void searchInFilter(final String text){
+
+    private void searchInFilter(final String text) {
         final ArrayList<Speaker> filter = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for(Speaker item: speakerListFilter){
-                    if(item.getName().toLowerCase().contains(text.toLowerCase())){
+                for (Speaker item : speakerListFilter) {
+                    if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                         filter.add(item);
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                speakerListFilter=filter;
+                                speakerListFilter = filter;
                                 speakerAdapter.updateList(speakerListFilter);
                             }
                         });
                     }
                 }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (filter.size() == 0) {
+                            speakerListFilter = filter;
+                            speakerAdapter.updateList(filter);
+                        }
+                    }
+                });
             }
         }).start();
-        if(filter.size()==0){
-            speakerListFilter=filter;
-            speakerAdapter.updateList(filter);
-        }
+
     }
+
     private void loadData() {
         RetrofitRequest.getAllSpeaker(SharedPref.getMyAccount(getContext()).getUserId(), new RetrofitResponse<List<com.example.ahmed.eyecare.model.Speaker>>() {
             @Override
             public void onSuccess(List<com.example.ahmed.eyecare.model.Speaker> speakers) {
                 speakerList = speakers;
                 speakerListFilter = speakers;
-                speakerAdapter = new SpeakerAdapter(speakers, getActivity(),R.color.white);
+                speakerAdapter = new SpeakerAdapter(speakers, getActivity(), R.color.white);
                 recycleview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                 recycleview.setAdapter(speakerAdapter);
                 progress.setVisibility(View.GONE);
