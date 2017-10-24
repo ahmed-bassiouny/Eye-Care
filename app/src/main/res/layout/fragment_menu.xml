@@ -300,12 +300,12 @@
                 <ImageView
                     android:id="@+id/iv_setting"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:scaleX=".5"
-                    android:scaleY=".5"
-                    android:src="@drawable/vectorsmartobject" />
+                    android:scaleX=".6"
+                    android:scaleY=".6"
+                    android:src="@drawable/placeholderperson" />
 
                 <ImageView
                     android:id="@+id/iv_about"
