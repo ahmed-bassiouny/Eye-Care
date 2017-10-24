@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layer"
-    tools:context="com.example.ahmed.eyecare.activity.Splash">
+    tools:context="com.ntam.tech.eyecare.activity.Splash">
 
     <ImageView
         android:layout_width="match_parent"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f0f2f0"
-    tools:context="com.example.ahmed.eyecare.fragment.ProfileFragment">
+    tools:context="com.ntam.tech.eyecare.fragment.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

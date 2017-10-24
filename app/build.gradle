@@ -19,7 +19,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "com.example.ahmed.eyecare"
+        applicationId "com.ntam.tech.eyecare"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 1

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/layer"
     android:padding="20dp"
-    tools:context="com.example.ahmed.eyecare.activity.SignIn">
+    tools:context="com.ntam.tech.eyecare.activity.SignIn">
 
     <LinearLayout
         android:id="@+id/container"

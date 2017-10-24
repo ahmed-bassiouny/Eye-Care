@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray"
-    tools:context="com.example.ahmed.eyecare.fragment.AdminFragment">
+    tools:context="com.ntam.tech.eyecare.fragment.AdminFragment">
 
 
     <include

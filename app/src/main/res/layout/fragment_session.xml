@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    tools:context="com.example.ahmed.eyecare.fragment.SessionFragment">
+    tools:context="com.ntam.tech.eyecare.fragment.SessionFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
