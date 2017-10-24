@@ -216,6 +216,13 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+        if(SharedPref.getMyAccount(getContext()).isAdmin()){
+            tvAdmin.setVisibility(View.VISIBLE);
+            ivAdmin.setVisibility(View.VISIBLE);
+        }else {
+            tvAdmin.setVisibility(View.GONE);
+            ivAdmin.setVisibility(View.GONE);
+        }
         getTotalMessage();
     }
 

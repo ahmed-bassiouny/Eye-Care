@@ -105,6 +105,7 @@ public class PhotosFragment extends Fragment implements OnClickListenerAdapter {
         btnSelectImage = view.findViewById(R.id.btn_select_image);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Photos");
 
         mToolbar.setNavigationIcon(R.drawable.ic_back);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -49,6 +49,7 @@ public class ChatActivity extends AppCompatActivity {
         onClick();
         makeRequestWithHandler();
         updateMessageStatus();
+        getSupportActionBar().setTitle("Chat");
     }
 
     private void getData() {
