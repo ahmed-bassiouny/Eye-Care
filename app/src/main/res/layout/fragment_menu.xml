@@ -70,6 +70,7 @@
                     android:layout_weight="1"
                     android:scaleX=".5"
                     android:scaleY=".5"
+                    android:layout_gravity="center"
                     android:src="@drawable/vectorsmartobject4" />
 
                 <ImageView
@@ -78,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleX=".5"
+                    android:layout_gravity="center"
                     android:scaleY=".5"
                     android:src="@drawable/attendees" />
 
@@ -87,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleX=".5"
+                    android:layout_gravity="center"
                     android:scaleY=".5"
                     android:src="@drawable/notebook" />
             </LinearLayout>
@@ -140,6 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleX=".5"
+                    android:layout_gravity="center"
                     android:scaleY=".5"
                     android:src="@drawable/placeholder" />
 
@@ -150,6 +154,7 @@
                     android:layout_weight="1"
                     android:scaleX=".5"
                     android:scaleY=".5"
+                    android:layout_gravity="center"
                     android:src="@drawable/rss" />
 
                 <ImageView
@@ -158,6 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleX=".5"
+                    android:layout_gravity="center"
                     android:scaleY=".5"
                     android:src="@drawable/megaphone" />
             </LinearLayout>
@@ -210,6 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:scaleX=".5"
                     android:scaleY=".5"
                     android:src="@drawable/livevoteicon" />
@@ -219,6 +226,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:scaleX=".5"
                     android:scaleY=".5"
                     android:src="@drawable/photoicon" />
@@ -227,6 +235,7 @@
                     android:id="@+id/iv_twitter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:scaleX=".5"
                     android:scaleY=".5"
@@ -283,6 +292,7 @@
                     android:layout_weight="1"
                     android:scaleX=".5"
                     android:scaleY=".5"
+                    android:layout_gravity="center"
                     android:src="@drawable/envelope" />
 
                 <ImageView
@@ -290,6 +300,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:scaleX=".5"
                     android:scaleY=".5"
                     android:src="@drawable/vectorsmartobject" />
@@ -300,6 +311,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleX=".5"
+                    android:layout_gravity="center"
                     android:scaleY=".5"
                     android:src="@drawable/i" />
             </LinearLayout>
