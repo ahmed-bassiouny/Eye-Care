@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/layer"
     android:padding="20dp"
+    android:layoutDirection="ltr"
     tools:context="com.ntam.tech.eyecare.activity.SignIn">
 
     <LinearLayout
