@@ -197,6 +197,16 @@ public class AgendaActivity extends AppCompatActivity implements OnClickListener
                         }else{
                             spinner.setEnabled(true);
                         }
+                        if(days.size()==0){
+                            if (sessionMyAgendaAdapter == null)
+                                sessionMyAgendaAdapter = new SessionMyAgendaAdapter(AgendaActivity.this);
+                            sessionMyAgendaAdapter.setData(new ArrayList<Session>());
+                            recyclerView.setAdapter(sessionMyAgendaAdapter);
+                            spinner.setVisibility(View.GONE);
+                            Toast.makeText(AgendaActivity.this, "No Session in Your Agenda", Toast.LENGTH_SHORT).show();
+                        }else {
+                            spinner.setVisibility(View.VISIBLE);
+                        }
                         showData(true);
                     }
                 });
