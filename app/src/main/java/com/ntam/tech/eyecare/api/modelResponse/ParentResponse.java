@@ -18,7 +18,7 @@ public class ParentResponse {
     private String massage="";
 
     public boolean getStatus() {
-        if (status.equals(trueResult))
+        if (status !=null &&status.equals(trueResult))
             return true;
         return false;
     }
